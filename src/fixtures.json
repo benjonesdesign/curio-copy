@@ -1,0 +1,17 @@
+{
+  "$description": "Shared input/output truth table for formatGBP/formatDate — both the TS (src/format.test.ts) and Swift (Tests/CurioCopyTests/FormatTests.swift) test suites assert against these SAME pairs, so the two implementations can never silently diverge without a visible test failure in whichever repo picks up the drift first.",
+  "formatGBP": [
+    { "input": 245, "output": "£245.00" },
+    { "input": 0, "output": "£0.00" },
+    { "input": 1234.5, "output": "£1,234.50" },
+    { "input": 9.999, "output": "£10.00" },
+    { "input": -12.34, "output": "-£12.34" },
+    { "input": 1000000, "output": "£1,000,000.00" }
+  ],
+  "formatDate": [
+    { "input": "2026-08-09", "style": "short", "output": "9 Aug" },
+    { "input": "2026-08-09", "style": "full", "output": "9 Aug 2026" },
+    { "input": "2026-01-01", "style": "short", "output": "1 Jan" },
+    { "input": "not-a-date", "style": "short", "output": "" }
+  ]
+}

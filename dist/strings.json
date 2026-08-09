@@ -1,0 +1,87 @@
+{
+    "$schema": "one canonical copy source — see README.md. Edit this file, then `npm run build`.",
+    "statusLabels": {
+        "legacyCardStatus": {
+            "draft": "Draft",
+            "in_stock": "In stock",
+            "listed": "Listed",
+            "sold": "Sold",
+            "reconciled": "Reconciled",
+            "returned": "Returned",
+            "archived": "Archived"
+        },
+        "physicalCardLifecycle": {
+            "NEEDS_ID_REVIEW": "Needs ID review",
+            "NEEDS_CONDITION": "Needs condition",
+            "NEEDS_DECISION": "Needs decision",
+            "READY_TO_LIST": "Ready to list",
+            "EBAY_DRAFT": "Draft created",
+            "LISTED": "Listed"
+        }
+    },
+    "attentionQueueCtas": {
+        "NEEDS_ID_REVIEW": "Review",
+        "NEEDS_CONDITION": "Assess",
+        "NEEDS_DECISION": "Decide",
+        "READY_TO_LIST": "List"
+    },
+    "recommendationRouteLabels": {
+        "list_single": "List individually",
+        "bundle": "Bundle",
+        "bulk": "Bulk",
+        "hold": "Hold",
+        "grade_review": "Consider grading",
+        "restoration_review": "Restoration review",
+        "do_not_list": "Don't list"
+    },
+    "conditionLabels": {
+        "NM": "Near Mint (NM)",
+        "LP": "Lightly Played (LP)",
+        "MP": "Moderately Played (MP)",
+        "HP": "Heavily Played (HP)",
+        "DMG": "Damaged (DMG)",
+        "Graded": "Graded"
+    },
+    "priceSourceLabels": {
+        "ebay-uk-sold": "UK sold",
+        "cardmarket_proxy": "CardTrader marketplace",
+        "poketrace-ebay": "US eBay reference",
+        "pokemontcg-cardmarket": "CardMarket trend",
+        "pokemontcg-tcgplayer": "US TCGplayer reference"
+    },
+    "actionVerbs": {
+        "confirmAndNext": "Confirm and next",
+        "addToInventory": "Add to inventory",
+        "retry": "Retry",
+        "cancel": "Cancel",
+        "edit": "Edit",
+        "save": "Save"
+    },
+    "honestyCaveats": {
+        "gradeEvLowConfidence": "rough estimate, not a sold comp",
+        "gradeEvNormalConfidence": "based on current graded asking prices, not sold comps",
+        "conditionEstimateOnly": "Condition estimate only — not professionally graded."
+    },
+    "errorCopy": {
+        "genericUnexpected": "An unexpected error occurred. Your data is safe — try again or refresh the page.",
+        "networkError": "Network error — try again.",
+        "couldNotLoadGames": "Couldn't load games — try again.",
+        "couldNotUpdate": "Couldn't update — try again.",
+        "couldNotConnect": "Couldn't connect — check your internet connection and try again.",
+        "couldNotLoadInventory": "Couldn't load your inventory — try refreshing the page.",
+        "saveFailed": "Couldn't save — try again.",
+        "couldNotAutofillAddress": "Couldn't auto-fill from eBay — enter your address manually above.",
+        "couldNotImport": "Couldn't import right now.",
+        "couldNotScoreListing": "Couldn't score this listing — check buying settings.",
+        "notSignedIn": "Not signed in — reload and try again."
+    },
+    "emptyCopy": {
+        "dashboardHome": "Nothing here yet",
+        "searchNoMatch": "No cards match your search.",
+        "acquisitionDetail": "No cards linked to this acquisition.",
+        "dashboardEmpty": "No cards yet — add some to see your dashboard.",
+        "bulkPublish": "No cards ready to list",
+        "showDetail": "No cards allocated to this show",
+        "bundleDetail": "No cards in this bundle"
+    }
+}
