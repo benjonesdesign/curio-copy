@@ -1,8 +1,10 @@
 # Changelog
 
-## v0.1.0 — 2026-08-09
+## v0.1.0 — 2026-08-09 (tagged 2026-08-10)
 
-**Not yet tagged — open for iOS review before tagging.** WORK-BACKLOG.md Packet CC-1 slice 1.
+**Tagged.** iOS-cowork review of the Swift dictionary-based shape is complete — confirmed
+correct, no changes requested. WORK-BACKLOG.md Packet CC-1 slice 1. Both `pokemon-tool` and
+`curio-capture-ios` should pin to this tag (not the pre-tag commit `25ca79a`).
 
 Initial release. Promotes `curio-shared`'s `canon/copy/strings.candidate.json` (landed 2026-08-08,
 commit `a760155`) from a documented-but-unwired candidate to a real, pinnable package — same
@@ -28,6 +30,6 @@ pattern as `@curio/contracts`/`@curio/tokens`.
   constants — see `scripts/gen-swift.mjs`'s header comment for why.
 - 17 TS tests (`npm test`) + 8 Swift tests (`swift test`) passing.
 
-**Held per the packet's own coordination requirement** ("coordinate the `@curio/copy` shape with
+Was held per the packet's own coordination requirement ("coordinate the `@curio/copy` shape with
 the iOS cowork before tagging") — same discipline as `curio-contracts` Packet 9's inline-image
-contract: open a PR, no tag, so iOS can review the shape before either side pins to it.
+contract. Review is done; the hold is lifted.
