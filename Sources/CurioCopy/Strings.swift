@@ -93,6 +93,10 @@ public enum CurioCopy {
         "couldNotImport": "Couldn't import right now.",
         "couldNotScoreListing": "Couldn't score this listing — check buying settings.",
         "notSignedIn": "Not signed in — reload and try again.",
+        "identifyFailed": "Couldn't identify this card — try again.",
+        "recommendationLoadFailed": "Couldn't load pricing — try again.",
+        "repriceFailed": "Couldn't reprice — try again.",
+        "ebayUnreachable": "Couldn't reach eBay — try again.",
     ]
     }
     public enum EmptyCopy {

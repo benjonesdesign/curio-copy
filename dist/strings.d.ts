@@ -74,6 +74,10 @@ export declare const STRINGS: {
         couldNotImport: string;
         couldNotScoreListing: string;
         notSignedIn: string;
+        identifyFailed: string;
+        recommendationLoadFailed: string;
+        repriceFailed: string;
+        ebayUnreachable: string;
     };
     emptyCopy: {
         dashboardHome: string;

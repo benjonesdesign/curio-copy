@@ -1,5 +1,27 @@
 # Changelog
 
+## v0.1.1 — 2026-08-10
+
+iOS-cowork follow-up after wiring `@curio/tokens`/`@curio/copy` (CC-1/CC-2): 4 domain error strings
+iOS needed had no shared equivalent, so they'd have stayed local, hand-authored copy that could
+drift from web. None of these had existing deliberately-authored web copy to extract verbatim —
+web's own current fallbacks for these cases are raw technical strings ("Identification failed",
+"Failed to load repricing flags") that don't follow the established "Couldn't X — try again" voice
+(the same pattern `saveFailed`/`couldNotUpdate`/`couldNotLoadGames` already use), so these are
+authored fresh to that pattern rather than carried forward as-is — matching how the "please"
+violations were handled in v0.1.0, not a deviation from the extraction discipline.
+
+- `errorCopy.identifyFailed` — "Couldn't identify this card — try again."
+- `errorCopy.recommendationLoadFailed` — "Couldn't load pricing — try again."
+- `errorCopy.repriceFailed` — "Couldn't reprice — try again."
+- `errorCopy.ebayUnreachable` — "Couldn't reach eBay — try again."
+
+No breaking changes — purely additive. `priceSourceLabels` (unchanged since v0.1.0) was also
+confirmed against `RecommendResponse.priceSource`'s actual production value set
+(`lib/price-providers.ts`'s `PricingResult.source` type in `pokemon-tool`) during this same
+follow-up — the 5 keys here already match exactly, including the `cardmarket_proxy` underscore
+(the one key that isn't hyphenated like the other 4 — that inconsistency is real, not a typo).
+
 ## v0.1.0 — 2026-08-09 (tagged 2026-08-10)
 
 **Tagged.** iOS-cowork review of the Swift dictionary-based shape is complete — confirmed

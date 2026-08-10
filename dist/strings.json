@@ -73,7 +73,11 @@
         "couldNotAutofillAddress": "Couldn't auto-fill from eBay — enter your address manually above.",
         "couldNotImport": "Couldn't import right now.",
         "couldNotScoreListing": "Couldn't score this listing — check buying settings.",
-        "notSignedIn": "Not signed in — reload and try again."
+        "notSignedIn": "Not signed in — reload and try again.",
+        "identifyFailed": "Couldn't identify this card — try again.",
+        "recommendationLoadFailed": "Couldn't load pricing — try again.",
+        "repriceFailed": "Couldn't reprice — try again.",
+        "ebayUnreachable": "Couldn't reach eBay — try again."
     },
     "emptyCopy": {
         "dashboardHome": "Nothing here yet",
