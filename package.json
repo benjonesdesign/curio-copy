@@ -1,6 +1,6 @@
 {
   "name": "@curio/copy",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Curio shared copy & terminology — status labels, route labels, action verbs, honesty caveats, error/empty copy, and one canonical en-GB currency/date formatting spec. Generated TS module + Swift enum, one source JSON. Consumed by pokemon-tool (web) and curio-capture-ios.",
   "license": "UNLICENSED",
   "private": false,

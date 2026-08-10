@@ -1,5 +1,20 @@
 # Changelog
 
+## v0.1.2 — 2026-08-10
+
+iOS-cowork found the shared `errorCopy.identifyFailed` (added in v0.1.1) undersold a common,
+often-transient cause: iOS had a richer local string ("...its photos may still be uploading, or
+try a clearer shot.") that got dropped when switching to the shared key. Checked whether that
+cause is real on web too before enriching the shared copy, rather than taking the iOS framing at
+face value — it is: `app/add/multiple/page.tsx`'s batch flow silently drops any photo whose
+Supabase upload hasn't resolved yet (`.filter(Boolean)` on `supabaseUrl`) and calls `/api/identify`
+anyway, so a still-uploading photo is a genuine, non-iOS-specific identify-failure cause.
+
+- `errorCopy.identifyFailed`: "Couldn't identify this card — try again." → "Couldn't identify this
+  card yet — its photos may still be uploading, or try a clearer shot."
+
+No breaking changes — value-only change to an existing key.
+
 ## v0.1.1 — 2026-08-10
 
 iOS-cowork follow-up after wiring `@curio/tokens`/`@curio/copy` (CC-1/CC-2): 4 domain error strings
