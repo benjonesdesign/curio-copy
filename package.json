@@ -1,7 +1,7 @@
 {
   "name": "@curio/copy",
-  "version": "0.1.2",
-  "description": "Curio shared copy & terminology — status labels, route labels, action verbs, honesty caveats, error/empty copy, and one canonical en-GB currency/date formatting spec. Generated TS module + Swift enum, one source JSON. Consumed by pokemon-tool (web) and curio-capture-ios.",
+  "version": "0.1.3",
+  "description": "Curio shared copy & terminology \u2014 status labels, route labels, action verbs, honesty caveats, error/empty copy, and one canonical en-GB currency/date formatting spec. Generated TS module + Swift enum, one source JSON. Consumed by pokemon-tool (web) and curio-capture-ios.",
   "license": "UNLICENSED",
   "private": false,
   "type": "module",
@@ -19,7 +19,7 @@
     "Package.swift"
   ],
   "scripts": {
-    "build": "tsc -p tsconfig.build.json && tsx scripts/gen-swift.mjs",
+    "build": "tsc -p tsconfig.build.json && tsx scripts/gen-swift.mjs && tsx scripts/gen-kotlin.mjs",
     "check": "tsx scripts/check-drift.mjs",
     "test": "vitest run"
   },
