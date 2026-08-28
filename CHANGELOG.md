@@ -1,5 +1,39 @@
 # Changelog
 
+## v0.1.3
+Two gaps, both found by client lanes hitting a wall the package caused.
+
+- **Reason-code labels for `@curio/contracts`' `decide` module** — `routeReasonLabels`,
+  `alternativeReasonLabels`, `degradedReasonLabels`.
+
+  The decision engine returns **codes and never English**, deliberately (`decisions/0024`) — so
+  that the server does not own copy for three platforms. But no English existed anywhere for those
+  codes, which meant iOS could not move the decision hero to `/api/decide` without inventing it in
+  Swift, which is exactly what the contract forbids. So the hero stayed on `/api/recommend` and its
+  English `why` could not retire. **The refusal was correct; the gap was ours.**
+
+  Degraded labels deliberately say what was MISSING, not sorry. A degraded decision is still the
+  best available call, and the seller is owed the reason rather than an apology.
+
+- **A Kotlin target.** This package had none, so Android could not consume it at all and was
+  stubbing labels behind a single accessor — about to hit the identical wall on the value half it
+  is building now.
+
+  `scripts/gen-kotlin.mjs` mirrors `gen-swift.mjs` exactly: same groups, same order, same design
+  choice of one `all` map per group keyed by the RAW WIRE VALUE rather than a constant per key
+  (keys arrive as `"NEEDS_ID_REVIEW"`, `"list_single"`, `"ebay-uk-sold"`, and converting those to
+  identifiers is lossy and collision-prone). Gradle build mirrors `curio-contracts`' so JitPack
+  serves both the same way.
+
+- **The drift guard now covers BOTH generated trees.** It checked only Swift, so Kotlin could have
+  drifted silently while the guard reported green — the "looks like enforcement" failure
+  `decisions/0026` records against this project's own conformance claims.
+
+- **This repo has CI for the first time**, running the TS tests, the drift guard, and
+  `./gradlew test` on a pinned JDK 21. `StringsTest` asserts every `decide` reason code has a
+  label, because otherwise "Android can consume @curio/copy" is a claim about a file existing.
+
+
 ## v0.1.2 — 2026-08-10
 
 iOS-cowork found the shared `errorCopy.identifyFailed` (added in v0.1.1) undersold a common,

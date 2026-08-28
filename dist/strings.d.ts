@@ -88,10 +88,35 @@ export declare const STRINGS: {
         showDetail: string;
         bundleDetail: string;
     };
+    routeReasonLabels: {
+        below_bulk_floor: string;
+        net_below_minimum: string;
+        grade_worth_reviewing: string;
+        thin_market: string;
+        bundle_lot_available: string;
+        sound_single_listing: string;
+    };
+    alternativeReasonLabels: {
+        net_negative_after_costs: string;
+        bundle_shares_postage: string;
+        list_ungraded_instead: string;
+        list_now_accept_slower: string;
+        list_alone_instead: string;
+    };
+    degradedReasonLabels: {
+        no_sale_count: string;
+        fees_unknown: string;
+        compatible_count_unknown: string;
+    };
 };
 export type PhysicalCardLifecycleStatus = keyof typeof STRINGS.statusLabels.physicalCardLifecycle;
 export type LegacyCardStatus = keyof typeof STRINGS.statusLabels.legacyCardStatus;
 export type RecommendedRoute = keyof typeof STRINGS.recommendationRouteLabels;
+/** Reason codes from @curio/contracts' `decide` module. The engine returns codes and never
+ *  English — see decisions/0024. This is where the English lives, for all three platforms. */
+export type RouteReason = keyof typeof STRINGS.routeReasonLabels;
+export type AlternativeReason = keyof typeof STRINGS.alternativeReasonLabels;
+export type DegradedReason = keyof typeof STRINGS.degradedReasonLabels;
 export type Condition = keyof typeof STRINGS.conditionLabels;
 export type PriceSource = keyof typeof STRINGS.priceSourceLabels;
 export type ErrorCopyKey = keyof typeof STRINGS.errorCopy;

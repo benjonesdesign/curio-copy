@@ -44,6 +44,32 @@ public enum CurioCopy {
         "do_not_list": "Don't list",
     ]
     }
+    public enum RouteReasonLabels {
+        public static let all: [String: String] = [
+        "below_bulk_floor": "Fees and postage absorb the value",
+        "net_below_minimum": "Nets less than your minimum",
+        "grade_worth_reviewing": "Worth checking graded comps",
+        "thin_market": "Not enough recent sales to price it confidently",
+        "bundle_lot_available": "You hold enough similar cards to make a lot",
+        "sound_single_listing": "Sells well on its own",
+    ]
+    }
+    public enum AlternativeReasonLabels {
+        public static let all: [String: String] = [
+        "net_negative_after_costs": "Net negative after fees and postage",
+        "bundle_shares_postage": "Bundling shares one postage",
+        "list_ungraded_instead": "List it ungraded instead",
+        "list_now_accept_slower": "List now and accept a slower sale",
+        "list_alone_instead": "List it on its own instead",
+    ]
+    }
+    public enum DegradedReasonLabels {
+        public static let all: [String: String] = [
+        "no_sale_count": "No recent sales data to draw on",
+        "fees_unknown": "Your fee settings weren't available",
+        "compatible_count_unknown": "We didn't check your other cards",
+    ]
+    }
     public enum ConditionLabels {
         public static let all: [String: String] = [
         "NM": "Near Mint (NM)",
