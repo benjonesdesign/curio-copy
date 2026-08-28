@@ -1,5 +1,23 @@
 # Changelog
 
+## v0.1.4
+- **npm now ships the Kotlin target too.** v0.1.3 added it and the changelog said so, but
+  `package.json`'s `files` list predated it — `["dist", "Sources", "Package.swift"]` — so an
+  `npm install` saw Swift only. **The target was genuinely in the tag**; the npm package was the
+  incomplete view. That cost a round trip to establish, which is the argument for the next item.
+
+- **Release-integrity assertions**, mirroring `curio-contracts`': `npm run check` now fails if
+  `files` omits a generated tree, or if HEAD is tagged at a version `package.json` disagrees with.
+  A changelog claiming an output the package doesn't ship is the same "assertion pointing at
+  something that isn't there" defect the code-level audits kept finding, one layer up.
+
+- ⚠️ **Android still cannot consume this package, and the Kotlin target is not why.** This repo is
+  **private**, and JitPack cannot see it (`Repo not found or no token provided`), while
+  `curio-contracts` and `curio-tokens` — which Android consumes fine — are **public**. Correct
+  Kotlin, correct tag, no delivery path. Making this repo public, matching the other two, is the
+  fix and it needs Ben.
+
+
 ## v0.1.3
 Two gaps, both found by client lanes hitting a wall the package caused.
 

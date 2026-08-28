@@ -29,5 +29,32 @@ for (const t of TARGETS) {
     rmSync(tmp, { recursive: true, force: true });
   }
 }
+// ── Release integrity ──────────────────────────────────────────────────────────────────────
+//
+// Mirrors curio-contracts'. Added after v0.1.3's changelog claimed a Kotlin target that an `npm
+// install` could not see: the target WAS in the tag, but package.json's `files` list predated it,
+// so the npm package shipped Swift only. The changelog was right about the repo and wrong about
+// what a consumer received — the same "assertion pointing at something that isn't there" defect
+// one layer up from code.
+import { execSync as exec } from "node:child_process";
+
+const pkg = JSON.parse(readFileSync("package.json", "utf8"));
+const files = pkg.files ?? [];
+for (const required of ["Sources", "src/main/kotlin"]) {
+  if (!files.some((f) => f === required || f.startsWith(`${required}/`))) {
+    console.error(`\n✗ package.json "files" omits ${required} — the npm package would ship without it, ` +
+                  `while the repo and changelog claim it exists.`);
+    failed = true;
+  }
+}
+
+try {
+  const tag = exec("git describe --exact-match --tags HEAD 2>/dev/null", { encoding: "utf8" }).trim();
+  if (tag && tag !== `v${pkg.version}`) {
+    console.error(`\n✗ HEAD is tagged ${tag} but package.json says ${pkg.version}.`);
+    failed = true;
+  }
+} catch { /* HEAD isn't tagged — normal mid-development */ }
+
 if (failed) process.exit(1);
-console.log("curio-copy: generated Swift and Kotlin output are both up to date.");
+console.log("curio-copy: Swift and Kotlin output up to date, and both are shipped.");
