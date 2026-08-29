@@ -112,5 +112,15 @@
     "identity_unresolved": "We couldn't identify this card",
     "no_market_value": "No recent sales to price this from",
     "pricing_unavailable": "Pricing is unavailable right now — try again shortly"
+  },
+  "assumptionLabels": {
+    "channel": "Assumed you'll sell on eBay",
+    "seller_type": "Assumed you sell as a private seller",
+    "vat_registered": "Assumed you're not VAT-registered",
+    "condition": "Assumed near mint condition",
+    "postage": "Assumed standard postage",
+    "packaging": "Assumed standard packaging",
+    "tax_rate": "Assumed the basic-rate tax band",
+    "cost_basis": "Assumed you haven't bought it yet"
   }
 }

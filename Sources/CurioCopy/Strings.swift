@@ -77,6 +77,18 @@ public enum CurioCopy {
         "pricing_unavailable": "Pricing is unavailable right now — try again shortly",
     ]
     }
+    public enum AssumptionLabels {
+        public static let all: [String: String] = [
+        "channel": "Assumed you'll sell on eBay",
+        "seller_type": "Assumed you sell as a private seller",
+        "vat_registered": "Assumed you're not VAT-registered",
+        "condition": "Assumed near mint condition",
+        "postage": "Assumed standard postage",
+        "packaging": "Assumed standard packaging",
+        "tax_rate": "Assumed the basic-rate tax band",
+        "cost_basis": "Assumed you haven't bought it yet",
+    ]
+    }
     public enum ConditionLabels {
         public static let all: [String: String] = [
         "NM": "Near Mint (NM)",

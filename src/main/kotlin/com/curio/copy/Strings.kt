@@ -85,6 +85,19 @@ public object CurioCopy {
         )
     }
 
+    public object AssumptionLabels {
+        public val all: Map<String, String> = mapOf(
+            "channel" to "Assumed you'll sell on eBay",
+            "seller_type" to "Assumed you sell as a private seller",
+            "vat_registered" to "Assumed you're not VAT-registered",
+            "condition" to "Assumed near mint condition",
+            "postage" to "Assumed standard postage",
+            "packaging" to "Assumed standard packaging",
+            "tax_rate" to "Assumed the basic-rate tax band",
+            "cost_basis" to "Assumed you haven't bought it yet",
+        )
+    }
+
     public object ConditionLabels {
         public val all: Map<String, String> = mapOf(
             "NM" to "Near Mint (NM)",

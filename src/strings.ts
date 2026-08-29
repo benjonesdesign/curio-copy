@@ -18,6 +18,20 @@ export type DegradedReason = keyof typeof STRINGS.degradedReasonLabels;
  *  that distinction, because a client showing the same tone for "no price for this card" and
  *  "our pricing is down" tells the seller the wrong thing about which it is. */
 export type DecisionUnavailable = keyof typeof STRINGS.decisionUnavailableLabels;
+/** What the engine FILLED IN because the seller hadn't said — @curio/contracts'
+ *  `DecisionAssumptionCodeSchema`. Distinct from `DegradedReason`, which says what was MISSING:
+ *  a decision can be entirely un-degraded and still rest on assumptions.
+ *
+ *  Every string begins "Assumed" deliberately. W21 7.1 requires the default sales channel to be
+ *  "labelled as an assumption, never presented as a choice the seller made", and a label reading
+ *  "Selling on eBay" would read as a setting the seller chose. That requirement is really true of
+ *  every entry here, so the whole set is phrased to satisfy it rather than just the one code.
+ *
+ *  The assumption's `value`/`valueGbp` are formatted separately by each client in its own locale;
+ *  these labels stand alone and do not interpolate one. `channel` names eBay directly because it
+ *  is the only channel that can currently be assumed — `direct` is only ever a stated choice, so
+ *  it can never appear in this list. */
+export type AssumptionCode = keyof typeof STRINGS.assumptionLabels;
 export type Condition = keyof typeof STRINGS.conditionLabels;
 export type PriceSource = keyof typeof STRINGS.priceSourceLabels;
 export type ErrorCopyKey = keyof typeof STRINGS.errorCopy;
