@@ -70,6 +70,13 @@ public enum CurioCopy {
         "compatible_count_unknown": "We didn't check your other cards",
     ]
     }
+    public enum DecisionUnavailableLabels {
+        public static let all: [String: String] = [
+        "identity_unresolved": "We couldn't identify this card",
+        "no_market_value": "No recent sales to price this from",
+        "pricing_unavailable": "Pricing is unavailable right now — try again shortly",
+    ]
+    }
     public enum ConditionLabels {
         public static let all: [String: String] = [
         "NM": "Near Mint (NM)",

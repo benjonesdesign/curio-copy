@@ -41,6 +41,7 @@ const FLAT_GROUPS = {
   RouteReasonLabels: strings.routeReasonLabels,
   AlternativeReasonLabels: strings.alternativeReasonLabels,
   DegradedReasonLabels: strings.degradedReasonLabels,
+  DecisionUnavailableLabels: strings.decisionUnavailableLabels,
   ConditionLabels: strings.conditionLabels,
   PriceSourceLabels: strings.priceSourceLabels,
   ActionVerbs: strings.actionVerbs,

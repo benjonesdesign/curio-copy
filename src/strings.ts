@@ -14,6 +14,10 @@ export type RecommendedRoute = keyof typeof STRINGS.recommendationRouteLabels;
 export type RouteReason = keyof typeof STRINGS.routeReasonLabels;
 export type AlternativeReason = keyof typeof STRINGS.alternativeReasonLabels;
 export type DegradedReason = keyof typeof STRINGS.degradedReasonLabels;
+/** Why a Quick Scan returned no decision. Two ordinary results and one OUTAGE — the copy holds
+ *  that distinction, because a client showing the same tone for "no price for this card" and
+ *  "our pricing is down" tells the seller the wrong thing about which it is. */
+export type DecisionUnavailable = keyof typeof STRINGS.decisionUnavailableLabels;
 export type Condition = keyof typeof STRINGS.conditionLabels;
 export type PriceSource = keyof typeof STRINGS.priceSourceLabels;
 export type ErrorCopyKey = keyof typeof STRINGS.errorCopy;

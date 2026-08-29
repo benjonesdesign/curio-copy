@@ -32,6 +32,11 @@ class StringsTest {
         for (code in listOf("no_sale_count", "fees_unknown", "compatible_count_unknown")) {
             assertTrue(CurioCopy.DegradedReasonLabels.all.containsKey(code), "no label for degraded reason $code")
         }
+        // The FOURTH shared enum. It was missed in v0.1.3, so iOS wrote these locally with the
+        // deviation named -- the right interim and the wrong permanent state.
+        for (code in listOf("identity_unresolved", "no_market_value", "pricing_unavailable")) {
+            assertTrue(CurioCopy.DecisionUnavailableLabels.all.containsKey(code), "no label for $code")
+        }
     }
 
     @Test
@@ -46,9 +51,20 @@ class StringsTest {
     }
 
     @Test
+    fun `an outage does not read like an ordinary result`() {
+        // Two of the three are normal answers about a card; pricing_unavailable is an OUTAGE.
+        // Showing the same tone for both tells the seller the wrong thing about which it is.
+        val outage = CurioCopy.DecisionUnavailableLabels.all["pricing_unavailable"]!!
+        val ordinary = CurioCopy.DecisionUnavailableLabels.all["no_market_value"]!!
+        assertTrue(outage.contains("try again"), "an outage should invite a retry: $outage")
+        assertTrue(!ordinary.contains("try again"), "a real answer should not invite a retry: $ordinary")
+    }
+
+    @Test
     fun `no label is empty anywhere`() {
         for (group in listOf(CurioCopy.RouteLabels.all, CurioCopy.RouteReasonLabels.all,
                              CurioCopy.AlternativeReasonLabels.all, CurioCopy.DegradedReasonLabels.all,
+                             CurioCopy.DecisionUnavailableLabels.all,
                              CurioCopy.ConditionLabels.all, CurioCopy.ErrorCopy.all)) {
             for ((k, v) in group) assertTrue(v.isNotBlank(), "empty label for $k")
         }

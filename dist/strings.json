@@ -107,5 +107,10 @@
         "no_sale_count": "No recent sales data to draw on",
         "fees_unknown": "Your fee settings weren't available",
         "compatible_count_unknown": "We didn't check your other cards"
+    },
+    "decisionUnavailableLabels": {
+        "identity_unresolved": "We couldn't identify this card",
+        "no_market_value": "No recent sales to price this from",
+        "pricing_unavailable": "Pricing is unavailable right now — try again shortly"
     }
 }
