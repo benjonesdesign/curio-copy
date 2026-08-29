@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.1.5
+- **`decisionUnavailableLabels`** — the FOURTH shared enum from `@curio/contracts`' `decide` module,
+  missed in v0.1.3. `routeReasonLabels`, `alternativeReasonLabels` and `degradedReasonLabels` are
+  here precisely so three platforms can't invent three sentences for one code; this one wasn't, so
+  iOS wrote them locally with the deviation named — the right interim and the wrong permanent state.
+
+  The copy holds a distinction the codes carry: `identity_unresolved` and `no_market_value` are
+  ordinary results about a card, and `pricing_unavailable` is an **outage**. A client showing the
+  same tone for "no price for this card" and "our pricing is down" tells the seller the wrong thing
+  about which it is — so only the outage invites a retry, and a test asserts that.
+
+
 ## v0.1.4
 - **npm now ships the Kotlin target too.** v0.1.3 added it and the changelog said so, but
   `package.json`'s `files` list predated it — `["dist", "Sources", "Package.swift"]` — so an

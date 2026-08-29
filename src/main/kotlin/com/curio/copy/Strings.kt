@@ -77,6 +77,14 @@ public object CurioCopy {
         )
     }
 
+    public object DecisionUnavailableLabels {
+        public val all: Map<String, String> = mapOf(
+            "identity_unresolved" to "We couldn't identify this card",
+            "no_market_value" to "No recent sales to price this from",
+            "pricing_unavailable" to "Pricing is unavailable right now — try again shortly",
+        )
+    }
+
     public object ConditionLabels {
         public val all: Map<String, String> = mapOf(
             "NM" to "Near Mint (NM)",
