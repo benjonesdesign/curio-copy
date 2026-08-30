@@ -89,6 +89,12 @@ public enum CurioCopy {
         "cost_basis": "Assumed you haven't bought it yet",
     ]
     }
+    public enum EditionAmbiguityLabels {
+        public static let all: [String: String] = [
+        "first_edition_shadowless_unlimited": "This price can't tell 1st Edition, Shadowless and Unlimited apart — they can differ by a lot. Check the stamp and the shadow before you sell.",
+        "first_edition_unlimited": "This price can't tell 1st Edition from Unlimited — they can differ by a lot. Check for the 1st Edition stamp before you sell.",
+    ]
+    }
     public enum ConditionLabels {
         public static let all: [String: String] = [
         "NM": "Near Mint (NM)",

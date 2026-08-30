@@ -98,6 +98,13 @@ public object CurioCopy {
         )
     }
 
+    public object EditionAmbiguityLabels {
+        public val all: Map<String, String> = mapOf(
+            "first_edition_shadowless_unlimited" to "This price can't tell 1st Edition, Shadowless and Unlimited apart — they can differ by a lot. Check the stamp and the shadow before you sell.",
+            "first_edition_unlimited" to "This price can't tell 1st Edition from Unlimited — they can differ by a lot. Check for the 1st Edition stamp before you sell.",
+        )
+    }
+
     public object ConditionLabels {
         public val all: Map<String, String> = mapOf(
             "NM" to "Near Mint (NM)",

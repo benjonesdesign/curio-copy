@@ -122,5 +122,9 @@
     "packaging": "Assumed standard packaging",
     "tax_rate": "Assumed the basic-rate tax band",
     "cost_basis": "Assumed you haven't bought it yet"
+  },
+  "editionAmbiguityLabels": {
+    "first_edition_shadowless_unlimited": "This price can't tell 1st Edition, Shadowless and Unlimited apart — they can differ by a lot. Check the stamp and the shadow before you sell.",
+    "first_edition_unlimited": "This price can't tell 1st Edition from Unlimited — they can differ by a lot. Check for the 1st Edition stamp before you sell."
   }
 }
