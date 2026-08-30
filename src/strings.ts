@@ -32,6 +32,15 @@ export type DecisionUnavailable = keyof typeof STRINGS.decisionUnavailableLabels
  *  is the only channel that can currently be assumed — `direct` is only ever a stated choice, so
  *  it can never appear in this list. */
 export type AssumptionCode = keyof typeof STRINGS.assumptionLabels;
+/** What a price CANNOT distinguish — the WOTC sets where 1st Edition / Shadowless / Unlimited
+ *  share a name, set and number and differ by an order of magnitude, while nothing in our pipeline
+ *  models edition at all.
+ *
+ *  Written to prompt an ACTION, not to hedge. "Check the stamp before you sell" is the difference
+ *  between a seller checking and a seller finding out afterwards — and this is the one money bug
+ *  that costs them the card rather than the margin. Both strings name the thing to look at, since
+ *  a caveat a seller can't act on is just noise on the number. */
+export type EditionAmbiguity = keyof typeof STRINGS.editionAmbiguityLabels;
 export type Condition = keyof typeof STRINGS.conditionLabels;
 export type PriceSource = keyof typeof STRINGS.priceSourceLabels;
 export type ErrorCopyKey = keyof typeof STRINGS.errorCopy;
