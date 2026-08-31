@@ -44,3 +44,20 @@ jobs:
       # Without it, "Android can consume @curio/copy" is a claim about a file existing, which is
       # the mistake decisions/0026 records against this project's own conformance claims.
       - run: ./gradlew test --no-daemon
+
+  swift:
+    # The same gap curio-contracts had until 2026-08-31: a Kotlin job, no Swift job, and a Swift
+    # package that was generated, committed, and NEVER COMPILED — including eight tests in
+    # Tests/CurioCopyTests that had never once run. They pass; nothing was checking that they did.
+    #
+    # In curio-contracts that gap let decisions/0027's forward-compatible decoding ship on Android
+    # and silently not ship on iOS for three days. The exposure here is smaller — copy is strings,
+    # not decode behaviour — but the shape is identical, and the reason it went unnoticed in both
+    # places is this job not existing.
+    runs-on: ubuntu-latest
+    container: swift:6.0
+    steps:
+      - uses: actions/checkout@v4
+      # StringsTests / FormatTests — the generated Swift really carries the strings and formats
+      # them, rather than merely being a file that exists in the right place.
+      - run: swift test
