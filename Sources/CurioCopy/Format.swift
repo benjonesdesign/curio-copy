@@ -12,15 +12,26 @@ extension CurioCopy {
         guard amount.isFinite else { return "£0.00" }
         let negative = amount < 0
         let abs = Swift.abs(amount)
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        formatter.locale = Locale(identifier: "en_GB")
-        formatter.minimumFractionDigits = 2
-        formatter.maximumFractionDigits = 2
-        formatter.groupingSeparator = ","
-        formatter.decimalSeparator = "."
-        let formatted = formatter.string(from: NSNumber(value: abs)) ?? String(format: "%.2f", abs)
-        return "\(negative ? "-" : "")£\(formatted)"
+
+        // Formatted by hand rather than with NumberFormatter, because NumberFormatter is not the
+        // same code on every platform. swift-corelibs-foundation (Linux) IGNORES
+        // maximumFractionDigits here: formatGBP(9.999) returns "£10.00" on Darwin and "£9.999" on
+        // Linux, from identical source. Caught the first time this package was ever built in CI —
+        // the tests were written, correct, and had never run anywhere but a Mac.
+        //
+        // The output of a money formatter must not depend on which Foundation happens to be
+        // linked. `%.2f` is C-level and identical everywhere; the grouping below is ours.
+        let fixed = String(format: "%.2f", abs)
+        let parts = fixed.split(separator: ".", maxSplits: 1, omittingEmptySubsequences: false)
+        let whole = String(parts[0])
+        let fraction = parts.count > 1 ? String(parts[1]) : "00"
+
+        var grouped = ""
+        for (offset, ch) in whole.reversed().enumerated() {
+            if offset > 0 && offset % 3 == 0 { grouped.append(",") }
+            grouped.append(ch)
+        }
+        return "\(negative ? "-" : "")£\(String(grouped.reversed())).\(fraction)"
     }
 
     private static let shortMonths = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
