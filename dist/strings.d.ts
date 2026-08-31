@@ -127,6 +127,10 @@ export declare const STRINGS: {
         first_edition_shadowless_unlimited: string;
         first_edition_unlimited: string;
     };
+    editionAmbiguityNoPriceLabels: {
+        first_edition_shadowless_unlimited: string;
+        first_edition_unlimited: string;
+    };
 };
 export type PhysicalCardLifecycleStatus = keyof typeof STRINGS.statusLabels.physicalCardLifecycle;
 export type LegacyCardStatus = keyof typeof STRINGS.statusLabels.legacyCardStatus;
@@ -163,6 +167,20 @@ export type AssumptionCode = keyof typeof STRINGS.assumptionLabels;
  *  that costs them the card rather than the margin. Both strings name the thing to look at, since
  *  a caveat a seller can't act on is just noise on the number. */
 export type EditionAmbiguity = keyof typeof STRINGS.editionAmbiguityLabels;
+/**
+ * The SAME disclosure, worded for when there is no price on screen.
+ *
+ * `editionAmbiguityLabels` opens "This price can't tell..." and iOS rightly gated it on a price
+ * existing — the note was appearing above a dash and talking about a number that wasn't there.
+ *
+ * But gating it loses the warning exactly where it matters most. A vintage Base Charizard our
+ * pricing CANNOT SEE is the card a seller is most likely to sell blind, and the ambiguity is a
+ * fact about the CARD, not about the price. So this set presupposes no number, and a client shows
+ * it instead of hiding the disclosure — never nothing.
+ *
+ * Same codes, same action ("check the stamp"), no presupposed price.
+ */
+export type EditionAmbiguityNoPrice = keyof typeof STRINGS.editionAmbiguityNoPriceLabels;
 export type Condition = keyof typeof STRINGS.conditionLabels;
 export type PriceSource = keyof typeof STRINGS.priceSourceLabels;
 export type ErrorCopyKey = keyof typeof STRINGS.errorCopy;

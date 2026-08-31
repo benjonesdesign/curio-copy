@@ -46,7 +46,8 @@ const FLAT_GROUPS = {
   DegradedReasonLabels: strings.degradedReasonLabels,
   DecisionUnavailableLabels: strings.decisionUnavailableLabels,
   AssumptionLabels: strings.assumptionLabels,
-  EditionAmbiguityLabels: strings.editionAmbiguityLabels,   // add here AND in gen-swift.mjs — src/generated-coverage.test.ts enforces both
+  EditionAmbiguityLabels: strings.editionAmbiguityLabels,
+  EditionAmbiguityNoPriceLabels: strings.editionAmbiguityNoPriceLabels,   // add here AND in gen-swift.mjs — src/generated-coverage.test.ts enforces both
   ConditionLabels: strings.conditionLabels,
   PriceSourceLabels: strings.priceSourceLabels,
   ActionVerbs: strings.actionVerbs,
