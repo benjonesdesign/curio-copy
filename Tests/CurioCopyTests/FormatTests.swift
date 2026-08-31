@@ -13,6 +13,12 @@ final class FormatTests: XCTestCase {
         XCTAssertEqual(CurioCopy.formatGBP(9.999), "£10.00")
         XCTAssertEqual(CurioCopy.formatGBP(-12.34), "-£12.34")
         XCTAssertEqual(CurioCopy.formatGBP(1_000_000), "£1,000,000.00")
+        // Grouping boundaries, added after the hand-rolled grouping replaced NumberFormatter —
+        // three digits is where an off-by-one in the comma logic hides.
+        XCTAssertEqual(CurioCopy.formatGBP(999), "£999.00")
+        XCTAssertEqual(CurioCopy.formatGBP(1000), "£1,000.00")
+        XCTAssertEqual(CurioCopy.formatGBP(-1234.5), "-£1,234.50")
+        XCTAssertEqual(CurioCopy.formatGBP(0.005), "£0.01")
     }
 
     func testFormatGBPNonFinite() {
