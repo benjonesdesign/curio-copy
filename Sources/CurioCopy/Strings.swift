@@ -95,6 +95,12 @@ public enum CurioCopy {
         "first_edition_unlimited": "This price can't tell 1st Edition from Unlimited — they can differ by a lot. Check for the 1st Edition stamp before you sell.",
     ]
     }
+    public enum EditionAmbiguityNoPriceLabels {
+        public static let all: [String: String] = [
+        "first_edition_shadowless_unlimited": "This card comes in 1st Edition, Shadowless and Unlimited printings, which differ by a lot. Check the stamp and the shadow.",
+        "first_edition_unlimited": "This card comes in 1st Edition and Unlimited printings, which differ by a lot. Check for the 1st Edition stamp.",
+    ]
+    }
     public enum ConditionLabels {
         public static let all: [String: String] = [
         "NM": "Near Mint (NM)",

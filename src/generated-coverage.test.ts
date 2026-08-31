@@ -71,3 +71,31 @@ describe("generated copy covers every label set on every platform", () => {
     expect(stale, `exempted keys that are gone from strings.json: ${stale.join(", ")}`).toEqual([]);
   });
 });
+
+describe("the edition disclosure has a wording for both cases", () => {
+  it("every code exists in BOTH label sets", () => {
+    // iOS gated the disclosure on a price existing, because the with-price wording opened "This
+    // price can't tell..." above a dash. The gate was right for that wording and wrong for the
+    // disclosure: a vintage card our pricing cannot see is the one a seller is most likely to sell
+    // blind. A code present in one set and missing from the other puts the gate back.
+    const withPrice = Object.keys(strings.editionAmbiguityLabels);
+    const noPrice = Object.keys(strings.editionAmbiguityNoPriceLabels);
+    expect(withPrice.length).toBeGreaterThan(0);
+    expect(noPrice.sort()).toEqual(withPrice.sort());
+  });
+
+  it("the no-price wording presupposes no number", () => {
+    // The whole reason the second set exists. If it says "price", it cannot run where there isn't one.
+    for (const [code, s] of Object.entries(strings.editionAmbiguityNoPriceLabels)) {
+      expect(String(s).toLowerCase(), `${code} still talks about a price`).not.toContain("this price");
+    }
+  });
+
+  it("both wordings still tell the seller what to LOOK AT", () => {
+    for (const set of [strings.editionAmbiguityLabels, strings.editionAmbiguityNoPriceLabels]) {
+      for (const [code, s] of Object.entries(set)) {
+        expect(String(s).toLowerCase(), `${code} gives the seller nothing to act on`).toContain("check");
+      }
+    }
+  });
+});
