@@ -1,5 +1,43 @@
 # Changelog
 
+## v0.1.9 — the sale-venue vocabulary
+
+**`saleVenueLabels` (11) and `dispositionOnlyLabels` (2)** — curio-shared
+`decisions/0030-sale-venue-and-disposition.md`.
+
+"Where a card went" was spelled **seven** different ways in `pokemon-tool` and its database: two
+customer-facing dropdowns that disagreed, two CHECKed slug lists that disagreed with each other,
+and three unconstrained `text` columns holding display strings. `local` is the one that bit —
+"Local / cash" on one screen and "Local sale" on another, so a sale recorded on one did not match
+a filter on the other.
+
+**Disposition is composed, not duplicated.** `dispositionLabels` is
+`{...saleVenueLabels, ...dispositionOnlyLabels}` and `CardDisposition` is
+`SaleVenue | keyof dispositionOnlyLabels`, so a venue added tomorrow is a valid disposition the
+same day with nobody remembering to add it twice — the two lists drifted apart precisely because
+they were maintained separately.
+
+The two extras are the outcomes that are **not sales**: `keep` (the decision not to sell — a venue
+of "keep" is incoherent) and `bundle` (the lot then sells somewhere, and `bundles.channel` records
+*that*). A test pins that set to exactly those two, because it is the whole argument for two
+vocabularies rather than one.
+
+`TCGplayer` is spelled with a lowercase `p`, which is the brand's own rendering; `pokemon-tool`
+had `TCGPlayer` in both dropdowns.
+
+### ⚠️ Three releases are missing from this file
+
+`package.json` said `0.1.5` and this changelog stopped at v0.1.5, while the repo tagged **v0.1.6,
+v0.1.7 and v0.1.8**. Nothing broke — consumers pin by git tag (`#v0.1.8`), and `copy-check.mjs`
+verifies the installed commit against the pinned tag rather than the version field — but the
+repo's own record of what it has shipped has been three releases stale, and the version field read
+as a fourth-release-ago number to anyone who looked.
+
+The version field is now `0.1.9`. The three missing entries are **not** reconstructed here: their
+content would be a guess, and a fabricated changelog is worse than an admitted gap. `git log
+v0.1.5..v0.1.8` is the record.
+
+
 ## v0.1.5
 - **`decisionUnavailableLabels`** — the FOURTH shared enum from `@curio/contracts`' `decide` module,
   missed in v0.1.3. `routeReasonLabels`, `alternativeReasonLabels` and `degradedReasonLabels` are
