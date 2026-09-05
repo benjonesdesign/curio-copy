@@ -25,18 +25,60 @@ vocabularies rather than one.
 `TCGplayer` is spelled with a lowercase `p`, which is the brand's own rendering; `pokemon-tool`
 had `TCGPlayer` in both dropdowns.
 
-### ⚠️ Three releases are missing from this file
+### Where this file's history lives
 
-`package.json` said `0.1.5` and this changelog stopped at v0.1.5, while the repo tagged **v0.1.6,
-v0.1.7 and v0.1.8**. Nothing broke — consumers pin by git tag (`#v0.1.8`), and `copy-check.mjs`
-verifies the installed commit against the pinned tag rather than the version field — but the
-repo's own record of what it has shipped has been three releases stale, and the version field read
-as a fourth-release-ago number to anyone who looked.
+⚠️ **`curio-shared/versions.json` is the authoritative record of what this package has shipped.
+This file is a transcription of it.**
 
-The version field is now `0.1.9`. The three missing entries are **not** reconstructed here: their
-content would be a guess, and a fabricated changelog is worse than an admitted gap. `git log
-v0.1.5..v0.1.8` is the record.
+v0.1.6, v0.1.7 and v0.1.8 were tagged with no entry here, and `package.json` sat at `0.1.5`
+throughout. Nothing broke — consumers pin by git tag (`#v0.1.8`) and `copy-check.mjs` verifies the
+installed *commit* against the pinned tag, never the version field — but this file was three
+releases stale while canonical was current.
 
+**The cause is structural, not forgetfulness.** `versions.json` is what gets updated during a
+release sitting, because that is what consumers read; a package's own changelog is not on that
+path. Two records of one fact, one of them maintained. So the maintained one is authoritative and
+this one is derived from it — the same shape as `dispositionLabels` being composed from
+`saleVenueLabels` rather than kept in parallel.
+
+The three entries below are **transcribed** from that note, not reconstructed. `git log
+v0.1.5..v0.1.8` is the code-level record.
+
+`src/changelog-coverage.test.ts` now fails when a git tag has no heading here.
+
+## v0.1.8 — `editionAmbiguityNoPriceLabels`
+
+*Transcribed 2026-09-03 from `curio-shared/versions.json` — see "Where this file's history lives".*
+
+The disclosure survives having no price. iOS gated the warning on a price existing, because the
+wording opened *"This price can't tell…"* above a dash. **The gate was right for that wording and
+wrong for the disclosure**: a vintage Base Charizard our pricing *cannot see* is the card a seller
+is most likely to sell blind. Same codes, no presupposed number.
+
+## v0.1.7 — `editionAmbiguityLabels`
+
+*Transcribed from `curio-shared/versions.json`.*
+
+Say what the price cannot distinguish. A Base Set Charizard exists as 1st Edition, Shadowless and
+Unlimited — thousands vs hundreds of pounds — and **nothing in the pricing pipeline models
+edition**: no catalogue column, no `PriceLookupParams` field, and the cache key is
+`name|set_name|card_number|condition`, so two editions share a cache entry. The number is wrong in
+both directions, and the undervaluing one costs a seller **the card** rather than the margin.
+
+## v0.1.6 — `assumptionLabels`
+
+*Transcribed from `curio-shared/versions.json`.*
+
+`/api/decide`'s `assumptions` is the typed successor to `/api/recommend`'s English
+`assumptions: string[]` — the whole point being that the wording lives *here*, so one repo owns
+English for three platforms (ADR 0024). The codes shipped and the labels never did, so every client
+had to invent its own. W21 7.1 made it urgent: an assumed sales channel *"must be labelled as an
+assumption, never presented as a choice the seller made"*, and you cannot label it without a label —
+which is why every string in the set begins "Assumed".
+
+Also fixed the **mechanism**: both generators listed their label sets in a hand-written map, so a
+new key reached TypeScript only, a fresh regeneration matched the committed file byte for byte, and
+`check-drift` reported green. It caught a stale output and was blind to a missing one.
 
 ## v0.1.5
 - **`decisionUnavailableLabels`** — the FOURTH shared enum from `@curio/contracts`' `decide` module,
