@@ -9,6 +9,31 @@ export const STRINGS = raw;
 export type PhysicalCardLifecycleStatus = keyof typeof STRINGS.statusLabels.physicalCardLifecycle;
 export type LegacyCardStatus = keyof typeof STRINGS.statusLabels.legacyCardStatus;
 export type RecommendedRoute = keyof typeof STRINGS.recommendationRouteLabels;
+
+/** WHERE MONEY ACTUALLY CHANGED HANDS — curio-shared decisions/0030. The vocabulary behind
+ *  `physical_cards.sale_platform`, `cards.sale_platform`, `outcome_events.sale_platform` and
+ *  `bundles.channel`, all of which previously held free display strings or a disagreeing slug list.
+ *
+ *  `local` is the one that mattered: web offered "Local / cash" on one screen and "Local sale" on
+ *  another, so a sale recorded on one did not match a filter on the other. */
+export type SaleVenue = keyof typeof STRINGS.saleVenueLabels;
+
+/** WHAT THE PLAN FOR A CARD IS — `physical_cards.allocation_channel`. A superset of SaleVenue,
+ *  and it is DEFINED from it rather than listed beside it, which is the point: the two lists
+ *  drifted apart precisely because they were maintained separately.
+ *
+ *  The two extras are the outcomes that are NOT sales. `keep` is the decision not to sell — a
+ *  sale venue of `keep` is incoherent. `bundle` is "this card goes into a lot"; the lot then sells
+ *  somewhere, and `bundles.channel` records THAT. */
+export type CardDisposition = SaleVenue | keyof typeof STRINGS.dispositionOnlyLabels;
+
+/** Every disposition's label, composed rather than duplicated — 13 entries from two sources, so a
+ *  venue added tomorrow is a valid disposition the same day with nobody remembering to add it
+ *  twice. */
+export const dispositionLabels: Record<CardDisposition, string> = {
+  ...STRINGS.saleVenueLabels,
+  ...STRINGS.dispositionOnlyLabels,
+};
 /** Reason codes from @curio/contracts' `decide` module. The engine returns codes and never
  *  English — see decisions/0024. This is where the English lives, for all three platforms. */
 export type RouteReason = keyof typeof STRINGS.routeReasonLabels;

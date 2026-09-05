@@ -1,5 +1,85 @@
 # Changelog
 
+## v0.1.9 — the sale-venue vocabulary
+
+**`saleVenueLabels` (11) and `dispositionOnlyLabels` (2)** — curio-shared
+`decisions/0030-sale-venue-and-disposition.md`.
+
+"Where a card went" was spelled **seven** different ways in `pokemon-tool` and its database: two
+customer-facing dropdowns that disagreed, two CHECKed slug lists that disagreed with each other,
+and three unconstrained `text` columns holding display strings. `local` is the one that bit —
+"Local / cash" on one screen and "Local sale" on another, so a sale recorded on one did not match
+a filter on the other.
+
+**Disposition is composed, not duplicated.** `dispositionLabels` is
+`{...saleVenueLabels, ...dispositionOnlyLabels}` and `CardDisposition` is
+`SaleVenue | keyof dispositionOnlyLabels`, so a venue added tomorrow is a valid disposition the
+same day with nobody remembering to add it twice — the two lists drifted apart precisely because
+they were maintained separately.
+
+The two extras are the outcomes that are **not sales**: `keep` (the decision not to sell — a venue
+of "keep" is incoherent) and `bundle` (the lot then sells somewhere, and `bundles.channel` records
+*that*). A test pins that set to exactly those two, because it is the whole argument for two
+vocabularies rather than one.
+
+`TCGplayer` is spelled with a lowercase `p`, which is the brand's own rendering; `pokemon-tool`
+had `TCGPlayer` in both dropdowns.
+
+### Where this file's history lives
+
+⚠️ **`curio-shared/versions.json` is the authoritative record of what this package has shipped.
+This file is a transcription of it.**
+
+v0.1.6, v0.1.7 and v0.1.8 were tagged with no entry here, and `package.json` sat at `0.1.5`
+throughout. Nothing broke — consumers pin by git tag (`#v0.1.8`) and `copy-check.mjs` verifies the
+installed *commit* against the pinned tag, never the version field — but this file was three
+releases stale while canonical was current.
+
+**The cause is structural, not forgetfulness.** `versions.json` is what gets updated during a
+release sitting, because that is what consumers read; a package's own changelog is not on that
+path. Two records of one fact, one of them maintained. So the maintained one is authoritative and
+this one is derived from it — the same shape as `dispositionLabels` being composed from
+`saleVenueLabels` rather than kept in parallel.
+
+The three entries below are **transcribed** from that note, not reconstructed. `git log
+v0.1.5..v0.1.8` is the code-level record.
+
+`src/changelog-coverage.test.ts` now fails when a git tag has no heading here.
+
+## v0.1.8 — `editionAmbiguityNoPriceLabels`
+
+*Transcribed 2026-09-03 from `curio-shared/versions.json` — see "Where this file's history lives".*
+
+The disclosure survives having no price. iOS gated the warning on a price existing, because the
+wording opened *"This price can't tell…"* above a dash. **The gate was right for that wording and
+wrong for the disclosure**: a vintage Base Charizard our pricing *cannot see* is the card a seller
+is most likely to sell blind. Same codes, no presupposed number.
+
+## v0.1.7 — `editionAmbiguityLabels`
+
+*Transcribed from `curio-shared/versions.json`.*
+
+Say what the price cannot distinguish. A Base Set Charizard exists as 1st Edition, Shadowless and
+Unlimited — thousands vs hundreds of pounds — and **nothing in the pricing pipeline models
+edition**: no catalogue column, no `PriceLookupParams` field, and the cache key is
+`name|set_name|card_number|condition`, so two editions share a cache entry. The number is wrong in
+both directions, and the undervaluing one costs a seller **the card** rather than the margin.
+
+## v0.1.6 — `assumptionLabels`
+
+*Transcribed from `curio-shared/versions.json`.*
+
+`/api/decide`'s `assumptions` is the typed successor to `/api/recommend`'s English
+`assumptions: string[]` — the whole point being that the wording lives *here*, so one repo owns
+English for three platforms (ADR 0024). The codes shipped and the labels never did, so every client
+had to invent its own. W21 7.1 made it urgent: an assumed sales channel *"must be labelled as an
+assumption, never presented as a choice the seller made"*, and you cannot label it without a label —
+which is why every string in the set begins "Assumed".
+
+Also fixed the **mechanism**: both generators listed their label sets in a hand-written map, so a
+new key reached TypeScript only, a fresh regeneration matched the committed file byte for byte, and
+`check-drift` reported green. It caught a stale output and was blind to a missing one.
+
 ## v0.1.5
 - **`decisionUnavailableLabels`** — the FOURTH shared enum from `@curio/contracts`' `decide` module,
   missed in v0.1.3. `routeReasonLabels`, `alternativeReasonLabels` and `degradedReasonLabels` are

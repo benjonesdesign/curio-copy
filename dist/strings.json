@@ -34,6 +34,23 @@
         "restoration_review": "Restoration review",
         "do_not_list": "Don't list"
     },
+    "saleVenueLabels": {
+        "ebay": "eBay",
+        "vinted": "Vinted",
+        "tcgplayer": "TCGplayer",
+        "cardmarket": "Cardmarket",
+        "whatnot": "Whatnot",
+        "facebook": "Facebook",
+        "show": "Card show",
+        "local": "Local / cash",
+        "buylist": "Buylist",
+        "trade": "Trade",
+        "other": "Other"
+    },
+    "dispositionOnlyLabels": {
+        "keep": "Keep",
+        "bundle": "Bundle"
+    },
     "conditionLabels": {
         "NM": "Near Mint (NM)",
         "LP": "Lightly Played (LP)",
