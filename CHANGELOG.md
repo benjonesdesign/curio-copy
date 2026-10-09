@@ -26,7 +26,9 @@ the follow-up of 2026-10-09). Eleven new groups, all keyed by the contract's wir
   reuses some of the listing reasons' wire strings but not their sentences ("A sold copy can't be
   listed again" is wrong for a change). Complete: all six codes, in the contract's order,
   `live_on_ebay`, `sold`, `archived`, `set_aside`, `not_found`, `write_failed`. No change sentence
-  mentions listing; a test fails if one does.
+  mentions listing, except `live_on_ebay` ("End the listing first. It's live on eBay."), where
+  "listing" is the existing eBay listing, not a "can't be listed" refusal. A test exempts exactly
+  that key and fails for any other.
 - **`receiveLabels`**: `negative` is "You'd pay to sell this" (Ben, 2026-10-09). "Below cost" read as
   below what the seller paid for the card, a different and commoner situation; a test fails if
   "below cost" appears anywhere in the strings.

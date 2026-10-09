@@ -179,7 +179,7 @@ public enum CurioCopy {
     }
     public enum ChangeRefusalReasonLabels {
         public static let all: [String: String] = [
-        "live_on_ebay": "Live on eBay. End it there first.",
+        "live_on_ebay": "End the listing first. It's live on eBay.",
         "sold": "Sold. A sold copy can't be changed.",
         "archived": "Archived. Restore it to change it.",
         "set_aside": "Set aside. Put it back to change it.",

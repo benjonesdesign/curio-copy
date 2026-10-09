@@ -130,10 +130,20 @@ describe("economics, postage and listing-refusal copy (design additions, 2026-10
 
   it("change refusals are their own set and no change sentence mentions listing", () => {
     // "A sold copy can't be listed again" is wrong for a Mark as Mine refusal.
+    // ONE exemption, by key: live_on_ebay reads "End the listing first. It's live on eBay." and
+    // "listing" there is the EXISTING eBay listing the seller has to end, not a "can't be listed"
+    // refusal. Every other key still fails if it says list, listed or listing.
+    const EXISTING_LISTING_KEY = "live_on_ebay";
     for (const [code, label] of Object.entries(STRINGS.changeRefusalReasonLabels)) {
-      expect(label.toLowerCase(), `${code} talks about listing`).not.toMatch(/\blist(ed|ing)?\b/);
+      if (code !== EXISTING_LISTING_KEY) {
+        expect(label.toLowerCase(), `${code} talks about listing`).not.toMatch(/\blist(ed|ing)?\b/);
+      }
       expect(label, `${code} is not a finished sentence`).toMatch(/\.$/);
     }
+    // The exemption is exactly that key and exactly that sentence: it must still say the listing is
+    // the seller's own, live one.
+    expect(STRINGS.changeRefusalReasonLabels.live_on_ebay).toBe("End the listing first. It's live on eBay.");
+    expect(STRINGS.changeRefusalShortLabels.live_on_ebay).toBe("Live on eBay");
     const listing: Record<string, string> = STRINGS.listingRefusalReasonLabels;
     for (const code of ["sold", "archived", "set_aside"] as const) {
       expect(STRINGS.changeRefusalReasonLabels[code], `${code} reuses the listing sentence`).not.toBe(listing[code]);
