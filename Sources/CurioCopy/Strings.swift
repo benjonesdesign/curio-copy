@@ -110,7 +110,6 @@ public enum CurioCopy {
         "margin_not_set": "Set a target margin to see the most to pay",
         "seller_type_not_set": "Say how you sell on eBay to see the most to pay",
         "vat_not_set": "Say whether you're VAT-registered to see the most to pay",
-        "asking_price_only": "Only asking prices so far, so there's no figure to work from",
         "no_price": "No price for this card yet",
         "not_viable": "Fees, postage and your margin take the whole sale price",
     ]
@@ -120,9 +119,13 @@ public enum CurioCopy {
         "margin_not_set": "Not set",
         "seller_type_not_set": "Not set",
         "vat_not_set": "Not set",
-        "asking_price_only": "Asking only",
         "no_price": "No price",
         "not_viable": "Nothing left",
+    ]
+    }
+    public enum MaxBuyAskingBasisCaption {
+        public static let all: [String: String] = [
+        "value": "Worked from asking prices, so it's a ceiling, not a forecast",
     ]
     }
     public enum FeeNotSetReasonLabels {
@@ -149,6 +152,7 @@ public enum CurioCopy {
         "mine": "Mine, not for sale. Change it to stock to list it.",
         "set_aside": "Set aside. Seek can't vouch for this card, so it can't be listed.",
         "unmatched": "Not identified. Identify it before you list it.",
+        "slab_unverified": "Graded slab not verified. Seek doesn't list an unverified slab as graded.",
         "condition_not_confirmed": "Condition not set. Confirm the condition before you list it.",
         "no_price": "No price yet. Set a price before you list it.",
         "no_sku": "No SKU yet, so it can't be listed. Try again in a moment.",
@@ -163,6 +167,7 @@ public enum CurioCopy {
         "mine": "Mine",
         "set_aside": "Set aside",
         "unmatched": "Not identified",
+        "slab_unverified": "Not verified",
         "condition_not_confirmed": "Condition not set",
         "no_price": "No price",
         "no_sku": "No SKU yet",
@@ -170,6 +175,12 @@ public enum CurioCopy {
         "already_live": "Already live",
         "sold": "Sold",
         "archived": "Archived",
+    ]
+    }
+    public enum ChangeRefusalReasonLabels {
+        public static let all: [String: String] = [
+        "sold": "Sold. A sold copy can't be changed.",
+        "archived": "Archived. Restore it to change it.",
     ]
     }
     public enum ReceiveLabels {

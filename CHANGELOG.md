@@ -5,47 +5,51 @@
 **Not tagged and not version-bumped.** This is a new-group release, so per README step 5 it waits for
 iOS (and Android) review before a tag. `package.json` is deliberately unchanged.
 
-Merged from `curio-shared/canon/design/copy-additions-2026-10-09.json`. Eight new groups, all
-keyed by the contract's wire value, no placeholders:
+Merged from `curio-shared/canon/design/copy-additions-2026-10-09.json` (design's PR curio-shared#27,
+the follow-up of 2026-10-09). Ten new groups, all keyed by the contract's wire value, no placeholders:
 
 - **`maxBuyUnavailableReasonLabels`** (the sentence under the most to pay) and
-  **`maxBuyLineUnavailableLabels`** (the short value on a null breakdown line). Same six codes.
-  `not_viable`'s line is "Nothing left", never a figure.
+  **`maxBuyLineUnavailableLabels`** (the short value on a null breakdown line). Same five codes.
+  `not_viable`'s line is "Nothing left", never a figure. **`asking_price_only` is not a reason**: a
+  figure worked from asking prices is shown, never withheld (rule 10). Its caption is
+  **`maxBuyAskingBasisCaption`** (`{ value }`).
 - **`feeNotSetReasonLabels`** (`seller_type_not_set`, `vat_not_set`) and **`feeNotSetValueLabel`**
   (`{ value: "Not set" }`, a one-key group so the value has a lookup on every platform).
 - **`postageServiceLabels`**: exactly the four contract services, `rm48_ll`, `rm24_ll`,
   `tracked48_sp`, `special_delivery`, with the H6 labels.
 - **`listingRefusalReasonLabels`** (a sentence, for a per-row result or a bulk leave-out line) and
-  **`listingRefusalShortLabels`** (a table cell). Same ten codes.
-- **`receiveLabels`**: `negative`.
+  **`listingRefusalShortLabels`** (a table cell). Same eleven codes, in the contract's order:
+  `mine`, `set_aside`, `unmatched`, `slab_unverified`, `condition_not_confirmed`, `no_price`,
+  `no_sku`, `game_not_available`, `already_live`, `sold`, `archived`.
+- **`changeRefusalReasonLabels`** (#260, Mark as Mine / set aside): its OWN group, for
+  `InventoryChangeRefusalReason`, which reuses some of the listing reasons' wire strings but not
+  their sentences ("A sold copy can't be listed again" is wrong for a change). Two of six written.
+- **`receiveLabels`**: `negative` is "You'd pay to sell this" (Ben, 2026-10-09). "Below cost" read as
+  below what the seller paid for the card, a different and commoner situation; a test fails if
+  "below cost" appears anywhere in the strings.
 - **`statusLabels.physicalCardLifecycle`**: adds `HELD` "Held", `UNMATCHED` "Not identified",
   `IDENTIFYING` "Identifying", `RETURNED` "Returned". **`EBAY_DRAFT` changes from "Draft created"
   to "Draft on eBay"** (it read as an event, not a state).
 
-Deviations from design's file, so nobody finds them by surprise:
+**Gaps, not invented:** design has written no copy for four of the six
+`InventoryChangeRefusalReason` codes: `live_on_ebay`, `set_aside`, `not_found`, `write_failed`. A
+client that meets one has no label from this package. A test pins exactly this list, so when design
+writes one it must move it out of the list.
 
-- **`receiveLabels.negative` is "You'd pay to sell this"**, not design's file's "Below cost". Ben
-  ruled it 2026-10-09 and design's DESIGN-ANSWERS says so; the JSON was not updated. "Below cost"
-  reads as below what the seller paid for the card, which is a different and commoner situation.
-  A test fails if "below cost" appears anywhere in the strings.
+Notes:
+
 - **No listing-time label exists.** Ben's 2026-10-09 ruling removed listing time everywhere. Design's
-  file carries none, so nothing was dropped; a test now fails if any label counts or mentions it.
+  file carries none; a test fails if any label counts or mentions it.
+- Listing-refusal keys are in the contract's order, not design's file's (which puts `slab_unverified`
+  last). Same keys, same strings.
+- `slab_unverified` has no next step on purpose: no verify action is drawn (design's D4b is open).
 
-Open mismatch with the contract, not resolved here because the answer is design's and the
-contract's, not ours to invent:
-
-- **`ListingRefusalReason`** in curio-contracts v0.2.0 (PR #35, untagged) has nine reasons. Design's
-  file has ten. It is **missing `slab_unverified`** (no copy exists for it; a client reading the
-  contract has nothing to show) and it **adds `sold` and `archived`** (#260), which the contract
-  does not carry yet. All three need an owner. A test pins this exact difference, so when design
-  writes `slab_unverified` or the contract adds `sold` / `archived` the test says so.
-- The v0.2.0 contract docs call HELD "Held by you"; design's answers rule "Held" (neutral tone). The
-  label here follows design.
-
-New tests: key sets pinned to the contract's wire values, sentence/short pairs share codes, short
-labels fit a cell, no placeholder or decoration, no listing-time wording, and Swift and Kotlin
-lookups for the new groups. `scripts/gen-swift.mjs` and `scripts/gen-kotlin.mjs` emit the new
-groups (`src/generated-coverage.test.ts` enforces both).
+New tests: key sets pinned to the contract's wire values (and order, for the listing refusals), the
+five most-to-pay reasons with asking prices as a flag rather than a reason, sentence/short pairs share
+codes, short labels fit a cell, change refusals never reuse a listing sentence, no placeholder or
+decoration, no listing-time wording, and Swift and Kotlin lookups for the new groups.
+`scripts/gen-swift.mjs` and `scripts/gen-kotlin.mjs` emit the new groups
+(`src/generated-coverage.test.ts` enforces both).
 
 ## v0.1.5
 - **`decisionUnavailableLabels`** — the FOURTH shared enum from `@curio/contracts`' `decide` module,

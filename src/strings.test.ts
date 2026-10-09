@@ -51,17 +51,29 @@ describe("STRINGS", () => {
 });
 
 // ── Design additions, 2026-10-09 ────────────────────────────────────────────────────────────────
-// The keys of the first four sets are curio-contracts v0.2.0's wire values (PR #35, untagged at the
-// time of writing). They are pinned HERE as literals, deliberately: this package does not depend on
-// the contract, so a key renamed on either side shows up as a failure rather than as a label that
-// is silently never looked up.
+// The keys of these sets are curio-contracts v0.2.0's wire values (branch
+// code-tab/v0.2.0-nullable-maxbuy-fee-1008 @ 1853327, untagged at the time of writing). They are
+// pinned HERE as literals, deliberately: this package does not depend on the contract, so a key
+// renamed on either side shows up as a failure rather than as a label that is silently never
+// looked up.
 describe("economics, postage and listing-refusal copy (design additions, 2026-10-09)", () => {
   const sorted = (o: object) => Object.keys(o).sort();
 
-  it("most-to-pay unavailable reasons: the six contract codes, in both the sentence and line forms", () => {
-    const codes = ["asking_price_only", "margin_not_set", "no_price", "not_viable", "seller_type_not_set", "vat_not_set"];
+  it("most-to-pay unavailable reasons: the five contract codes, in both the sentence and line forms", () => {
+    const codes = ["margin_not_set", "no_price", "not_viable", "seller_type_not_set", "vat_not_set"];
     expect(sorted(STRINGS.maxBuyUnavailableReasonLabels)).toEqual(codes);
     expect(sorted(STRINGS.maxBuyLineUnavailableLabels)).toEqual(codes);
+  });
+
+  it("asking prices are a flag on a shown figure, never a reason it is withheld", () => {
+    // Rule 10: a figure worked from asking prices is shown as a ceiling and says so. A label for
+    // `asking_price_only` as an "unavailable" reason would put the withholding back.
+    expect(STRINGS.maxBuyUnavailableReasonLabels).not.toHaveProperty("asking_price_only");
+    expect(STRINGS.maxBuyLineUnavailableLabels).not.toHaveProperty("asking_price_only");
+    const caption = STRINGS.maxBuyAskingBasisCaption.value;
+    expect(Object.keys(STRINGS.maxBuyAskingBasisCaption)).toEqual(["value"]);
+    expect(caption).toContain("asking prices");
+    expect(caption.toLowerCase()).toContain("ceiling");
   });
 
   it("a null breakdown line never reads as zero money", () => {
@@ -89,24 +101,40 @@ describe("economics, postage and listing-refusal copy (design additions, 2026-10
     });
   });
 
-  it("listing refusals: the sentence and the short form carry the same codes", () => {
-    // Two forms of one vocabulary. A code in one and not the other is a table cell that falls back
-    // to inventing a word, or a result line with no sentence.
-    expect(sorted(STRINGS.listingRefusalShortLabels)).toEqual(sorted(STRINGS.listingRefusalReasonLabels));
+  it("listing refusals: both forms carry exactly the contract's eleven reasons, in its order", () => {
+    // ListingRefusalReason, curio-contracts @ 1853327. Order is part of the pin: the contract
+    // documents it as the order of the enum, and a reorder is a change somebody should see.
+    const CONTRACT = ["mine", "set_aside", "unmatched", "slab_unverified", "condition_not_confirmed",
+                      "no_price", "no_sku", "game_not_available", "already_live", "sold", "archived"];
+    expect(Object.keys(STRINGS.listingRefusalReasonLabels)).toEqual(CONTRACT);
+    expect(Object.keys(STRINGS.listingRefusalShortLabels)).toEqual(CONTRACT);
   });
 
-  it("listing refusals: the contract's reasons are all here, bar the one it has that design did not write", () => {
-    // curio-contracts' ListingRefusalReason (PR #35): mine, set_aside, unmatched, slab_unverified,
-    // condition_not_confirmed, no_price, no_sku, game_not_available, already_live.
-    // `slab_unverified` has NO copy yet (design's file omits it) and `sold` / `archived` are ahead
-    // of the contract (#260). Both are reported in CHANGELOG.md. When design writes
-    // slab_unverified, move it from MISSING to the literal below, and this test makes sure it landed.
-    const CONTRACT = ["already_live", "condition_not_confirmed", "game_not_available", "mine", "no_price",
-                      "no_sku", "set_aside", "slab_unverified", "unmatched"];
-    const MISSING = ["slab_unverified"];
-    const have = Object.keys(STRINGS.listingRefusalReasonLabels);
-    expect(CONTRACT.filter((c) => !have.includes(c))).toEqual(MISSING);
-    expect(have.filter((c) => !CONTRACT.includes(c)).sort()).toEqual(["archived", "sold"]);
+  it("an unverified slab is told plainly, with no next step it cannot take", () => {
+    // QD.4: never listed as graded. No verify action is drawn (D4b is open), so the sentence must
+    // not promise one.
+    expect(STRINGS.listingRefusalReasonLabels.slab_unverified).toBe(
+      "Graded slab not verified. Seek doesn't list an unverified slab as graded.",
+    );
+    expect(STRINGS.listingRefusalShortLabels.slab_unverified).toBe("Not verified");
+    expect(STRINGS.listingRefusalReasonLabels.slab_unverified.toLowerCase()).not.toContain("verify it");
+  });
+
+  it("change refusals are their own set and never reuse a listing sentence", () => {
+    // InventoryChangeRefusalReason: live_on_ebay, sold, archived, set_aside, not_found, write_failed.
+    // Design has written copy for two. The other four are GAPS, reported in CHANGELOG.md and the PR;
+    // when design writes one, move it from MISSING to HAVE and this test makes sure it landed.
+    const CONTRACT = ["live_on_ebay", "sold", "archived", "set_aside", "not_found", "write_failed"];
+    const HAVE = ["sold", "archived"];
+    const MISSING = ["live_on_ebay", "set_aside", "not_found", "write_failed"];
+    expect(Object.keys(STRINGS.changeRefusalReasonLabels)).toEqual(HAVE);
+    expect(CONTRACT.filter((c) => !HAVE.includes(c))).toEqual(MISSING);
+    for (const [code, label] of Object.entries(STRINGS.changeRefusalReasonLabels)) {
+      // "A sold copy can't be listed again" is wrong for a Mark as Mine refusal.
+      expect(label.toLowerCase(), `${code} talks about listing`).not.toMatch(/\blist(ed|ing)?\b/);
+      expect(label).not.toBe(STRINGS.listingRefusalReasonLabels[code as "sold" | "archived"]);
+      expect(label, `${code} is not a finished sentence`).toMatch(/\.$/);
+    }
   });
 
   it("short refusal labels fit a table cell: no full stop, 24 characters or fewer", () => {
@@ -155,8 +183,9 @@ describe("economics, postage and listing-refusal copy (design additions, 2026-10
   it("the new sets carry no placeholder and no UI decoration (README: plain content, composed per platform)", () => {
     const sets = [
       STRINGS.maxBuyUnavailableReasonLabels, STRINGS.maxBuyLineUnavailableLabels,
-      STRINGS.feeNotSetReasonLabels, STRINGS.feeNotSetValueLabel, STRINGS.postageServiceLabels,
-      STRINGS.listingRefusalReasonLabels, STRINGS.listingRefusalShortLabels, STRINGS.receiveLabels,
+      STRINGS.maxBuyAskingBasisCaption, STRINGS.feeNotSetReasonLabels, STRINGS.feeNotSetValueLabel,
+      STRINGS.postageServiceLabels, STRINGS.listingRefusalReasonLabels, STRINGS.listingRefusalShortLabels,
+      STRINGS.changeRefusalReasonLabels, STRINGS.receiveLabels,
     ];
     for (const set of sets) {
       for (const [code, label] of Object.entries(set)) {

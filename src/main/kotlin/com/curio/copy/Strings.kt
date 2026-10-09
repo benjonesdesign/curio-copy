@@ -121,7 +121,6 @@ public object CurioCopy {
             "margin_not_set" to "Set a target margin to see the most to pay",
             "seller_type_not_set" to "Say how you sell on eBay to see the most to pay",
             "vat_not_set" to "Say whether you're VAT-registered to see the most to pay",
-            "asking_price_only" to "Only asking prices so far, so there's no figure to work from",
             "no_price" to "No price for this card yet",
             "not_viable" to "Fees, postage and your margin take the whole sale price",
         )
@@ -132,9 +131,14 @@ public object CurioCopy {
             "margin_not_set" to "Not set",
             "seller_type_not_set" to "Not set",
             "vat_not_set" to "Not set",
-            "asking_price_only" to "Asking only",
             "no_price" to "No price",
             "not_viable" to "Nothing left",
+        )
+    }
+
+    public object MaxBuyAskingBasisCaption {
+        public val all: Map<String, String> = mapOf(
+            "value" to "Worked from asking prices, so it's a ceiling, not a forecast",
         )
     }
 
@@ -165,6 +169,7 @@ public object CurioCopy {
             "mine" to "Mine, not for sale. Change it to stock to list it.",
             "set_aside" to "Set aside. Seek can't vouch for this card, so it can't be listed.",
             "unmatched" to "Not identified. Identify it before you list it.",
+            "slab_unverified" to "Graded slab not verified. Seek doesn't list an unverified slab as graded.",
             "condition_not_confirmed" to "Condition not set. Confirm the condition before you list it.",
             "no_price" to "No price yet. Set a price before you list it.",
             "no_sku" to "No SKU yet, so it can't be listed. Try again in a moment.",
@@ -180,6 +185,7 @@ public object CurioCopy {
             "mine" to "Mine",
             "set_aside" to "Set aside",
             "unmatched" to "Not identified",
+            "slab_unverified" to "Not verified",
             "condition_not_confirmed" to "Condition not set",
             "no_price" to "No price",
             "no_sku" to "No SKU yet",
@@ -187,6 +193,13 @@ public object CurioCopy {
             "already_live" to "Already live",
             "sold" to "Sold",
             "archived" to "Archived",
+        )
+    }
+
+    public object ChangeRefusalReasonLabels {
+        public val all: Map<String, String> = mapOf(
+            "sold" to "Sold. A sold copy can't be changed.",
+            "archived" to "Archived. Restore it to change it.",
         )
     }
 

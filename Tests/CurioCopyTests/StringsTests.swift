@@ -33,16 +33,27 @@ final class StringsTests: XCTestCase {
     }
 
     func testMostToPayReasonsHaveASentenceAndALineForm() {
+        // asking_price_only is NOT a reason: an asking-price figure is shown, with a caption.
         let codes: Set<String> = ["margin_not_set", "seller_type_not_set", "vat_not_set",
-                                  "asking_price_only", "no_price", "not_viable"]
+                                  "no_price", "not_viable"]
         XCTAssertEqual(Set(CurioCopy.MaxBuyUnavailableReasonLabels.all.keys), codes)
         XCTAssertEqual(Set(CurioCopy.MaxBuyLineUnavailableLabels.all.keys), codes)
         XCTAssertEqual(CurioCopy.MaxBuyLineUnavailableLabels.all["not_viable"], "Nothing left")
     }
 
-    func testListingRefusalFormsShareTheirCodes() {
-        XCTAssertEqual(Set(CurioCopy.ListingRefusalReasonLabels.all.keys),
-                       Set(CurioCopy.ListingRefusalShortLabels.all.keys))
+    func testListingRefusalFormsCarryTheContractsElevenReasons() {
+        let reasons: Set<String> = ["mine", "set_aside", "unmatched", "slab_unverified", "condition_not_confirmed",
+                                    "no_price", "no_sku", "game_not_available", "already_live", "sold", "archived"]
+        XCTAssertEqual(Set(CurioCopy.ListingRefusalReasonLabels.all.keys), reasons)
+        XCTAssertEqual(Set(CurioCopy.ListingRefusalShortLabels.all.keys), reasons)
+        XCTAssertEqual(CurioCopy.ListingRefusalShortLabels.all["slab_unverified"], "Not verified")
+    }
+
+    func testChangeRefusalsAreTheirOwnSetAndAskingBasisHasACaption() {
+        XCTAssertEqual(CurioCopy.ChangeRefusalReasonLabels.all["sold"], "Sold. A sold copy can't be changed.")
+        XCTAssertNotEqual(CurioCopy.ChangeRefusalReasonLabels.all["sold"], CurioCopy.ListingRefusalReasonLabels.all["sold"])
+        XCTAssertEqual(CurioCopy.MaxBuyAskingBasisCaption.all["value"],
+                       "Worked from asking prices, so it's a ceiling, not a forecast")
     }
 
     func testStatusWordsForHoldingAndIdentification() {

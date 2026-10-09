@@ -139,7 +139,6 @@ export declare const STRINGS: {
         margin_not_set: string;
         seller_type_not_set: string;
         vat_not_set: string;
-        asking_price_only: string;
         no_price: string;
         not_viable: string;
     };
@@ -147,9 +146,11 @@ export declare const STRINGS: {
         margin_not_set: string;
         seller_type_not_set: string;
         vat_not_set: string;
-        asking_price_only: string;
         no_price: string;
         not_viable: string;
+    };
+    maxBuyAskingBasisCaption: {
+        value: string;
     };
     feeNotSetReasonLabels: {
         seller_type_not_set: string;
@@ -168,6 +169,7 @@ export declare const STRINGS: {
         mine: string;
         set_aside: string;
         unmatched: string;
+        slab_unverified: string;
         condition_not_confirmed: string;
         no_price: string;
         no_sku: string;
@@ -180,11 +182,16 @@ export declare const STRINGS: {
         mine: string;
         set_aside: string;
         unmatched: string;
+        slab_unverified: string;
         condition_not_confirmed: string;
         no_price: string;
         no_sku: string;
         game_not_available: string;
         already_live: string;
+        sold: string;
+        archived: string;
+    };
+    changeRefusalReasonLabels: {
         sold: string;
         archived: string;
     };
@@ -246,11 +253,18 @@ export type PriceSource = keyof typeof STRINGS.priceSourceLabels;
 export type ErrorCopyKey = keyof typeof STRINGS.errorCopy;
 export type EmptyCopyKey = keyof typeof STRINGS.emptyCopy;
 /** Why a most-to-pay is null. The sentence under the number; `maxBuyLineUnavailableLabels` is the
- *  short value on a breakdown line that is null. */
+ *  short value on a breakdown line that is null. `asking_price_only` is NOT a reason: a figure
+ *  worked from asking prices is shown, with `maxBuyAskingBasisCaption` under it. */
 export type MaxBuyUnavailableReason = keyof typeof STRINGS.maxBuyUnavailableReasonLabels;
 /** Why a fee is not shown yet. The value itself reads `feeNotSetValueLabel.value`. */
 export type FeeNotSetReason = keyof typeof STRINGS.feeNotSetReasonLabels;
 /** The four postage services the seller's Dispatch settings offer, and nothing else. */
 export type PostageService = keyof typeof STRINGS.postageServiceLabels;
-/** Why a copy cannot be listed. The sentence form; `listingRefusalShortLabels` is the table-cell form. */
+/** Why a copy cannot be LISTED. The sentence form; `listingRefusalShortLabels` is the table-cell
+ *  form. Keys are the contract's eleven reasons, in the contract's order. */
 export type ListingRefusalReason = keyof typeof STRINGS.listingRefusalReasonLabels;
+/** Why a copy was not CHANGED (marked Mine, set aside, put back; #260). A separate enum from
+ *  `ListingRefusalReason` that reuses some of its wire strings: "A sold copy can't be listed again"
+ *  is wrong for a Mark as Mine refusal, so the two never share a label. Only the reasons design has
+ *  written copy for are here; see CHANGELOG.md, Unreleased, for the gaps. */
+export type ChangeRefusalReason = keyof typeof STRINGS.changeRefusalReasonLabels;

@@ -47,11 +47,13 @@ const FLAT_GROUPS = {
   EditionAmbiguityNoPriceLabels: strings.editionAmbiguityNoPriceLabels,   // add here AND in gen-kotlin.mjs — src/generated-coverage.test.ts enforces both
   MaxBuyUnavailableReasonLabels: strings.maxBuyUnavailableReasonLabels,
   MaxBuyLineUnavailableLabels: strings.maxBuyLineUnavailableLabels,
+  MaxBuyAskingBasisCaption: strings.maxBuyAskingBasisCaption,
   FeeNotSetReasonLabels: strings.feeNotSetReasonLabels,
   FeeNotSetValueLabel: strings.feeNotSetValueLabel,
   PostageServiceLabels: strings.postageServiceLabels,
   ListingRefusalReasonLabels: strings.listingRefusalReasonLabels,
   ListingRefusalShortLabels: strings.listingRefusalShortLabels,
+  ChangeRefusalReasonLabels: strings.changeRefusalReasonLabels,
   ReceiveLabels: strings.receiveLabels,
   ConditionLabels: strings.conditionLabels,
   PriceSourceLabels: strings.priceSourceLabels,

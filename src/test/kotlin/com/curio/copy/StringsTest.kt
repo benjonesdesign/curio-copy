@@ -81,16 +81,29 @@ class StringsTest {
 
     @Test
     fun `most-to-pay reasons have a sentence and a line form`() {
+        // asking_price_only is NOT a reason: an asking-price figure is shown, with a caption.
         val codes = setOf("margin_not_set", "seller_type_not_set", "vat_not_set",
-                          "asking_price_only", "no_price", "not_viable")
+                          "no_price", "not_viable")
         assertEquals(codes, CurioCopy.MaxBuyUnavailableReasonLabels.all.keys)
         assertEquals(codes, CurioCopy.MaxBuyLineUnavailableLabels.all.keys)
         assertEquals("Nothing left", CurioCopy.MaxBuyLineUnavailableLabels.all["not_viable"])
     }
 
     @Test
-    fun `listing refusal forms share their codes`() {
-        assertEquals(CurioCopy.ListingRefusalReasonLabels.all.keys, CurioCopy.ListingRefusalShortLabels.all.keys)
+    fun `listing refusal forms carry the contracts eleven reasons`() {
+        val reasons = setOf("mine", "set_aside", "unmatched", "slab_unverified", "condition_not_confirmed",
+                            "no_price", "no_sku", "game_not_available", "already_live", "sold", "archived")
+        assertEquals(reasons, CurioCopy.ListingRefusalReasonLabels.all.keys)
+        assertEquals(reasons, CurioCopy.ListingRefusalShortLabels.all.keys)
+        assertEquals("Not verified", CurioCopy.ListingRefusalShortLabels.all["slab_unverified"])
+    }
+
+    @Test
+    fun `change refusals are their own set and asking basis has a caption`() {
+        assertEquals("Sold. A sold copy can't be changed.", CurioCopy.ChangeRefusalReasonLabels.all["sold"])
+        assertTrue(CurioCopy.ChangeRefusalReasonLabels.all["sold"] != CurioCopy.ListingRefusalReasonLabels.all["sold"])
+        assertEquals("Worked from asking prices, so it's a ceiling, not a forecast",
+                     CurioCopy.MaxBuyAskingBasisCaption.all["value"])
     }
 
     @Test
