@@ -21,8 +21,12 @@ public enum CurioCopy {
         "NEEDS_CONDITION": "Needs condition",
         "NEEDS_DECISION": "Needs decision",
         "READY_TO_LIST": "Ready to list",
-        "EBAY_DRAFT": "Draft created",
+        "EBAY_DRAFT": "Draft on eBay",
         "LISTED": "Listed",
+        "HELD": "Held",
+        "UNMATCHED": "Not identified",
+        "IDENTIFYING": "Identifying",
+        "RETURNED": "Returned",
     ]
     }
     public enum AttentionQueueCtas {
@@ -99,6 +103,78 @@ public enum CurioCopy {
         public static let all: [String: String] = [
         "first_edition_shadowless_unlimited": "This card comes in 1st Edition, Shadowless and Unlimited printings, which differ by a lot. Check the stamp and the shadow.",
         "first_edition_unlimited": "This card comes in 1st Edition and Unlimited printings, which differ by a lot. Check for the 1st Edition stamp.",
+    ]
+    }
+    public enum MaxBuyUnavailableReasonLabels {
+        public static let all: [String: String] = [
+        "margin_not_set": "Set a target margin to see the most to pay",
+        "seller_type_not_set": "Say how you sell on eBay to see the most to pay",
+        "vat_not_set": "Say whether you're VAT-registered to see the most to pay",
+        "asking_price_only": "Only asking prices so far, so there's no figure to work from",
+        "no_price": "No price for this card yet",
+        "not_viable": "Fees, postage and your margin take the whole sale price",
+    ]
+    }
+    public enum MaxBuyLineUnavailableLabels {
+        public static let all: [String: String] = [
+        "margin_not_set": "Not set",
+        "seller_type_not_set": "Not set",
+        "vat_not_set": "Not set",
+        "asking_price_only": "Asking only",
+        "no_price": "No price",
+        "not_viable": "Nothing left",
+    ]
+    }
+    public enum FeeNotSetReasonLabels {
+        public static let all: [String: String] = [
+        "seller_type_not_set": "Say how you sell on eBay to see the fee",
+        "vat_not_set": "Say whether you're VAT-registered to see the fee",
+    ]
+    }
+    public enum FeeNotSetValueLabel {
+        public static let all: [String: String] = [
+        "value": "Not set",
+    ]
+    }
+    public enum PostageServiceLabels {
+        public static let all: [String: String] = [
+        "rm48_ll": "Royal Mail 48 · large letter",
+        "rm24_ll": "Royal Mail 24 · large letter",
+        "tracked48_sp": "Tracked 48 · small parcel",
+        "special_delivery": "Special Delivery",
+    ]
+    }
+    public enum ListingRefusalReasonLabels {
+        public static let all: [String: String] = [
+        "mine": "Mine, not for sale. Change it to stock to list it.",
+        "set_aside": "Set aside. Seek can't vouch for this card, so it can't be listed.",
+        "unmatched": "Not identified. Identify it before you list it.",
+        "condition_not_confirmed": "Condition not set. Confirm the condition before you list it.",
+        "no_price": "No price yet. Set a price before you list it.",
+        "no_sku": "No SKU yet, so it can't be listed. Try again in a moment.",
+        "game_not_available": "This game isn't supported yet, so it can't be listed.",
+        "already_live": "Already live on eBay.",
+        "sold": "Sold. A sold copy can't be listed again.",
+        "archived": "Archived. Restore it to list it.",
+    ]
+    }
+    public enum ListingRefusalShortLabels {
+        public static let all: [String: String] = [
+        "mine": "Mine",
+        "set_aside": "Set aside",
+        "unmatched": "Not identified",
+        "condition_not_confirmed": "Condition not set",
+        "no_price": "No price",
+        "no_sku": "No SKU yet",
+        "game_not_available": "Game not supported",
+        "already_live": "Already live",
+        "sold": "Sold",
+        "archived": "Archived",
+    ]
+    }
+    public enum ReceiveLabels {
+        public static let all: [String: String] = [
+        "negative": "You'd pay to sell this",
     ]
     }
     public enum ConditionLabels {

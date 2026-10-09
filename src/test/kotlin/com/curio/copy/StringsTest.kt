@@ -69,4 +69,43 @@ class StringsTest {
             for ((k, v) in group) assertTrue(v.isNotBlank(), "empty label for $k")
         }
     }
+
+    // Design additions, 2026-10-09. Keys are curio-contracts v0.2.0's wire values, pinned as
+    // literals so a rename on either side fails here rather than as a label never looked up.
+    @Test
+    fun `postage services are exactly the four contract codes`() {
+        assertEquals(setOf("rm48_ll", "rm24_ll", "tracked48_sp", "special_delivery"),
+                     CurioCopy.PostageServiceLabels.all.keys)
+        assertEquals("Royal Mail 48 · large letter", CurioCopy.PostageServiceLabels.all["rm48_ll"])
+    }
+
+    @Test
+    fun `most-to-pay reasons have a sentence and a line form`() {
+        val codes = setOf("margin_not_set", "seller_type_not_set", "vat_not_set",
+                          "asking_price_only", "no_price", "not_viable")
+        assertEquals(codes, CurioCopy.MaxBuyUnavailableReasonLabels.all.keys)
+        assertEquals(codes, CurioCopy.MaxBuyLineUnavailableLabels.all.keys)
+        assertEquals("Nothing left", CurioCopy.MaxBuyLineUnavailableLabels.all["not_viable"])
+    }
+
+    @Test
+    fun `listing refusal forms share their codes`() {
+        assertEquals(CurioCopy.ListingRefusalReasonLabels.all.keys, CurioCopy.ListingRefusalShortLabels.all.keys)
+    }
+
+    @Test
+    fun `status words for holding and identification`() {
+        val l = CurioCopy.PhysicalCardLifecycleLabels.all
+        assertEquals("Held", l["HELD"])
+        assertEquals("Not identified", l["UNMATCHED"])
+        assertEquals("Identifying", l["IDENTIFYING"])
+        assertEquals("Returned", l["RETURNED"])
+        assertEquals("Draft on eBay", l["EBAY_DRAFT"])
+    }
+
+    @Test
+    fun `negative receive says the seller pays`() {
+        assertEquals("You'd pay to sell this", CurioCopy.ReceiveLabels.all["negative"])
+        assertEquals("Not set", CurioCopy.FeeNotSetValueLabel.all["value"])
+    }
 }

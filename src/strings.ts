@@ -60,3 +60,20 @@ export type Condition = keyof typeof STRINGS.conditionLabels;
 export type PriceSource = keyof typeof STRINGS.priceSourceLabels;
 export type ErrorCopyKey = keyof typeof STRINGS.errorCopy;
 export type EmptyCopyKey = keyof typeof STRINGS.emptyCopy;
+
+// ── Copy for the economics / listing-refusal / holding work (design additions, 2026-10-09) ──────
+// Every key below is a contract wire value (curio-contracts v0.2.0, PR #35, untagged as of 2026-10-09),
+// the label is the English. `ListingRefusalReason` is the one set that does not match the draft
+// contract exactly: see CHANGELOG.md, Unreleased.
+// Two forms exist for two of the sets: a SENTENCE for a per-row result or a bulk leave-out line,
+// and a SHORT form for a table cell or a breakdown line. A pair always has the same keys.
+
+/** Why a most-to-pay is null. The sentence under the number; `maxBuyLineUnavailableLabels` is the
+ *  short value on a breakdown line that is null. */
+export type MaxBuyUnavailableReason = keyof typeof STRINGS.maxBuyUnavailableReasonLabels;
+/** Why a fee is not shown yet. The value itself reads `feeNotSetValueLabel.value`. */
+export type FeeNotSetReason = keyof typeof STRINGS.feeNotSetReasonLabels;
+/** The four postage services the seller's Dispatch settings offer, and nothing else. */
+export type PostageService = keyof typeof STRINGS.postageServiceLabels;
+/** Why a copy cannot be listed. The sentence form; `listingRefusalShortLabels` is the table-cell form. */
+export type ListingRefusalReason = keyof typeof STRINGS.listingRefusalReasonLabels;

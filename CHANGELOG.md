@@ -1,5 +1,52 @@
 # Changelog
 
+## Unreleased (design additions, 2026-10-09)
+
+**Not tagged and not version-bumped.** This is a new-group release, so per README step 5 it waits for
+iOS (and Android) review before a tag. `package.json` is deliberately unchanged.
+
+Merged from `curio-shared/canon/design/copy-additions-2026-10-09.json`. Eight new groups, all
+keyed by the contract's wire value, no placeholders:
+
+- **`maxBuyUnavailableReasonLabels`** (the sentence under the most to pay) and
+  **`maxBuyLineUnavailableLabels`** (the short value on a null breakdown line). Same six codes.
+  `not_viable`'s line is "Nothing left", never a figure.
+- **`feeNotSetReasonLabels`** (`seller_type_not_set`, `vat_not_set`) and **`feeNotSetValueLabel`**
+  (`{ value: "Not set" }`, a one-key group so the value has a lookup on every platform).
+- **`postageServiceLabels`**: exactly the four contract services, `rm48_ll`, `rm24_ll`,
+  `tracked48_sp`, `special_delivery`, with the H6 labels.
+- **`listingRefusalReasonLabels`** (a sentence, for a per-row result or a bulk leave-out line) and
+  **`listingRefusalShortLabels`** (a table cell). Same ten codes.
+- **`receiveLabels`**: `negative`.
+- **`statusLabels.physicalCardLifecycle`**: adds `HELD` "Held", `UNMATCHED` "Not identified",
+  `IDENTIFYING` "Identifying", `RETURNED` "Returned". **`EBAY_DRAFT` changes from "Draft created"
+  to "Draft on eBay"** (it read as an event, not a state).
+
+Deviations from design's file, so nobody finds them by surprise:
+
+- **`receiveLabels.negative` is "You'd pay to sell this"**, not design's file's "Below cost". Ben
+  ruled it 2026-10-09 and design's DESIGN-ANSWERS says so; the JSON was not updated. "Below cost"
+  reads as below what the seller paid for the card, which is a different and commoner situation.
+  A test fails if "below cost" appears anywhere in the strings.
+- **No listing-time label exists.** Ben's 2026-10-09 ruling removed listing time everywhere. Design's
+  file carries none, so nothing was dropped; a test now fails if any label counts or mentions it.
+
+Open mismatch with the contract, not resolved here because the answer is design's and the
+contract's, not ours to invent:
+
+- **`ListingRefusalReason`** in curio-contracts v0.2.0 (PR #35, untagged) has nine reasons. Design's
+  file has ten. It is **missing `slab_unverified`** (no copy exists for it; a client reading the
+  contract has nothing to show) and it **adds `sold` and `archived`** (#260), which the contract
+  does not carry yet. All three need an owner. A test pins this exact difference, so when design
+  writes `slab_unverified` or the contract adds `sold` / `archived` the test says so.
+- The v0.2.0 contract docs call HELD "Held by you"; design's answers rule "Held" (neutral tone). The
+  label here follows design.
+
+New tests: key sets pinned to the contract's wire values, sentence/short pairs share codes, short
+labels fit a cell, no placeholder or decoration, no listing-time wording, and Swift and Kotlin
+lookups for the new groups. `scripts/gen-swift.mjs` and `scripts/gen-kotlin.mjs` emit the new
+groups (`src/generated-coverage.test.ts` enforces both).
+
 ## v0.1.5
 - **`decisionUnavailableLabels`** — the FOURTH shared enum from `@curio/contracts`' `decide` module,
   missed in v0.1.3. `routeReasonLabels`, `alternativeReasonLabels` and `degradedReasonLabels` are

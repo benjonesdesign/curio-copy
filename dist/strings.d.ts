@@ -17,6 +17,10 @@ export declare const STRINGS: {
             READY_TO_LIST: string;
             EBAY_DRAFT: string;
             LISTED: string;
+            HELD: string;
+            UNMATCHED: string;
+            IDENTIFYING: string;
+            RETURNED: string;
         };
     };
     attentionQueueCtas: {
@@ -131,6 +135,62 @@ export declare const STRINGS: {
         first_edition_shadowless_unlimited: string;
         first_edition_unlimited: string;
     };
+    maxBuyUnavailableReasonLabels: {
+        margin_not_set: string;
+        seller_type_not_set: string;
+        vat_not_set: string;
+        asking_price_only: string;
+        no_price: string;
+        not_viable: string;
+    };
+    maxBuyLineUnavailableLabels: {
+        margin_not_set: string;
+        seller_type_not_set: string;
+        vat_not_set: string;
+        asking_price_only: string;
+        no_price: string;
+        not_viable: string;
+    };
+    feeNotSetReasonLabels: {
+        seller_type_not_set: string;
+        vat_not_set: string;
+    };
+    feeNotSetValueLabel: {
+        value: string;
+    };
+    postageServiceLabels: {
+        rm48_ll: string;
+        rm24_ll: string;
+        tracked48_sp: string;
+        special_delivery: string;
+    };
+    listingRefusalReasonLabels: {
+        mine: string;
+        set_aside: string;
+        unmatched: string;
+        condition_not_confirmed: string;
+        no_price: string;
+        no_sku: string;
+        game_not_available: string;
+        already_live: string;
+        sold: string;
+        archived: string;
+    };
+    listingRefusalShortLabels: {
+        mine: string;
+        set_aside: string;
+        unmatched: string;
+        condition_not_confirmed: string;
+        no_price: string;
+        no_sku: string;
+        game_not_available: string;
+        already_live: string;
+        sold: string;
+        archived: string;
+    };
+    receiveLabels: {
+        negative: string;
+    };
 };
 export type PhysicalCardLifecycleStatus = keyof typeof STRINGS.statusLabels.physicalCardLifecycle;
 export type LegacyCardStatus = keyof typeof STRINGS.statusLabels.legacyCardStatus;
@@ -185,3 +245,12 @@ export type Condition = keyof typeof STRINGS.conditionLabels;
 export type PriceSource = keyof typeof STRINGS.priceSourceLabels;
 export type ErrorCopyKey = keyof typeof STRINGS.errorCopy;
 export type EmptyCopyKey = keyof typeof STRINGS.emptyCopy;
+/** Why a most-to-pay is null. The sentence under the number; `maxBuyLineUnavailableLabels` is the
+ *  short value on a breakdown line that is null. */
+export type MaxBuyUnavailableReason = keyof typeof STRINGS.maxBuyUnavailableReasonLabels;
+/** Why a fee is not shown yet. The value itself reads `feeNotSetValueLabel.value`. */
+export type FeeNotSetReason = keyof typeof STRINGS.feeNotSetReasonLabels;
+/** The four postage services the seller's Dispatch settings offer, and nothing else. */
+export type PostageService = keyof typeof STRINGS.postageServiceLabels;
+/** Why a copy cannot be listed. The sentence form; `listingRefusalShortLabels` is the table-cell form. */
+export type ListingRefusalReason = keyof typeof STRINGS.listingRefusalReasonLabels;

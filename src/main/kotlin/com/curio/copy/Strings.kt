@@ -22,8 +22,12 @@ public object CurioCopy {
             "NEEDS_CONDITION" to "Needs condition",
             "NEEDS_DECISION" to "Needs decision",
             "READY_TO_LIST" to "Ready to list",
-            "EBAY_DRAFT" to "Draft created",
+            "EBAY_DRAFT" to "Draft on eBay",
             "LISTED" to "Listed",
+            "HELD" to "Held",
+            "UNMATCHED" to "Not identified",
+            "IDENTIFYING" to "Identifying",
+            "RETURNED" to "Returned",
         )
     }
 
@@ -109,6 +113,86 @@ public object CurioCopy {
         public val all: Map<String, String> = mapOf(
             "first_edition_shadowless_unlimited" to "This card comes in 1st Edition, Shadowless and Unlimited printings, which differ by a lot. Check the stamp and the shadow.",
             "first_edition_unlimited" to "This card comes in 1st Edition and Unlimited printings, which differ by a lot. Check for the 1st Edition stamp.",
+        )
+    }
+
+    public object MaxBuyUnavailableReasonLabels {
+        public val all: Map<String, String> = mapOf(
+            "margin_not_set" to "Set a target margin to see the most to pay",
+            "seller_type_not_set" to "Say how you sell on eBay to see the most to pay",
+            "vat_not_set" to "Say whether you're VAT-registered to see the most to pay",
+            "asking_price_only" to "Only asking prices so far, so there's no figure to work from",
+            "no_price" to "No price for this card yet",
+            "not_viable" to "Fees, postage and your margin take the whole sale price",
+        )
+    }
+
+    public object MaxBuyLineUnavailableLabels {
+        public val all: Map<String, String> = mapOf(
+            "margin_not_set" to "Not set",
+            "seller_type_not_set" to "Not set",
+            "vat_not_set" to "Not set",
+            "asking_price_only" to "Asking only",
+            "no_price" to "No price",
+            "not_viable" to "Nothing left",
+        )
+    }
+
+    public object FeeNotSetReasonLabels {
+        public val all: Map<String, String> = mapOf(
+            "seller_type_not_set" to "Say how you sell on eBay to see the fee",
+            "vat_not_set" to "Say whether you're VAT-registered to see the fee",
+        )
+    }
+
+    public object FeeNotSetValueLabel {
+        public val all: Map<String, String> = mapOf(
+            "value" to "Not set",
+        )
+    }
+
+    public object PostageServiceLabels {
+        public val all: Map<String, String> = mapOf(
+            "rm48_ll" to "Royal Mail 48 · large letter",
+            "rm24_ll" to "Royal Mail 24 · large letter",
+            "tracked48_sp" to "Tracked 48 · small parcel",
+            "special_delivery" to "Special Delivery",
+        )
+    }
+
+    public object ListingRefusalReasonLabels {
+        public val all: Map<String, String> = mapOf(
+            "mine" to "Mine, not for sale. Change it to stock to list it.",
+            "set_aside" to "Set aside. Seek can't vouch for this card, so it can't be listed.",
+            "unmatched" to "Not identified. Identify it before you list it.",
+            "condition_not_confirmed" to "Condition not set. Confirm the condition before you list it.",
+            "no_price" to "No price yet. Set a price before you list it.",
+            "no_sku" to "No SKU yet, so it can't be listed. Try again in a moment.",
+            "game_not_available" to "This game isn't supported yet, so it can't be listed.",
+            "already_live" to "Already live on eBay.",
+            "sold" to "Sold. A sold copy can't be listed again.",
+            "archived" to "Archived. Restore it to list it.",
+        )
+    }
+
+    public object ListingRefusalShortLabels {
+        public val all: Map<String, String> = mapOf(
+            "mine" to "Mine",
+            "set_aside" to "Set aside",
+            "unmatched" to "Not identified",
+            "condition_not_confirmed" to "Condition not set",
+            "no_price" to "No price",
+            "no_sku" to "No SKU yet",
+            "game_not_available" to "Game not supported",
+            "already_live" to "Already live",
+            "sold" to "Sold",
+            "archived" to "Archived",
+        )
+    }
+
+    public object ReceiveLabels {
+        public val all: Map<String, String> = mapOf(
+            "negative" to "You'd pay to sell this",
         )
     }
 
