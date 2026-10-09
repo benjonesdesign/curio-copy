@@ -6,7 +6,7 @@
 iOS (and Android) review before a tag. `package.json` is deliberately unchanged.
 
 Merged from `curio-shared/canon/design/copy-additions-2026-10-09.json` (design's PR curio-shared#27,
-the follow-up of 2026-10-09). Ten new groups, all keyed by the contract's wire value, no placeholders:
+the follow-up of 2026-10-09). Eleven new groups, all keyed by the contract's wire value, no placeholders:
 
 - **`maxBuyUnavailableReasonLabels`** (the sentence under the most to pay) and
   **`maxBuyLineUnavailableLabels`** (the short value on a null breakdown line). Same five codes.
@@ -21,20 +21,18 @@ the follow-up of 2026-10-09). Ten new groups, all keyed by the contract's wire v
   **`listingRefusalShortLabels`** (a table cell). Same eleven codes, in the contract's order:
   `mine`, `set_aside`, `unmatched`, `slab_unverified`, `condition_not_confirmed`, `no_price`,
   `no_sku`, `game_not_available`, `already_live`, `sold`, `archived`.
-- **`changeRefusalReasonLabels`** (#260, Mark as Mine / set aside): its OWN group, for
-  `InventoryChangeRefusalReason`, which reuses some of the listing reasons' wire strings but not
-  their sentences ("A sold copy can't be listed again" is wrong for a change). Two of six written.
+- **`changeRefusalReasonLabels`** (a sentence) and **`changeRefusalShortLabels`** (a table cell)
+  (#260, Mark as Mine / set aside): their OWN groups, for `InventoryChangeRefusalReason`, which
+  reuses some of the listing reasons' wire strings but not their sentences ("A sold copy can't be
+  listed again" is wrong for a change). Complete: all six codes, in the contract's order,
+  `live_on_ebay`, `sold`, `archived`, `set_aside`, `not_found`, `write_failed`. No change sentence
+  mentions listing; a test fails if one does.
 - **`receiveLabels`**: `negative` is "You'd pay to sell this" (Ben, 2026-10-09). "Below cost" read as
   below what the seller paid for the card, a different and commoner situation; a test fails if
   "below cost" appears anywhere in the strings.
 - **`statusLabels.physicalCardLifecycle`**: adds `HELD` "Held", `UNMATCHED` "Not identified",
   `IDENTIFYING` "Identifying", `RETURNED` "Returned". **`EBAY_DRAFT` changes from "Draft created"
   to "Draft on eBay"** (it read as an event, not a state).
-
-**Gaps, not invented:** design has written no copy for four of the six
-`InventoryChangeRefusalReason` codes: `live_on_ebay`, `set_aside`, `not_found`, `write_failed`. A
-client that meets one has no label from this package. A test pins exactly this list, so when design
-writes one it must move it out of the list.
 
 Notes:
 
@@ -44,7 +42,7 @@ Notes:
   last). Same keys, same strings.
 - `slab_unverified` has no next step on purpose: no verify action is drawn (design's D4b is open).
 
-New tests: key sets pinned to the contract's wire values (and order, for the listing refusals), the
+New tests: key sets pinned to the contract's wire values (and order, for both refusal sets), the
 five most-to-pay reasons with asking prices as a flag rather than a reason, sentence/short pairs share
 codes, short labels fit a cell, change refusals never reuse a listing sentence, no placeholder or
 decoration, no listing-time wording, and Swift and Kotlin lookups for the new groups.

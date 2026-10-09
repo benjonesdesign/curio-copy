@@ -99,9 +99,17 @@ class StringsTest {
     }
 
     @Test
-    fun `change refusals are their own set and asking basis has a caption`() {
+    fun `change refusals are complete and their own set`() {
+        val reasons = setOf("live_on_ebay", "sold", "archived", "set_aside", "not_found", "write_failed")
+        assertEquals(reasons, CurioCopy.ChangeRefusalReasonLabels.all.keys)
+        assertEquals(reasons, CurioCopy.ChangeRefusalShortLabels.all.keys)
         assertEquals("Sold. A sold copy can't be changed.", CurioCopy.ChangeRefusalReasonLabels.all["sold"])
         assertTrue(CurioCopy.ChangeRefusalReasonLabels.all["sold"] != CurioCopy.ListingRefusalReasonLabels.all["sold"])
+        assertEquals("Not saved", CurioCopy.ChangeRefusalShortLabels.all["write_failed"])
+    }
+
+    @Test
+    fun `asking basis has a caption`() {
         assertEquals("Worked from asking prices, so it's a ceiling, not a forecast",
                      CurioCopy.MaxBuyAskingBasisCaption.all["value"])
     }

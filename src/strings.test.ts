@@ -120,27 +120,32 @@ describe("economics, postage and listing-refusal copy (design additions, 2026-10
     expect(STRINGS.listingRefusalReasonLabels.slab_unverified.toLowerCase()).not.toContain("verify it");
   });
 
-  it("change refusals are their own set and never reuse a listing sentence", () => {
-    // InventoryChangeRefusalReason: live_on_ebay, sold, archived, set_aside, not_found, write_failed.
-    // Design has written copy for two. The other four are GAPS, reported in CHANGELOG.md and the PR;
-    // when design writes one, move it from MISSING to HAVE and this test makes sure it landed.
+  it("change refusals: both forms carry exactly the contract's six reasons, in its order", () => {
+    // InventoryChangeRefusalReason, curio-contracts @ 8691519. Complete: every reason has a
+    // sentence and a short form, so a client never meets one with no label.
     const CONTRACT = ["live_on_ebay", "sold", "archived", "set_aside", "not_found", "write_failed"];
-    const HAVE = ["sold", "archived"];
-    const MISSING = ["live_on_ebay", "set_aside", "not_found", "write_failed"];
-    expect(Object.keys(STRINGS.changeRefusalReasonLabels)).toEqual(HAVE);
-    expect(CONTRACT.filter((c) => !HAVE.includes(c))).toEqual(MISSING);
+    expect(Object.keys(STRINGS.changeRefusalReasonLabels)).toEqual(CONTRACT);
+    expect(Object.keys(STRINGS.changeRefusalShortLabels)).toEqual(CONTRACT);
+  });
+
+  it("change refusals are their own set and no change sentence mentions listing", () => {
+    // "A sold copy can't be listed again" is wrong for a Mark as Mine refusal.
     for (const [code, label] of Object.entries(STRINGS.changeRefusalReasonLabels)) {
-      // "A sold copy can't be listed again" is wrong for a Mark as Mine refusal.
       expect(label.toLowerCase(), `${code} talks about listing`).not.toMatch(/\blist(ed|ing)?\b/);
-      expect(label).not.toBe(STRINGS.listingRefusalReasonLabels[code as "sold" | "archived"]);
       expect(label, `${code} is not a finished sentence`).toMatch(/\.$/);
+    }
+    const listing: Record<string, string> = STRINGS.listingRefusalReasonLabels;
+    for (const code of ["sold", "archived", "set_aside"] as const) {
+      expect(STRINGS.changeRefusalReasonLabels[code], `${code} reuses the listing sentence`).not.toBe(listing[code]);
     }
   });
 
   it("short refusal labels fit a table cell: no full stop, 24 characters or fewer", () => {
-    for (const [code, label] of Object.entries(STRINGS.listingRefusalShortLabels)) {
-      expect(label.length, `${code}: "${label}" is too long for a cell`).toBeLessThanOrEqual(24);
-      expect(label, `${code} ends like a sentence`).not.toMatch(/[.!?]$/);
+    for (const set of [STRINGS.listingRefusalShortLabels, STRINGS.changeRefusalShortLabels]) {
+      for (const [code, label] of Object.entries(set)) {
+        expect(label.length, `${code}: "${label}" is too long for a cell`).toBeLessThanOrEqual(24);
+        expect(label, `${code} ends like a sentence`).not.toMatch(/[.!?]$/);
+      }
     }
   });
 
@@ -185,7 +190,7 @@ describe("economics, postage and listing-refusal copy (design additions, 2026-10
       STRINGS.maxBuyUnavailableReasonLabels, STRINGS.maxBuyLineUnavailableLabels,
       STRINGS.maxBuyAskingBasisCaption, STRINGS.feeNotSetReasonLabels, STRINGS.feeNotSetValueLabel,
       STRINGS.postageServiceLabels, STRINGS.listingRefusalReasonLabels, STRINGS.listingRefusalShortLabels,
-      STRINGS.changeRefusalReasonLabels, STRINGS.receiveLabels,
+      STRINGS.changeRefusalReasonLabels, STRINGS.changeRefusalShortLabels, STRINGS.receiveLabels,
     ];
     for (const set of sets) {
       for (const [code, label] of Object.entries(set)) {

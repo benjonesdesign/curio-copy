@@ -198,8 +198,23 @@ public object CurioCopy {
 
     public object ChangeRefusalReasonLabels {
         public val all: Map<String, String> = mapOf(
+            "live_on_ebay" to "Live on eBay. End it there first.",
             "sold" to "Sold. A sold copy can't be changed.",
             "archived" to "Archived. Restore it to change it.",
+            "set_aside" to "Set aside. Put it back to change it.",
+            "not_found" to "Couldn't find this card. It may have been removed.",
+            "write_failed" to "Couldn't save the change. Try again.",
+        )
+    }
+
+    public object ChangeRefusalShortLabels {
+        public val all: Map<String, String> = mapOf(
+            "live_on_ebay" to "Live on eBay",
+            "sold" to "Sold",
+            "archived" to "Archived",
+            "set_aside" to "Set aside",
+            "not_found" to "Not found",
+            "write_failed" to "Not saved",
         )
     }
 

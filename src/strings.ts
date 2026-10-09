@@ -79,6 +79,6 @@ export type PostageService = keyof typeof STRINGS.postageServiceLabels;
 export type ListingRefusalReason = keyof typeof STRINGS.listingRefusalReasonLabels;
 /** Why a copy was not CHANGED (marked Mine, set aside, put back; #260). A separate enum from
  *  `ListingRefusalReason` that reuses some of its wire strings: "A sold copy can't be listed again"
- *  is wrong for a Mark as Mine refusal, so the two never share a label. Only the reasons design has
- *  written copy for are here; see CHANGELOG.md, Unreleased, for the gaps. */
+ *  is wrong for a Mark as Mine refusal, so the two never share a label. The sentence form;
+ *  `changeRefusalShortLabels` is the table-cell form. Keys are the contract's six reasons. */
 export type ChangeRefusalReason = keyof typeof STRINGS.changeRefusalReasonLabels;

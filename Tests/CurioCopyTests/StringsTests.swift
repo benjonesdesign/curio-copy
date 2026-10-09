@@ -49,9 +49,16 @@ final class StringsTests: XCTestCase {
         XCTAssertEqual(CurioCopy.ListingRefusalShortLabels.all["slab_unverified"], "Not verified")
     }
 
-    func testChangeRefusalsAreTheirOwnSetAndAskingBasisHasACaption() {
+    func testChangeRefusalsAreCompleteAndTheirOwnSet() {
+        let reasons: Set<String> = ["live_on_ebay", "sold", "archived", "set_aside", "not_found", "write_failed"]
+        XCTAssertEqual(Set(CurioCopy.ChangeRefusalReasonLabels.all.keys), reasons)
+        XCTAssertEqual(Set(CurioCopy.ChangeRefusalShortLabels.all.keys), reasons)
         XCTAssertEqual(CurioCopy.ChangeRefusalReasonLabels.all["sold"], "Sold. A sold copy can't be changed.")
         XCTAssertNotEqual(CurioCopy.ChangeRefusalReasonLabels.all["sold"], CurioCopy.ListingRefusalReasonLabels.all["sold"])
+        XCTAssertEqual(CurioCopy.ChangeRefusalShortLabels.all["write_failed"], "Not saved")
+    }
+
+    func testAskingBasisHasACaption() {
         XCTAssertEqual(CurioCopy.MaxBuyAskingBasisCaption.all["value"],
                        "Worked from asking prices, so it's a ceiling, not a forecast")
     }

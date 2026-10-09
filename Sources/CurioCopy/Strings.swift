@@ -179,8 +179,22 @@ public enum CurioCopy {
     }
     public enum ChangeRefusalReasonLabels {
         public static let all: [String: String] = [
+        "live_on_ebay": "Live on eBay. End it there first.",
         "sold": "Sold. A sold copy can't be changed.",
         "archived": "Archived. Restore it to change it.",
+        "set_aside": "Set aside. Put it back to change it.",
+        "not_found": "Couldn't find this card. It may have been removed.",
+        "write_failed": "Couldn't save the change. Try again.",
+    ]
+    }
+    public enum ChangeRefusalShortLabels {
+        public static let all: [String: String] = [
+        "live_on_ebay": "Live on eBay",
+        "sold": "Sold",
+        "archived": "Archived",
+        "set_aside": "Set aside",
+        "not_found": "Not found",
+        "write_failed": "Not saved",
     ]
     }
     public enum ReceiveLabels {
