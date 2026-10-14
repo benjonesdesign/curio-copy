@@ -155,6 +155,12 @@ public object CurioCopy {
         )
     }
 
+    public object SellerTypeUnavailableNotice {
+        public val all: Map<String, String> = mapOf(
+            "value" to "You can't change this yet. Until you can, fees read “Not set”.",
+        )
+    }
+
     public object PostageServiceLabels {
         public val all: Map<String, String> = mapOf(
             "rm48_ll" to "Royal Mail 48 · large letter",

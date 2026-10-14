@@ -53,6 +53,7 @@ const FLAT_GROUPS = {
   MaxBuyAskingBasisCaption: strings.maxBuyAskingBasisCaption,
   FeeNotSetReasonLabels: strings.feeNotSetReasonLabels,
   FeeNotSetValueLabel: strings.feeNotSetValueLabel,
+  SellerTypeUnavailableNotice: strings.sellerTypeUnavailableNotice,
   PostageServiceLabels: strings.postageServiceLabels,
   ListingRefusalReasonLabels: strings.listingRefusalReasonLabels,
   ListingRefusalShortLabels: strings.listingRefusalShortLabels,

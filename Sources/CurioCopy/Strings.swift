@@ -139,6 +139,11 @@ public enum CurioCopy {
         "value": "Not set",
     ]
     }
+    public enum SellerTypeUnavailableNotice {
+        public static let all: [String: String] = [
+        "value": "You can't change this yet. Until you can, fees read “Not set”.",
+    ]
+    }
     public enum PostageServiceLabels {
         public static let all: [String: String] = [
         "rm48_ll": "Royal Mail 48 · large letter",

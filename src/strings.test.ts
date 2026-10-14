@@ -89,6 +89,12 @@ describe("economics, postage and listing-refusal copy (design additions, 2026-10
     expect(STRINGS.feeNotSetValueLabel).toEqual({ value: "Not set" });
   });
 
+  it("seller type unavailable: the picker's notice, with design's curly quotes around Not set", () => {
+    expect(STRINGS.sellerTypeUnavailableNotice).toEqual({ value: "You can't change this yet. Until you can, fees read “Not set”." });
+    // It names the value the fee reads while the write is held; that value is the shared one.
+    expect(STRINGS.sellerTypeUnavailableNotice.value).toContain("\u201c" + STRINGS.feeNotSetValueLabel.value + "\u201d");
+  });
+
   it("postage services: exactly the four contract service codes, with the H6 labels", () => {
     expect(sorted(STRINGS.postageServiceLabels)).toEqual(
       ["rm24_ll", "rm48_ll", "special_delivery", "tracked48_sp"],
@@ -199,6 +205,7 @@ describe("economics, postage and listing-refusal copy (design additions, 2026-10
     const sets = [
       STRINGS.maxBuyUnavailableReasonLabels, STRINGS.maxBuyLineUnavailableLabels,
       STRINGS.maxBuyAskingBasisCaption, STRINGS.feeNotSetReasonLabels, STRINGS.feeNotSetValueLabel,
+      STRINGS.sellerTypeUnavailableNotice,
       STRINGS.postageServiceLabels, STRINGS.listingRefusalReasonLabels, STRINGS.listingRefusalShortLabels,
       STRINGS.changeRefusalReasonLabels, STRINGS.changeRefusalShortLabels, STRINGS.receiveLabels,
     ];

@@ -6,7 +6,7 @@
 iOS (and Android) review before a tag. `package.json` is deliberately unchanged.
 
 Merged from `curio-shared/canon/design/copy-additions-2026-10-09.json` (design's PR curio-shared#27,
-the follow-up of 2026-10-09). Eleven new groups, all keyed by the contract's wire value, no placeholders:
+the follow-up of 2026-10-09). Twelve new groups, all keyed by the contract's wire value, no placeholders:
 
 - **`maxBuyUnavailableReasonLabels`** (the sentence under the most to pay) and
   **`maxBuyLineUnavailableLabels`** (the short value on a null breakdown line). Same five codes.
@@ -15,6 +15,10 @@ the follow-up of 2026-10-09). Eleven new groups, all keyed by the contract's wir
   **`maxBuyAskingBasisCaption`** (`{ value }`).
 - **`feeNotSetReasonLabels`** (`seller_type_not_set`, `vat_not_set`) and **`feeNotSetValueLabel`**
   (`{ value: "Not set" }`, a one-key group so the value has a lookup on every platform).
+- **`sellerTypeUnavailableNotice`** (`{ value }`, design's PR curio-shared#31): the line under the seller-type
+  picker, and its accessible description, only while writing the seller type is held (Android until
+  `PATCH /api/profile` exists, FOR-BEN 50). Not a contract enum: no wire value, no variant. Curly quotes
+  around “Not set” are design's, and the phrase is `feeNotSetValueLabel`'s value.
 - **`postageServiceLabels`**: exactly the four contract services, `rm48_ll`, `rm24_ll`,
   `tracked48_sp`, `special_delivery`, with the H6 labels.
 - **`listingRefusalReasonLabels`** (a sentence, for a per-row result or a bulk leave-out line) and

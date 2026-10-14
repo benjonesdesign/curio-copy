@@ -159,6 +159,9 @@ export declare const STRINGS: {
     feeNotSetValueLabel: {
         value: string;
     };
+    sellerTypeUnavailableNotice: {
+        value: string;
+    };
     postageServiceLabels: {
         rm48_ll: string;
         rm24_ll: string;

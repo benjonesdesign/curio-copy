@@ -159,6 +159,9 @@
   "feeNotSetValueLabel": {
     "value": "Not set"
   },
+  "sellerTypeUnavailableNotice": {
+    "value": "You can't change this yet. Until you can, fees read “Not set”."
+  },
   "postageServiceLabels": {
     "rm48_ll": "Royal Mail 48 · large letter",
     "rm24_ll": "Royal Mail 24 · large letter",
