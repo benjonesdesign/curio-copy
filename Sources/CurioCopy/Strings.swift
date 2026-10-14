@@ -144,6 +144,34 @@ public enum CurioCopy {
         "value": "You can't change this yet. Until you can, fees read “Not set”.",
     ]
     }
+    public enum ChangeCardPicker {
+        public static let all: [String: String] = [
+        "openButton": "Change this card",
+        "unresolvedLine": "Tell Seek which card this is and it will look up the price.",
+        "dialogTitle": "Which card is it?",
+        "searchLabel": "Card name or number",
+        "searchPlaceholder": "Name or number, like Charizard ex 125/197",
+        "currentlyLabel": "Currently",
+        "changeToLabel": "Change to",
+        "confirmNotice": "This changes which card this is and clears its price. Seek looks the price up again for the new card.",
+        "primary": "Change to this card",
+        "back": "Back",
+        "busy": "Changing the card…",
+        "searching": "Searching…",
+        "resultCountOne": "1 card found",
+        "searchFailed": "Couldn't search. Your card hasn't changed.",
+        "tryAgain": "Try again",
+        "noPrice": "No price yet",
+        "noPriceSourceLinePrefix": "Pricing for ",
+        "noPriceSourceLineSuffix": " is coming.",
+        "successToastPrefix": "Changed to ",
+        "successToastSuffix": ".",
+        "resultCountManySuffix": " cards found",
+        "emptySearchPrefix": "Nothing matches “",
+        "emptySearchSuffix": "”. Try the number on the card, like 125/197.",
+        "gameComingSuffix": " · coming",
+    ]
+    }
     public enum PostageServiceLabels {
         public static let all: [String: String] = [
         "rm48_ll": "Royal Mail 48 · large letter",
@@ -190,6 +218,8 @@ public enum CurioCopy {
         "set_aside": "Set aside. Put it back to change it.",
         "not_found": "Couldn't find this card. It may have been removed.",
         "write_failed": "Couldn't save the change. Try again.",
+        "target_not_found": "That card isn't in the catalogue any more. Search again to pick another.",
+        "game_not_available": "Seek doesn't support that game yet, so it can't be chosen.",
     ]
     }
     public enum ChangeRefusalShortLabels {
@@ -200,6 +230,8 @@ public enum CurioCopy {
         "set_aside": "Set aside",
         "not_found": "Not found",
         "write_failed": "Not saved",
+        "target_not_found": "Not in catalogue",
+        "game_not_available": "Game not supported",
     ]
     }
     public enum ReceiveLabels {

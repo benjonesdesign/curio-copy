@@ -201,6 +201,8 @@ export declare const STRINGS: {
         set_aside: string;
         not_found: string;
         write_failed: string;
+        target_not_found: string;
+        game_not_available: string;
     };
     changeRefusalShortLabels: {
         live_on_ebay: string;
@@ -209,9 +211,37 @@ export declare const STRINGS: {
         set_aside: string;
         not_found: string;
         write_failed: string;
+        target_not_found: string;
+        game_not_available: string;
     };
     receiveLabels: {
         negative: string;
+    };
+    changeCardPicker: {
+        openButton: string;
+        unresolvedLine: string;
+        dialogTitle: string;
+        searchLabel: string;
+        searchPlaceholder: string;
+        currentlyLabel: string;
+        changeToLabel: string;
+        confirmNotice: string;
+        primary: string;
+        back: string;
+        busy: string;
+        searching: string;
+        resultCountOne: string;
+        searchFailed: string;
+        tryAgain: string;
+        noPrice: string;
+        noPriceSourceLinePrefix: string;
+        noPriceSourceLineSuffix: string;
+        successToastPrefix: string;
+        successToastSuffix: string;
+        resultCountManySuffix: string;
+        emptySearchPrefix: string;
+        emptySearchSuffix: string;
+        gameComingSuffix: string;
     };
 };
 export type PhysicalCardLifecycleStatus = keyof typeof STRINGS.statusLabels.physicalCardLifecycle;

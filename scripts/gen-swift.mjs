@@ -51,6 +51,7 @@ const FLAT_GROUPS = {
   FeeNotSetReasonLabels: strings.feeNotSetReasonLabels,
   FeeNotSetValueLabel: strings.feeNotSetValueLabel,
   SellerTypeUnavailableNotice: strings.sellerTypeUnavailableNotice,
+  ChangeCardPicker: strings.changeCardPicker,
   PostageServiceLabels: strings.postageServiceLabels,
   ListingRefusalReasonLabels: strings.listingRefusalReasonLabels,
   ListingRefusalShortLabels: strings.listingRefusalShortLabels,

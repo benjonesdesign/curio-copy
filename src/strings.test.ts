@@ -1,3 +1,4 @@
+// MUTATION-CHECKED 2026-10-14 (change-card copy, curio-shared#35): red against target_not_found's sentence changed (the pinned sentence test), against a {placeholder} put into successToastPrefix (the picker placeholder test), and against resultCountManySuffix changed (the composed-sentence test); green against current.
 import { describe, it, expect } from "vitest";
 import { STRINGS } from "./strings.js";
 
@@ -126,10 +127,12 @@ describe("economics, postage and listing-refusal copy (design additions, 2026-10
     expect(STRINGS.listingRefusalReasonLabels.slab_unverified.toLowerCase()).not.toContain("verify it");
   });
 
-  it("change refusals: both forms carry exactly the contract's six reasons, in its order", () => {
-    // InventoryChangeRefusalReason, curio-contracts @ 8691519. Complete: every reason has a
-    // sentence and a short form, so a client never meets one with no label.
-    const CONTRACT = ["live_on_ebay", "sold", "archived", "set_aside", "not_found", "write_failed"];
+  it("change refusals: both forms carry the contract's reasons, in its order, complete", () => {
+    // InventoryChangeRefusalReason (curio-contracts @ 8691519): the first six. Then the two reasons
+    // only ChangeCardRefusalReason adds (curio-contracts#36, change-card): target_not_found and
+    // game_not_available. Complete: every reason has a sentence and a short form, so a client never
+    // meets one with no label.
+    const CONTRACT = ["live_on_ebay", "sold", "archived", "set_aside", "not_found", "write_failed", "target_not_found", "game_not_available"];
     expect(Object.keys(STRINGS.changeRefusalReasonLabels)).toEqual(CONTRACT);
     expect(Object.keys(STRINGS.changeRefusalShortLabels)).toEqual(CONTRACT);
   });
@@ -154,6 +157,29 @@ describe("economics, postage and listing-refusal copy (design additions, 2026-10
     for (const code of ["sold", "archived", "set_aside"] as const) {
       expect(STRINGS.changeRefusalReasonLabels[code], `${code} reuses the listing sentence`).not.toBe(listing[code]);
     }
+  });
+
+  it("the change-card refusals carry design's sentences (curio-shared#35)", () => {
+    expect(STRINGS.changeRefusalReasonLabels.target_not_found).toBe("That card isn't in the catalogue any more. Search again to pick another.");
+    expect(STRINGS.changeRefusalReasonLabels.game_not_available).toBe("Seek doesn't support that game yet, so it can't be chosen.");
+    expect(STRINGS.changeRefusalShortLabels.target_not_found).toBe("Not in catalogue");
+    expect(STRINGS.changeRefusalShortLabels.game_not_available).toBe("Game not supported");
+  });
+
+  it("changeCardPicker: plain strings, and every template split into a prefix and a suffix", () => {
+    const P = STRINGS.changeCardPicker;
+    // No placeholder anywhere (README: plain content, composed per platform).
+    for (const [key, value] of Object.entries(P)) {
+      expect(value, `${key} carries a placeholder`).not.toMatch(/[{}]/);
+    }
+    // The composed sentences equal design's templates exactly (curio-shared#35, copy-additions-2026-10-14).
+    expect(`${P.noPriceSourceLinePrefix}Magic: The Gathering${P.noPriceSourceLineSuffix}`).toBe("Pricing for Magic: The Gathering is coming.");
+    expect(`${P.successToastPrefix}District Mascot 158${P.successToastSuffix}`).toBe("Changed to District Mascot 158.");
+    expect(`12${P.resultCountManySuffix}`).toBe("12 cards found");
+    expect(`${P.emptySearchPrefix}charizrd${P.emptySearchSuffix}`).toBe("Nothing matches \u201ccharizrd\u201d. Try the number on the card, like 125/197.");
+    expect(`Lorcana${P.gameComingSuffix}`).toBe("Lorcana \u00b7 coming");
+    expect(P.resultCountOne).toBe("1 card found");
+    expect(P.dialogTitle).toBe("Which card is it?");
   });
 
   it("short refusal labels fit a table cell: no full stop, 24 characters or fewer", () => {
@@ -214,6 +240,24 @@ describe("economics, postage and listing-refusal copy (design additions, 2026-10
         expect(label, `${code} has a placeholder`).not.toMatch(/[{}]|%[@sd@]|\$\{/);
         expect(label, `${code} carries leading or trailing decoration`).not.toMatch(/^[\s→—–…·-]|[\s→—–…-]$/);
         expect(label.toLowerCase(), `${code} says please`).not.toContain("please");
+      }
+    }
+  });
+
+  it("changeCardPicker: no placeholder, no please; decoration only where design wrote it or the split needs it", () => {
+    // Two kinds of exemption, both by key and both stated:
+    //  - `busy` and `searching` end in "…": that is design's in-progress wording ("Changing the card…"),
+    //    kept verbatim (curio-shared#35), not list/arrow decoration.
+    //  - every *Prefix / *Suffix key is one half of a template split around a {placeholder}, so a space or
+    //    a quote at the edge IS the composition (" · coming", "Nothing matches “").
+    const ELLIPSIS_KEYS = ["busy", "searching"];
+    for (const [key, value] of Object.entries(STRINGS.changeCardPicker)) {
+      expect(value, `${key} has a placeholder`).not.toMatch(/[{}]|%[@sd@]|\$\{/);
+      expect(value.toLowerCase(), `${key} says please`).not.toContain("please");
+      if (/(Prefix|Suffix)$/.test(key)) continue;
+      expect(value, `${key} has stray edge whitespace`).not.toMatch(/^\s|\s$/);
+      if (!ELLIPSIS_KEYS.includes(key)) {
+        expect(value, `${key} carries leading or trailing decoration`).not.toMatch(/^[\s→—–…·-]|[\s→—–…-]$/);
       }
     }
   });
