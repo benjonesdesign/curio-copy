@@ -66,6 +66,7 @@ const FLAT_GROUPS = {
   HonestyCaveats: strings.honestyCaveats,
   ErrorCopy: strings.errorCopy,
   EmptyCopy: strings.emptyCopy,
+  GradedSlab: strings.gradedSlab,   // add here AND in gen-kotlin.mjs — src/generated-coverage.test.ts enforces both
 };
 
 let body = "";

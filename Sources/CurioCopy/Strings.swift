@@ -326,4 +326,25 @@ public enum CurioCopy {
         "bundleDetail": "No cards in this bundle",
     ]
     }
+    public enum GradedSlab {
+        public static let all: [String: String] = [
+        "title": "Verify graded",
+        "captureButton": "Scan slab label",
+        "scanningLabel": "Reading label…",
+        "verifyButton": "Verify with PSA",
+        "verifyingLabel": "Verifying…",
+        "psaSaysHeader": "PSA says",
+        "subjectLabel": "Card",
+        "gradeLabel": "Grade",
+        "yearLabel": "Year",
+        "brandLabel": "Set / brand",
+        "cardNumberLabel": "Card no.",
+        "certRowLabel": "Cert #",
+        "confirmButton": "Confirm — this matches the slab",
+        "confirmFooterPsa": "Only confirm if the details above match the physical slab in your hand. This is what marks the card graded and lets it be listed as graded.",
+        "certNotFoundBody": "No PSA record found for that cert number — double-check the digits on the label. (CGC and the other graders have no public cert API; their label reading is used as-is once you confirm it.)",
+        "verifyFailed": "Couldn't reach PSA verification. Check your connection and try again.",
+        "scanFailed": "Couldn't read the label. Try again with the printed strip filling the frame, or type the details in below.",
+    ]
+    }
 }
