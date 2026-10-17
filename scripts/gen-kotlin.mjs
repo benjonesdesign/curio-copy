@@ -48,6 +48,8 @@ const FLAT_GROUPS = {
   AssumptionLabels: strings.assumptionLabels,
   EditionAmbiguityLabels: strings.editionAmbiguityLabels,
   EditionAmbiguityNoPriceLabels: strings.editionAmbiguityNoPriceLabels,   // add here AND in gen-swift.mjs — src/generated-coverage.test.ts enforces both
+  SaleVenueLabels: strings.saleVenueLabels,
+  DispositionOnlyLabels: strings.dispositionOnlyLabels,
   ConditionLabels: strings.conditionLabels,
   PriceSourceLabels: strings.priceSourceLabels,
   ActionVerbs: strings.actionVerbs,
