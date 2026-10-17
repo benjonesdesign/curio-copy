@@ -279,6 +279,14 @@ export declare const STRINGS: {
         emptySearchSuffix: string;
         gameComingSuffix: string;
     };
+    gradedAdd: {
+        certHintLabel: string;
+        certHintPsa: string;
+        certHintUnverifiedSuffix: string;
+        doneUnverifiedMiddle: string;
+        doneUnverifiedSuffix: string;
+        gradeMissing: string;
+    };
 };
 export type PhysicalCardLifecycleStatus = keyof typeof STRINGS.statusLabels.physicalCardLifecycle;
 export type LegacyCardStatus = keyof typeof STRINGS.statusLabels.legacyCardStatus;

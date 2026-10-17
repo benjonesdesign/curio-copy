@@ -29,6 +29,12 @@ the follow-up of 2026-10-09). Twelve new groups, all keyed by the contract's wir
   `n + resultCountManySuffix` (1 is the plain `resultCountOne`);
   `emptySearchPrefix + query + emptySearchSuffix`; `game + gameComingSuffix`. A test composes each and
   compares it to design's template. No undo string, by design (none in this slice).
+- **graded add (design's curio-shared#38, `copy-additions-2026-10-17.json`):** new group **`gradedAdd`** for the
+  web add-graded page (pokemon-tool #298 applies D3b-AC5: no manual confirm). Six keys, no template support, so
+  the client composes: non-PSA hint = `certHintLabel + " " + grader + certHintUnverifiedSuffix`; PSA hint =
+  `certHintLabel + " " + certHintPsa`; non-PSA done line = `card + doneUnverifiedMiddle + grader +
+  doneUnverifiedSuffix`; `gradeMissing` is the Grade field's own error, shown beside the field. A test composes
+  each and compares it to design's sentences. Not a contract enum: no wire value.
 - **`postageServiceLabels`**: exactly the four contract services, `rm48_ll`, `rm24_ll`,
   `tracked48_sp`, `special_delivery`, with the H6 labels.
 - **`listingRefusalReasonLabels`** (a sentence, for a per-row result or a bulk leave-out line) and

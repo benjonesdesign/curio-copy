@@ -1,3 +1,4 @@
+// MUTATION-CHECKED 2026-10-17 (gradedAdd, curio-shared#38): red against certHintUnverifiedSuffix changed (the composed non-PSA hint test), against doneUnverifiedMiddle losing its trailing space (the composed done-line test), and against a {placeholder} put into certHintLabel (the placeholder test); green against current.
 // MUTATION-CHECKED 2026-10-14 (change-card copy, curio-shared#35): red against target_not_found's sentence changed (the pinned sentence test), against a {placeholder} put into successToastPrefix (the picker placeholder test), and against resultCountManySuffix changed (the composed-sentence test); green against current.
 import { describe, it, expect } from "vitest";
 import { STRINGS, dispositionLabels } from "./strings.js";
@@ -318,5 +319,43 @@ describe("economics, postage and listing-refusal copy (design additions, 2026-10
         expect(value, `${key} carries leading or trailing decoration`).not.toMatch(/^[\s→—–…·-]|[\s→—–…-]$/);
       }
     }
+  });
+});
+
+describe("gradedAdd: the graded add page's hint, done line and grade error (design, curio-shared#38)", () => {
+  const G = STRINGS.gradedAdd;
+
+  it("the keys are exactly design's six, and no value carries a placeholder or says please", () => {
+    expect(Object.keys(G)).toEqual(["certHintLabel", "certHintPsa", "certHintUnverifiedSuffix", "doneUnverifiedMiddle", "doneUnverifiedSuffix", "gradeMissing"]);
+    for (const [key, value] of Object.entries(G)) {
+      expect(value, `${key} has a placeholder`).not.toMatch(/[{}]|%[@sd@]|\$\{/);
+      expect(value.toLowerCase(), `${key} says please`).not.toContain("please");
+    }
+  });
+
+  it("composes to design's sentences exactly (no template support: the client joins the parts)", () => {
+    // hint (non-PSA) = certHintLabel + ' ' + {grader} + certHintUnverifiedSuffix
+    expect(`${G.certHintLabel} CGC${G.certHintUnverifiedSuffix}`).toBe(
+      "Found on the slab label. CGC has no public cert lookup, so Seek can't verify this. It never lists an unverified slab as graded.");
+    // hint (PSA) = certHintLabel + ' ' + certHintPsa
+    expect(`${G.certHintLabel} ${G.certHintPsa}`).toBe(
+      "Found on the slab label. Verify with PSA to confirm the card and grade. Seek only lists a slab as graded once it is verified.");
+    // done line (non-PSA) = {card} + doneUnverifiedMiddle + {grader} + doneUnverifiedSuffix
+    expect(`Charizard 4/102${G.doneUnverifiedMiddle}BGS${G.doneUnverifiedSuffix}`).toBe(
+      "Charizard 4/102 is in your inventory as a graded slab. The grade is read from the label, not checked with BGS, and the card is the one you chose. Seek never lists an unverified slab as graded.");
+    expect(G.gradeMissing).toBe("Choose the grade printed on the slab label.");
+  });
+
+  it("edge whitespace only where the split needs it: the *Suffix and *Middle keys; the rest are clean", () => {
+    // certHintUnverifiedSuffix, doneUnverifiedMiddle and doneUnverifiedSuffix are halves of a template
+    // split around {grader}/{card}, so a space or comma at the edge IS the composition.
+    for (const [key, value] of Object.entries(G)) {
+      if (/(Suffix|Middle)$/.test(key)) continue;
+      expect(value, `${key} has stray edge whitespace`).not.toMatch(/^\s|\s$/);
+    }
+  });
+
+  it("never offers a manual confirm (D3b-AC5): no copy mentions confirming the details", () => {
+    for (const [key, value] of Object.entries(G)) expect(value.toLowerCase(), `${key} mentions confirming`).not.toMatch(/confirm (the |these )?details|manually/);
   });
 });

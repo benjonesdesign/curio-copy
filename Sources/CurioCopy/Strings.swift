@@ -172,6 +172,16 @@ public enum CurioCopy {
         "gameComingSuffix": " · coming",
     ]
     }
+    public enum GradedAdd {
+        public static let all: [String: String] = [
+        "certHintLabel": "Found on the slab label.",
+        "certHintPsa": "Verify with PSA to confirm the card and grade. Seek only lists a slab as graded once it is verified.",
+        "certHintUnverifiedSuffix": " has no public cert lookup, so Seek can't verify this. It never lists an unverified slab as graded.",
+        "doneUnverifiedMiddle": " is in your inventory as a graded slab. The grade is read from the label, not checked with ",
+        "doneUnverifiedSuffix": ", and the card is the one you chose. Seek never lists an unverified slab as graded.",
+        "gradeMissing": "Choose the grade printed on the slab label.",
+    ]
+    }
     public enum PostageServiceLabels {
         public static let all: [String: String] = [
         "rm48_ll": "Royal Mail 48 · large letter",
