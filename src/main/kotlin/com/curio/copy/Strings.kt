@@ -324,4 +324,26 @@ public object CurioCopy {
             "bundleDetail" to "No cards in this bundle",
         )
     }
+
+    public object GradedSlab {
+        public val all: Map<String, String> = mapOf(
+            "title" to "Verify graded",
+            "captureButton" to "Scan slab label",
+            "scanningLabel" to "Reading label…",
+            "verifyButton" to "Verify with PSA",
+            "verifyingLabel" to "Verifying…",
+            "psaSaysHeader" to "PSA says",
+            "subjectLabel" to "Card",
+            "gradeLabel" to "Grade",
+            "yearLabel" to "Year",
+            "brandLabel" to "Set / brand",
+            "cardNumberLabel" to "Card no.",
+            "certRowLabel" to "Cert #",
+            "confirmButton" to "Confirm — this matches the slab",
+            "confirmFooterPsa" to "Only confirm if the details above match the physical slab in your hand. This is what marks the card graded and lets it be listed as graded.",
+            "certNotFoundBody" to "No PSA record found for that cert number — double-check the digits on the label. (CGC and the other graders have no public cert API; their label reading is used as-is once you confirm it.)",
+            "verifyFailed" to "Couldn't reach PSA verification. Check your connection and try again.",
+            "scanFailed" to "Couldn't read the label. Try again with the printed strip filling the frame, or type the details in below.",
+        )
+    }
 }

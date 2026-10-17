@@ -152,6 +152,25 @@ export declare const STRINGS: {
         first_edition_shadowless_unlimited: string;
         first_edition_unlimited: string;
     };
+    gradedSlab: {
+        title: string;
+        captureButton: string;
+        scanningLabel: string;
+        verifyButton: string;
+        verifyingLabel: string;
+        psaSaysHeader: string;
+        subjectLabel: string;
+        gradeLabel: string;
+        yearLabel: string;
+        brandLabel: string;
+        cardNumberLabel: string;
+        certRowLabel: string;
+        confirmButton: string;
+        confirmFooterPsa: string;
+        certNotFoundBody: string;
+        verifyFailed: string;
+        scanFailed: string;
+    };
     maxBuyUnavailableReasonLabels: {
         margin_not_set: string;
         seller_type_not_set: string;
@@ -301,6 +320,14 @@ export type EditionAmbiguity = keyof typeof STRINGS.editionAmbiguityLabels;
 export type EditionAmbiguityNoPrice = keyof typeof STRINGS.editionAmbiguityNoPriceLabels;
 export type Condition = keyof typeof STRINGS.conditionLabels;
 export type PriceSource = keyof typeof STRINGS.priceSourceLabels;
+/** Graded-slab verify/capture copy (WORK-BACKLOG.md Packet 3 / CC-1 follow-up). Codifies iOS's
+ *  and Android's existing wording where the two already agreed (Android was hand-copied from
+ *  iOS); web previously had none of this surface and independently-worded overlaps. Not a
+ *  dictionary keyed by a wire value — these are named UI strings, same shape as `errorCopy` /
+ *  `emptyCopy`. Camera-permission and scan-retry copy stays iOS/Android-only, hand-authored —
+ *  web's `/add/graded` is an intake flow with no camera step, so it has no use for them; the
+ *  flows are deliberately not unified, only the vocabulary they share is. */
+export type GradedSlabString = keyof typeof STRINGS.gradedSlab;
 export type ErrorCopyKey = keyof typeof STRINGS.errorCopy;
 export type EmptyCopyKey = keyof typeof STRINGS.emptyCopy;
 /** Why a most-to-pay is null. The sentence under the number; `maxBuyLineUnavailableLabels` is the
