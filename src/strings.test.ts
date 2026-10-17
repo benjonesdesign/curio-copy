@@ -89,4 +89,21 @@ describe("STRINGS", () => {
       expect(msg.toLowerCase().includes("please"), `errorCopy.${key} contains "please"`).toBe(false);
     }
   });
+
+  it("gradedSlab carries all 17 keys, iOS/Android-codified and picked, none dropped by accident", () => {
+    expect(Object.keys(STRINGS.gradedSlab).sort()).toEqual(
+      [
+        "title", "captureButton", "scanningLabel", "verifyButton", "verifyingLabel",
+        "psaSaysHeader", "subjectLabel", "gradeLabel", "yearLabel", "brandLabel",
+        "cardNumberLabel", "certRowLabel", "confirmButton", "confirmFooterPsa",
+        "certNotFoundBody", "verifyFailed", "scanFailed",
+      ].sort(),
+    );
+  });
+
+  it("no gradedSlab copy contains 'please' (voice rule)", () => {
+    for (const [key, msg] of Object.entries(STRINGS.gradedSlab)) {
+      expect(msg.toLowerCase().includes("please"), `gradedSlab.${key} contains "please"`).toBe(false);
+    }
+  });
 });

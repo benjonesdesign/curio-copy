@@ -1,5 +1,49 @@
 # Changelog
 
+## v0.1.10
+
+**`gradedSlab`** — the sixth cross-platform copy gap this package has closed, and the one
+`DELIVERY-TRACKER.md` footnote¹⁵ named directly: "`@curio/copy` publishes no graded-slab surface
+yet." Verified iOS's `GradedSlabView.swift` directly (not the changelog's description of it) and
+found iOS and Android already agree almost everywhere — Android's `Copy.Graded` was hand-copied
+from iOS, and it shows. Web is the sole outlier; it had never seen this vocabulary at all.
+
+Seventeen keys. Thirteen are iOS/Android verbatim or near-verbatim matches, codified as-is — no
+reconciliation needed, no rewrite of shipped, reviewed strings:
+`title`, `verifyButton`, `verifyingLabel`, `scanningLabel`, `psaSaysHeader`, `subjectLabel`,
+`gradeLabel`, `yearLabel`, `brandLabel`, `cardNumberLabel`, `certRowLabel`, `confirmButton`,
+`verifyFailed`.
+
+Four are genuine picks between platforms that had already diverged, each decided and named here
+so the reasoning travels with the tag, not just the string:
+- **`captureButton`** — the one true three-way (iOS "Scan slab label" / Android "Scan label" /
+  web "Scan label photo"). Picked iOS's wording: most precise of the three, names the slab
+  specifically, and Android's is a strict subset rather than a contradiction.
+- **`confirmFooterPsa`** — iOS: "Only confirm if the PSA details above match the physical slab in
+  your hand." Android: the same, plus "This is what marks the card graded and lets it be listed
+  as graded." Picked Android's — a real consequence stated plainly, not just a style difference.
+- **`certNotFoundBody`** — iOS names CGC specifically and says "double-check"; Android's version
+  is the same idea, more generically worded. Picked iOS's — more precise, and iOS is the source
+  Android was copied from.
+- **`scanFailed`** — Android's "try again with the printed strip filling the frame" is real
+  retry guidance iOS's shorter version omits. Picked Android's.
+
+**Deliberately NOT added**, and why: iOS's camera-permission and rationale copy, Android's
+scan-rate-limit and capture-error strings, and the non-PSA/multi-grader vocabulary (grader
+selection, non-PSA confirm footer) all stay platform-local. Web's `/add/graded` has no camera
+step, so it has no use for permission/retry copy — forcing web to import keys it will never call
+just because two other platforms share them is the wrong trade. The non-PSA vocabulary is
+web+Android only today (iOS's current view is PSA-only) — genuinely a different, narrower
+question than what this pass was scoped to answer, so it's left for its own follow-up rather than
+folded in here on an unverified guess at overlap.
+
+The flows themselves are NOT unified. Web's `/add/graded` is intake for a card that arrives
+already slabbed; iOS/Android's `Graded` flow verifies a raw card already in inventory. Different
+journeys, same vocabulary where they overlap — this package holds the second, not the first.
+
+Tag held pending iOS + Android review, same discipline as CC-1's v0.1.0. `pokemon-tool` pins the
+raw commit SHA in the interim, same pattern Packet 9 established for `@curio/contracts`.
+
 ## v0.1.9 — the sale-venue vocabulary
 
 **`saleVenueLabels` (11) and `dispositionOnlyLabels` (2)** — curio-shared
