@@ -19,6 +19,16 @@ the follow-up of 2026-10-09). Twelve new groups, all keyed by the contract's wir
   picker, and its accessible description, only while writing the seller type is held (Android until
   `PATCH /api/profile` exists, FOR-BEN 50). Not a contract enum: no wire value, no variant. Curly quotes
   around “Not set” are design's, and the phrase is `feeNotSetValueLabel`'s value.
+- **change-card (design's curio-shared#35, `copy-additions-2026-10-14.json`; curio-contracts#36):**
+  `changeRefusalReasonLabels` and `changeRefusalShortLabels` gain `target_not_found` and
+  `game_not_available` (the two refusals only `ChangeCardRefusalReason` adds), and a new group
+  **`changeCardPicker`** for the "Change this card" dialog. **No template support**: following the
+  house rule, every `{placeholder}` is a prefix/suffix split, and the client composes:
+  `noPriceSourceLinePrefix + game + noPriceSourceLineSuffix`;
+  `successToastPrefix + name + " " + number + successToastSuffix`;
+  `n + resultCountManySuffix` (1 is the plain `resultCountOne`);
+  `emptySearchPrefix + query + emptySearchSuffix`; `game + gameComingSuffix`. A test composes each and
+  compares it to design's template. No undo string, by design (none in this slice).
 - **`postageServiceLabels`**: exactly the four contract services, `rm48_ll`, `rm24_ll`,
   `tracked48_sp`, `special_delivery`, with the H6 labels.
 - **`listingRefusalReasonLabels`** (a sentence, for a per-row result or a bulk leave-out line) and

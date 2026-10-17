@@ -161,6 +161,35 @@ public object CurioCopy {
         )
     }
 
+    public object ChangeCardPicker {
+        public val all: Map<String, String> = mapOf(
+            "openButton" to "Change this card",
+            "unresolvedLine" to "Tell Seek which card this is and it will look up the price.",
+            "dialogTitle" to "Which card is it?",
+            "searchLabel" to "Card name or number",
+            "searchPlaceholder" to "Name or number, like Charizard ex 125/197",
+            "currentlyLabel" to "Currently",
+            "changeToLabel" to "Change to",
+            "confirmNotice" to "This changes which card this is and clears its price. Seek looks the price up again for the new card.",
+            "primary" to "Change to this card",
+            "back" to "Back",
+            "busy" to "Changing the card…",
+            "searching" to "Searching…",
+            "resultCountOne" to "1 card found",
+            "searchFailed" to "Couldn't search. Your card hasn't changed.",
+            "tryAgain" to "Try again",
+            "noPrice" to "No price yet",
+            "noPriceSourceLinePrefix" to "Pricing for ",
+            "noPriceSourceLineSuffix" to " is coming.",
+            "successToastPrefix" to "Changed to ",
+            "successToastSuffix" to ".",
+            "resultCountManySuffix" to " cards found",
+            "emptySearchPrefix" to "Nothing matches “",
+            "emptySearchSuffix" to "”. Try the number on the card, like 125/197.",
+            "gameComingSuffix" to " · coming",
+        )
+    }
+
     public object PostageServiceLabels {
         public val all: Map<String, String> = mapOf(
             "rm48_ll" to "Royal Mail 48 · large letter",
@@ -210,6 +239,8 @@ public object CurioCopy {
             "set_aside" to "Set aside. Put it back to change it.",
             "not_found" to "Couldn't find this card. It may have been removed.",
             "write_failed" to "Couldn't save the change. Try again.",
+            "target_not_found" to "That card isn't in the catalogue any more. Search again to pick another.",
+            "game_not_available" to "Seek doesn't support that game yet, so it can't be chosen.",
         )
     }
 
@@ -221,6 +252,8 @@ public object CurioCopy {
             "set_aside" to "Set aside",
             "not_found" to "Not found",
             "write_failed" to "Not saved",
+            "target_not_found" to "Not in catalogue",
+            "game_not_available" to "Game not supported",
         )
     }
 
