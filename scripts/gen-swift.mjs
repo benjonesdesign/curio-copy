@@ -57,6 +57,8 @@ const FLAT_GROUPS = {
   ChangeRefusalReasonLabels: strings.changeRefusalReasonLabels,
   ChangeRefusalShortLabels: strings.changeRefusalShortLabels,
   ReceiveLabels: strings.receiveLabels,
+  SaleVenueLabels: strings.saleVenueLabels,
+  DispositionOnlyLabels: strings.dispositionOnlyLabels,
   ConditionLabels: strings.conditionLabels,
   PriceSourceLabels: strings.priceSourceLabels,
   ActionVerbs: strings.actionVerbs,

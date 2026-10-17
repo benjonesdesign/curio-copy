@@ -207,6 +207,27 @@ public enum CurioCopy {
         "negative": "You'd pay to sell this",
     ]
     }
+    public enum SaleVenueLabels {
+        public static let all: [String: String] = [
+        "ebay": "eBay",
+        "vinted": "Vinted",
+        "tcgplayer": "TCGplayer",
+        "cardmarket": "Cardmarket",
+        "whatnot": "Whatnot",
+        "facebook": "Facebook",
+        "show": "Card show",
+        "local": "Local / cash",
+        "buylist": "Buylist",
+        "trade": "Trade",
+        "other": "Other",
+    ]
+    }
+    public enum DispositionOnlyLabels {
+        public static let all: [String: String] = [
+        "keep": "Keep",
+        "bundle": "Bundle",
+    ]
+    }
     public enum ConditionLabels {
         public static let all: [String: String] = [
         "NM": "Near Mint (NM)",
