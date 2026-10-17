@@ -180,6 +180,13 @@ public enum CurioCopy {
         "doneUnverifiedMiddle": " is in your inventory as a graded slab. The grade is read from the label, not checked with ",
         "doneUnverifiedSuffix": ", and the card is the one you chose. Seek never lists an unverified slab as graded.",
         "gradeMissing": "Choose the grade printed on the slab label.",
+        "typedIntroSuffix": " and the other graders have no public cert lookup, so check what you typed against the slab before it goes into your inventory.",
+        "typedIntroPrefix": "You typed this. ",
+        "typedOverline": "TYPED BY YOU · NOT VERIFIED",
+        "typedCertSupportSuffix": " has no public lookup, so this is not verified",
+        "typedCertSupportPrefix": "Typed by you. ",
+        "typedDoneMiddle": " is in your inventory as a graded slab. The grade and cert are as you typed them, not checked with ",
+        "typedDoneSuffix": ", and the card is the one you chose. Seek never lists an unverified slab as graded.",
     ]
     }
     public enum PostageServiceLabels {

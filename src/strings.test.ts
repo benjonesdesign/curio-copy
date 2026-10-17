@@ -1,3 +1,4 @@
+// MUTATION-CHECKED 2026-10-17 (gradedAdd typed-by-hand, curio-shared#39): red against typedIntroPrefix losing its trailing space, against typedDoneMiddle's sentence changed, and against typedOverline lower-cased; green against current.
 // MUTATION-CHECKED 2026-10-17 (gradedAdd, curio-shared#38): red against certHintUnverifiedSuffix changed (the composed non-PSA hint test), against doneUnverifiedMiddle losing its trailing space (the composed done-line test), and against a {placeholder} put into certHintLabel (the placeholder test); green against current.
 // MUTATION-CHECKED 2026-10-14 (change-card copy, curio-shared#35): red against target_not_found's sentence changed (the pinned sentence test), against a {placeholder} put into successToastPrefix (the picker placeholder test), and against resultCountManySuffix changed (the composed-sentence test); green against current.
 import { describe, it, expect } from "vitest";
@@ -325,8 +326,9 @@ describe("economics, postage and listing-refusal copy (design additions, 2026-10
 describe("gradedAdd: the graded add page's hint, done line and grade error (design, curio-shared#38)", () => {
   const G = STRINGS.gradedAdd;
 
-  it("the keys are exactly design's six, and no value carries a placeholder or says please", () => {
-    expect(Object.keys(G)).toEqual(["certHintLabel", "certHintPsa", "certHintUnverifiedSuffix", "doneUnverifiedMiddle", "doneUnverifiedSuffix", "gradeMissing"]);
+  it("the keys are exactly design's thirteen, and no value carries a placeholder or says please", () => {
+    expect(Object.keys(G)).toEqual(["certHintLabel", "certHintPsa", "certHintUnverifiedSuffix", "doneUnverifiedMiddle", "doneUnverifiedSuffix", "gradeMissing",
+      "typedIntroSuffix", "typedIntroPrefix", "typedOverline", "typedCertSupportSuffix", "typedCertSupportPrefix", "typedDoneMiddle", "typedDoneSuffix"]);
     for (const [key, value] of Object.entries(G)) {
       expect(value, `${key} has a placeholder`).not.toMatch(/[{}]|%[@sd@]|\$\{/);
       expect(value.toLowerCase(), `${key} says please`).not.toContain("please");
@@ -346,11 +348,23 @@ describe("gradedAdd: the graded add page's hint, done line and grade error (desi
     expect(G.gradeMissing).toBe("Choose the grade printed on the slab label.");
   });
 
-  it("edge whitespace only where the split needs it: the *Suffix and *Middle keys; the rest are clean", () => {
-    // certHintUnverifiedSuffix, doneUnverifiedMiddle and doneUnverifiedSuffix are halves of a template
-    // split around {grader}/{card}, so a space or comma at the edge IS the composition.
+  it("typed by hand (D3b-AC8, curio-shared#39) composes to design's sentences exactly", () => {
+    // intro = typedIntroPrefix + {grader} + typedIntroSuffix
+    expect(`${G.typedIntroPrefix}CGC${G.typedIntroSuffix}`).toBe(
+      "You typed this. CGC and the other graders have no public cert lookup, so check what you typed against the slab before it goes into your inventory.");
+    expect(G.typedOverline).toBe("TYPED BY YOU \u00b7 NOT VERIFIED");
+    // cert support = typedCertSupportPrefix + {grader} + typedCertSupportSuffix
+    expect(`${G.typedCertSupportPrefix}BGS${G.typedCertSupportSuffix}`).toBe("Typed by you. BGS has no public lookup, so this is not verified");
+    // done line = {card} + typedDoneMiddle + {grader} + typedDoneSuffix
+    expect(`Charizard 4/102${G.typedDoneMiddle}CGC${G.typedDoneSuffix}`).toBe(
+      "Charizard 4/102 is in your inventory as a graded slab. The grade and cert are as you typed them, not checked with CGC, and the card is the one you chose. Seek never lists an unverified slab as graded.");
+  });
+
+  it("edge whitespace only where the split needs it: the *Prefix, *Middle and *Suffix keys; the rest are clean", () => {
+    // The *Prefix, *Middle and *Suffix keys are halves of a template split around {grader}/{card}, so a
+    // space or comma at the edge IS the composition.
     for (const [key, value] of Object.entries(G)) {
-      if (/(Suffix|Middle)$/.test(key)) continue;
+      if (/(Prefix|Suffix|Middle)$/.test(key)) continue;
       expect(value, `${key} has stray edge whitespace`).not.toMatch(/^\s|\s$/);
     }
   });

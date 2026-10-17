@@ -286,6 +286,13 @@ export declare const STRINGS: {
         doneUnverifiedMiddle: string;
         doneUnverifiedSuffix: string;
         gradeMissing: string;
+        typedIntroSuffix: string;
+        typedIntroPrefix: string;
+        typedOverline: string;
+        typedCertSupportSuffix: string;
+        typedCertSupportPrefix: string;
+        typedDoneMiddle: string;
+        typedDoneSuffix: string;
     };
 };
 export type PhysicalCardLifecycleStatus = keyof typeof STRINGS.statusLabels.physicalCardLifecycle;

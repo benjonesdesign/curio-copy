@@ -198,6 +198,13 @@ public object CurioCopy {
             "doneUnverifiedMiddle" to " is in your inventory as a graded slab. The grade is read from the label, not checked with ",
             "doneUnverifiedSuffix" to ", and the card is the one you chose. Seek never lists an unverified slab as graded.",
             "gradeMissing" to "Choose the grade printed on the slab label.",
+            "typedIntroSuffix" to " and the other graders have no public cert lookup, so check what you typed against the slab before it goes into your inventory.",
+            "typedIntroPrefix" to "You typed this. ",
+            "typedOverline" to "TYPED BY YOU · NOT VERIFIED",
+            "typedCertSupportSuffix" to " has no public lookup, so this is not verified",
+            "typedCertSupportPrefix" to "Typed by you. ",
+            "typedDoneMiddle" to " is in your inventory as a graded slab. The grade and cert are as you typed them, not checked with ",
+            "typedDoneSuffix" to ", and the card is the one you chose. Seek never lists an unverified slab as graded.",
         )
     }
 
