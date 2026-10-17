@@ -112,6 +112,29 @@ public object CurioCopy {
         )
     }
 
+    public object SaleVenueLabels {
+        public val all: Map<String, String> = mapOf(
+            "ebay" to "eBay",
+            "vinted" to "Vinted",
+            "tcgplayer" to "TCGplayer",
+            "cardmarket" to "Cardmarket",
+            "whatnot" to "Whatnot",
+            "facebook" to "Facebook",
+            "show" to "Card show",
+            "local" to "Local / cash",
+            "buylist" to "Buylist",
+            "trade" to "Trade",
+            "other" to "Other",
+        )
+    }
+
+    public object DispositionOnlyLabels {
+        public val all: Map<String, String> = mapOf(
+            "keep" to "Keep",
+            "bundle" to "Bundle",
+        )
+    }
+
     public object ConditionLabels {
         public val all: Map<String, String> = mapOf(
             "NM" to "Near Mint (NM)",
