@@ -1,5 +1,59 @@
 # Changelog
 
+## Unreleased (design additions, 2026-10-09)
+
+**Not tagged and not version-bumped.** This is a new-group release, so per README step 5 it waits for
+iOS (and Android) review before a tag. `package.json` is deliberately unchanged.
+
+Merged from `curio-shared/canon/design/copy-additions-2026-10-09.json` (design's PR curio-shared#27,
+the follow-up of 2026-10-09). Twelve new groups, all keyed by the contract's wire value, no placeholders:
+
+- **`maxBuyUnavailableReasonLabels`** (the sentence under the most to pay) and
+  **`maxBuyLineUnavailableLabels`** (the short value on a null breakdown line). Same five codes.
+  `not_viable`'s line is "Nothing left", never a figure. **`asking_price_only` is not a reason**: a
+  figure worked from asking prices is shown, never withheld (rule 10). Its caption is
+  **`maxBuyAskingBasisCaption`** (`{ value }`).
+- **`feeNotSetReasonLabels`** (`seller_type_not_set`, `vat_not_set`) and **`feeNotSetValueLabel`**
+  (`{ value: "Not set" }`, a one-key group so the value has a lookup on every platform).
+- **`sellerTypeUnavailableNotice`** (`{ value }`, design's PR curio-shared#31): the line under the seller-type
+  picker, and its accessible description, only while writing the seller type is held (Android until
+  `PATCH /api/profile` exists, FOR-BEN 50). Not a contract enum: no wire value, no variant. Curly quotes
+  around “Not set” are design's, and the phrase is `feeNotSetValueLabel`'s value.
+- **`postageServiceLabels`**: exactly the four contract services, `rm48_ll`, `rm24_ll`,
+  `tracked48_sp`, `special_delivery`, with the H6 labels.
+- **`listingRefusalReasonLabels`** (a sentence, for a per-row result or a bulk leave-out line) and
+  **`listingRefusalShortLabels`** (a table cell). Same eleven codes, in the contract's order:
+  `mine`, `set_aside`, `unmatched`, `slab_unverified`, `condition_not_confirmed`, `no_price`,
+  `no_sku`, `game_not_available`, `already_live`, `sold`, `archived`.
+- **`changeRefusalReasonLabels`** (a sentence) and **`changeRefusalShortLabels`** (a table cell)
+  (#260, Mark as Mine / set aside): their OWN groups, for `InventoryChangeRefusalReason`, which
+  reuses some of the listing reasons' wire strings but not their sentences ("A sold copy can't be
+  listed again" is wrong for a change). Complete: all six codes, in the contract's order,
+  `live_on_ebay`, `sold`, `archived`, `set_aside`, `not_found`, `write_failed`. No change sentence
+  mentions listing, except `live_on_ebay` ("End the listing first. It's live on eBay."), where
+  "listing" is the existing eBay listing, not a "can't be listed" refusal. A test exempts exactly
+  that key and fails for any other.
+- **`receiveLabels`**: `negative` is "You'd pay to sell this" (Ben, 2026-10-09). "Below cost" read as
+  below what the seller paid for the card, a different and commoner situation; a test fails if
+  "below cost" appears anywhere in the strings.
+- **`statusLabels.physicalCardLifecycle`**: adds `HELD` "Held", `UNMATCHED` "Not identified",
+  `IDENTIFYING` "Identifying", `RETURNED` "Returned". **`EBAY_DRAFT` changes from "Draft created"
+  to "Draft on eBay"** (it read as an event, not a state).
+
+Notes:
+
+- **No listing-time label exists.** Ben's 2026-10-09 ruling removed listing time everywhere. Design's
+  file carries none; a test fails if any label counts or mentions it.
+- Listing-refusal keys are in the contract's order, not design's file's (which puts `slab_unverified`
+  last). Same keys, same strings.
+- `slab_unverified` has no next step on purpose: no verify action is drawn (design's D4b is open).
+
+New tests: key sets pinned to the contract's wire values (and order, for both refusal sets), the
+five most-to-pay reasons with asking prices as a flag rather than a reason, sentence/short pairs share
+codes, short labels fit a cell, change refusals never reuse a listing sentence, no placeholder or
+decoration, no listing-time wording, and Swift and Kotlin lookups for the new groups.
+`scripts/gen-swift.mjs` and `scripts/gen-kotlin.mjs` emit the new groups
+(`src/generated-coverage.test.ts` enforces both).
 ## v0.1.10
 
 **`gradedSlab`** — the sixth cross-platform copy gap this package has closed, and the one

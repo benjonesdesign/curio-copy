@@ -17,6 +17,10 @@ export declare const STRINGS: {
             READY_TO_LIST: string;
             EBAY_DRAFT: string;
             LISTED: string;
+            HELD: string;
+            UNMATCHED: string;
+            IDENTIFYING: string;
+            RETURNED: string;
         };
     };
     attentionQueueCtas: {
@@ -167,6 +171,84 @@ export declare const STRINGS: {
         verifyFailed: string;
         scanFailed: string;
     };
+    maxBuyUnavailableReasonLabels: {
+        margin_not_set: string;
+        seller_type_not_set: string;
+        vat_not_set: string;
+        no_price: string;
+        not_viable: string;
+    };
+    maxBuyLineUnavailableLabels: {
+        margin_not_set: string;
+        seller_type_not_set: string;
+        vat_not_set: string;
+        no_price: string;
+        not_viable: string;
+    };
+    maxBuyAskingBasisCaption: {
+        value: string;
+    };
+    feeNotSetReasonLabels: {
+        seller_type_not_set: string;
+        vat_not_set: string;
+    };
+    feeNotSetValueLabel: {
+        value: string;
+    };
+    sellerTypeUnavailableNotice: {
+        value: string;
+    };
+    postageServiceLabels: {
+        rm48_ll: string;
+        rm24_ll: string;
+        tracked48_sp: string;
+        special_delivery: string;
+    };
+    listingRefusalReasonLabels: {
+        mine: string;
+        set_aside: string;
+        unmatched: string;
+        slab_unverified: string;
+        condition_not_confirmed: string;
+        no_price: string;
+        no_sku: string;
+        game_not_available: string;
+        already_live: string;
+        sold: string;
+        archived: string;
+    };
+    listingRefusalShortLabels: {
+        mine: string;
+        set_aside: string;
+        unmatched: string;
+        slab_unverified: string;
+        condition_not_confirmed: string;
+        no_price: string;
+        no_sku: string;
+        game_not_available: string;
+        already_live: string;
+        sold: string;
+        archived: string;
+    };
+    changeRefusalReasonLabels: {
+        live_on_ebay: string;
+        sold: string;
+        archived: string;
+        set_aside: string;
+        not_found: string;
+        write_failed: string;
+    };
+    changeRefusalShortLabels: {
+        live_on_ebay: string;
+        sold: string;
+        archived: string;
+        set_aside: string;
+        not_found: string;
+        write_failed: string;
+    };
+    receiveLabels: {
+        negative: string;
+    };
 };
 export type PhysicalCardLifecycleStatus = keyof typeof STRINGS.statusLabels.physicalCardLifecycle;
 export type LegacyCardStatus = keyof typeof STRINGS.statusLabels.legacyCardStatus;
@@ -248,3 +330,19 @@ export type PriceSource = keyof typeof STRINGS.priceSourceLabels;
 export type GradedSlabString = keyof typeof STRINGS.gradedSlab;
 export type ErrorCopyKey = keyof typeof STRINGS.errorCopy;
 export type EmptyCopyKey = keyof typeof STRINGS.emptyCopy;
+/** Why a most-to-pay is null. The sentence under the number; `maxBuyLineUnavailableLabels` is the
+ *  short value on a breakdown line that is null. `asking_price_only` is NOT a reason: a figure
+ *  worked from asking prices is shown, with `maxBuyAskingBasisCaption` under it. */
+export type MaxBuyUnavailableReason = keyof typeof STRINGS.maxBuyUnavailableReasonLabels;
+/** Why a fee is not shown yet. The value itself reads `feeNotSetValueLabel.value`. */
+export type FeeNotSetReason = keyof typeof STRINGS.feeNotSetReasonLabels;
+/** The four postage services the seller's Dispatch settings offer, and nothing else. */
+export type PostageService = keyof typeof STRINGS.postageServiceLabels;
+/** Why a copy cannot be LISTED. The sentence form; `listingRefusalShortLabels` is the table-cell
+ *  form. Keys are the contract's eleven reasons, in the contract's order. */
+export type ListingRefusalReason = keyof typeof STRINGS.listingRefusalReasonLabels;
+/** Why a copy was not CHANGED (marked Mine, set aside, put back; #260). A separate enum from
+ *  `ListingRefusalReason` that reuses some of its wire strings: "A sold copy can't be listed again"
+ *  is wrong for a Mark as Mine refusal, so the two never share a label. The sentence form;
+ *  `changeRefusalShortLabels` is the table-cell form. Keys are the contract's six reasons. */
+export type ChangeRefusalReason = keyof typeof STRINGS.changeRefusalReasonLabels;

@@ -93,3 +93,25 @@ export type PriceSource = keyof typeof STRINGS.priceSourceLabels;
 export type GradedSlabString = keyof typeof STRINGS.gradedSlab;
 export type ErrorCopyKey = keyof typeof STRINGS.errorCopy;
 export type EmptyCopyKey = keyof typeof STRINGS.emptyCopy;
+
+// ── Copy for the economics / listing-refusal / holding work (design additions, 2026-10-09) ──────
+// Every key below is a contract wire value (curio-contracts v0.2.0, untagged as of 2026-10-09), the
+// label is the English. Two of the sets come in two forms: a SENTENCE for a per-row result or a bulk
+// leave-out line, and a SHORT form for a table cell or a breakdown line. A pair has the same keys.
+
+/** Why a most-to-pay is null. The sentence under the number; `maxBuyLineUnavailableLabels` is the
+ *  short value on a breakdown line that is null. `asking_price_only` is NOT a reason: a figure
+ *  worked from asking prices is shown, with `maxBuyAskingBasisCaption` under it. */
+export type MaxBuyUnavailableReason = keyof typeof STRINGS.maxBuyUnavailableReasonLabels;
+/** Why a fee is not shown yet. The value itself reads `feeNotSetValueLabel.value`. */
+export type FeeNotSetReason = keyof typeof STRINGS.feeNotSetReasonLabels;
+/** The four postage services the seller's Dispatch settings offer, and nothing else. */
+export type PostageService = keyof typeof STRINGS.postageServiceLabels;
+/** Why a copy cannot be LISTED. The sentence form; `listingRefusalShortLabels` is the table-cell
+ *  form. Keys are the contract's eleven reasons, in the contract's order. */
+export type ListingRefusalReason = keyof typeof STRINGS.listingRefusalReasonLabels;
+/** Why a copy was not CHANGED (marked Mine, set aside, put back; #260). A separate enum from
+ *  `ListingRefusalReason` that reuses some of its wire strings: "A sold copy can't be listed again"
+ *  is wrong for a Mark as Mine refusal, so the two never share a label. The sentence form;
+ *  `changeRefusalShortLabels` is the table-cell form. Keys are the contract's six reasons. */
+export type ChangeRefusalReason = keyof typeof STRINGS.changeRefusalReasonLabels;
