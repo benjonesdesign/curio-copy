@@ -190,6 +190,17 @@ public object CurioCopy {
         )
     }
 
+    public object GradedAdd {
+        public val all: Map<String, String> = mapOf(
+            "certHintLabel" to "Found on the slab label.",
+            "certHintPsa" to "Verify with PSA to confirm the card and grade. Seek only lists a slab as graded once it is verified.",
+            "certHintUnverifiedSuffix" to " has no public cert lookup, so Seek can't verify this. It never lists an unverified slab as graded.",
+            "doneUnverifiedMiddle" to " is in your inventory as a graded slab. The grade is read from the label, not checked with ",
+            "doneUnverifiedSuffix" to ", and the card is the one you chose. Seek never lists an unverified slab as graded.",
+            "gradeMissing" to "Choose the grade printed on the slab label.",
+        )
+    }
+
     public object PostageServiceLabels {
         public val all: Map<String, String> = mapOf(
             "rm48_ll" to "Royal Mail 48 · large letter",
