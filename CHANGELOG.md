@@ -35,6 +35,10 @@ the follow-up of 2026-10-09). Twelve new groups, all keyed by the contract's wir
   `certHintLabel + " " + certHintPsa`; non-PSA done line = `card + doneUnverifiedMiddle + grader +
   doneUnverifiedSuffix`; `gradeMissing` is the Grade field's own error, shown beside the field. A test composes
   each and compares it to design's sentences. Not a contract enum: no wire value.
+  **Typed by hand (D3b-AC8, curio-shared#39)** adds seven keys for a slab with no label read: intro =
+  `typedIntroPrefix + grader + typedIntroSuffix`; `typedOverline` (whole); cert support =
+  `typedCertSupportPrefix + grader + typedCertSupportSuffix`; done line = `card + typedDoneMiddle + grader +
+  typedDoneSuffix`.
 - **`postageServiceLabels`**: exactly the four contract services, `rm48_ll`, `rm24_ll`,
   `tracked48_sp`, `special_delivery`, with the H6 labels.
 - **`listingRefusalReasonLabels`** (a sentence, for a per-row result or a bulk leave-out line) and
