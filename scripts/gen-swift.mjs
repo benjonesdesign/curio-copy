@@ -53,6 +53,7 @@ const FLAT_GROUPS = {
   SellerTypeUnavailableNotice: strings.sellerTypeUnavailableNotice,
   ChangeCardPicker: strings.changeCardPicker,
   GradedAdd: strings.gradedAdd,
+  MoneySettings: strings.moneySettings,
   PostageServiceLabels: strings.postageServiceLabels,
   ListingRefusalReasonLabels: strings.listingRefusalReasonLabels,
   ListingRefusalShortLabels: strings.listingRefusalShortLabels,

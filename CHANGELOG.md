@@ -39,6 +39,14 @@ the follow-up of 2026-10-09). Twelve new groups, all keyed by the contract's wir
   `typedIntroPrefix + grader + typedIntroSuffix`; `typedOverline` (whole); cert support =
   `typedCertSupportPrefix + grader + typedCertSupportSuffix`; done line = `card + typedDoneMiddle + grader +
   typedDoneSuffix`.
+- **`moneySettings`** (design, curio-shared#43, `copy-additions-2026-10-18.json`): the web Settings money section,
+  76 keys merged verbatim: four panels (Cost, Your time, Dispatch, Buying) with intros, seller-type and VAT
+  labels and not-set help, field labels/placeholders/help/errors, status words, per-panel Save / Saving / saved /
+  failed lines. Three halves compose: a confirmed answer = `confirmedByYouPrefix + {date}`; a Clear button's
+  accessible name = `clearNamePrefix + the field's label`; a server reason beside a field = `fieldNotSavedReason +
+  the server's words`. The error sentences state the ranges `PATCH /api/profile` enforces (tax 1-60, margin 0-95,
+  minutes 1-60, handling 1-3). The "no listing time" guard now exempts the six packing-time-panel keys by path
+  ("Your time" is the packing and hourly-rate panel, not listing time).
 - **`postageServiceLabels`**: exactly the four contract services, `rm48_ll`, `rm24_ll`,
   `tracked48_sp`, `special_delivery`, with the H6 labels.
 - **`listingRefusalReasonLabels`** (a sentence, for a per-row result or a bulk leave-out line) and
