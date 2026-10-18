@@ -1,3 +1,4 @@
+// MUTATION-CHECKED 2026-10-18 (moneySettings, curio-shared#43): red against confirmedByYouPrefix losing its trailing space (the composed confirmed-date test), against taxError changed to a 0-60 range (the ranges-match-the-route test), and against a {placeholder} put into savedCost (the placeholder test); green against current.
 // MUTATION-CHECKED 2026-10-17 (gradedAdd typed-by-hand, curio-shared#39): red against typedIntroPrefix losing its trailing space, against typedDoneMiddle's sentence changed, and against typedOverline lower-cased; green against current.
 // MUTATION-CHECKED 2026-10-17 (gradedAdd, curio-shared#38): red against certHintUnverifiedSuffix changed (the composed non-PSA hint test), against doneUnverifiedMiddle losing its trailing space (the composed done-line test), and against a {placeholder} put into certHintLabel (the placeholder test); green against current.
 // MUTATION-CHECKED 2026-10-14 (change-card copy, curio-shared#35): red against target_not_found's sentence changed (the pinned sentence test), against a {placeholder} put into successToastPrefix (the picker placeholder test), and against resultCountManySuffix changed (the composed-sentence test); green against current.
@@ -277,8 +278,16 @@ describe("economics, postage and listing-refusal copy (design additions, 2026-10
     // Packing time is real and estimated; listing time is not counted anywhere, so nothing may
     // label it, beside a figure or otherwise.
     const hits: string[] = [];
+    // Design's Settings "Your time" panel (curio-shared#43) is the PACKING-time and hourly-rate panel; its own intro says
+    // "Price the time packing takes you". These exact keys are that panel's name, buttons and status lines, and the hourly
+    // rate's help. Listed by path so any other "your time" anywhere still fails this guard.
+    const PACKING_TIME_PANEL = new Set([
+      "STRINGS.moneySettings.panelTime", "STRINGS.moneySettings.hourlyRateHelp", "STRINGS.moneySettings.saveTime",
+      "STRINGS.moneySettings.savingTime", "STRINGS.moneySettings.savedTime", "STRINGS.moneySettings.failedTime",
+    ]);
     (function walk(node: unknown, path: string): void {
       if (typeof node === "string") {
+        if (PACKING_TIME_PANEL.has(path)) return;
         if (/listing time|time to list|minutes? to list|to list a card|your time/i.test(node)) hits.push(`${path}: ${node}`);
       } else if (node && typeof node === "object") {
         for (const [k, v] of Object.entries(node)) walk(v, `${path}.${k}`);
@@ -371,5 +380,61 @@ describe("gradedAdd: the graded add page's hint, done line and grade error (desi
 
   it("never offers a manual confirm (D3b-AC5): no copy mentions confirming the details", () => {
     for (const [key, value] of Object.entries(G)) expect(value.toLowerCase(), `${key} mentions confirming`).not.toMatch(/confirm (the |these )?details|manually/);
+  });
+});
+
+describe("moneySettings: the web Settings money section (design, curio-shared#43)", () => {
+  const M = STRINGS.moneySettings;
+  // Halves of a composition: a space at the edge IS the composition (confirmedByYouPrefix + date, clearNamePrefix + label,
+  // fieldNotSavedReason + the server's words).
+  const COMPOSED = new Set(["confirmedByYouPrefix", "clearNamePrefix", "fieldNotSavedReason"]);
+
+  it("has design's 76 keys, none carrying a placeholder, and none says please", () => {
+    expect(Object.keys(M)).toHaveLength(76);
+    for (const [key, value] of Object.entries(M)) {
+      expect(value, `${key} has a placeholder`).not.toMatch(/[{}]|%[@sd@]|\$\{/);
+      expect(value.toLowerCase(), `${key} says please`).not.toContain("please");
+    }
+  });
+
+  it("edge whitespace only on the three composed halves; every other value is clean", () => {
+    for (const [key, value] of Object.entries(M)) {
+      if (COMPOSED.has(key)) { expect(value, `${key} should end with a space`).toMatch(/ $/); continue; }
+      expect(value, `${key} has stray edge whitespace`).not.toMatch(/^\s|\s$/);
+    }
+  });
+
+  it("composes to design's sentences exactly", () => {
+    // A confirmed answer = confirmedByYouPrefix + {date}.
+    expect(`${M.confirmedByYouPrefix}18 Oct 2026`).toBe("Confirmed by you \u00b7 18 Oct 2026");
+    // A field's Clear button: accessible name = clearNamePrefix + the field's label.
+    expect(`${M.clearNamePrefix}${M.hourlyRateLabel}`).toBe("Clear Your hourly rate (optional)");
+    // A server reason beside a field = fieldNotSavedReason + the server's words (the 400 `fields` sentence).
+    expect(`${M.fieldNotSavedReason}Enter a margin from 0% to 95% of the selling price.`).toBe("Not saved. Enter a margin from 0% to 95% of the selling price.");
+  });
+
+  it("the not-set help promises \"Not set\", never \u00a30, and the status word matches the fee's not-set value", () => {
+    expect(M.statusNotSet).toBe(STRINGS.feeNotSetValueLabel.value);
+    expect(M.sellerTypeNotSetHelp).toContain("\u201cNot set\u201d, never \u00a30");
+    expect(M.vatNotSetHelp).toContain("\u201cNot set\u201d, never \u00a30");
+  });
+
+  it("the packing-time panel says it is about packing, so the 'no listing time' guard's exemption is honest", () => {
+    expect(M.panelTimeIntro).toContain("time packing takes you");
+    expect(M.packMinutesLabel).toContain("pack a parcel");
+  });
+
+  it("the error sentences state the same ranges PATCH /api/profile enforces (tax 1-60, margin 0-95, minutes 1-60, handling 1-3)", () => {
+    expect(M.taxError).toContain("between 1% and 60%");
+    expect(M.marginError).toContain("between 0% and 95%");
+    expect(M.packMinutesError).toContain("1 to 60");
+    expect(M.handlingTimeError).toContain("1 to 3");
+  });
+
+  it("each panel has a Save, a Saving, a saved line and a failed line, and the failed body promises nothing was changed", () => {
+    for (const panel of ["Cost", "Time", "Dispatch", "Buying"]) {
+      for (const prefix of ["save", "saving", "saved", "failed"]) expect(M, `${prefix}${panel}`).toHaveProperty(`${prefix}${panel}`);
+    }
+    expect(M.failedBody).toBe("Nothing was changed. Everything you typed is still here. Try again.");
   });
 });
