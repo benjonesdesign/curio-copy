@@ -269,6 +269,15 @@ public enum CurioCopy {
         "fieldNotSavedReason": "Not saved. ",
     ]
     }
+    public enum PhotoStrip {
+        public static let all: [String: String] = [
+        "groupName": "Photos",
+        "previous": "Previous photos",
+        "next": "Next photos",
+        "ofJoiner": " of ",
+        "positionPrefix": "Photo ",
+    ]
+    }
     public enum PostageServiceLabels {
         public static let all: [String: String] = [
         "rm48_ll": "Royal Mail 48 · large letter",

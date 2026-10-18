@@ -372,6 +372,13 @@ export declare const STRINGS: {
         clearNamePrefix: string;
         fieldNotSavedReason: string;
     };
+    photoStrip: {
+        groupName: string;
+        previous: string;
+        next: string;
+        ofJoiner: string;
+        positionPrefix: string;
+    };
 };
 export type PhysicalCardLifecycleStatus = keyof typeof STRINGS.statusLabels.physicalCardLifecycle;
 export type LegacyCardStatus = keyof typeof STRINGS.statusLabels.legacyCardStatus;

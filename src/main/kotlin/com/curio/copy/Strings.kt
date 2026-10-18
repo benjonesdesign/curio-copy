@@ -289,6 +289,16 @@ public object CurioCopy {
         )
     }
 
+    public object PhotoStrip {
+        public val all: Map<String, String> = mapOf(
+            "groupName" to "Photos",
+            "previous" to "Previous photos",
+            "next" to "Next photos",
+            "ofJoiner" to " of ",
+            "positionPrefix" to "Photo ",
+        )
+    }
+
     public object PostageServiceLabels {
         public val all: Map<String, String> = mapOf(
             "rm48_ll" to "Royal Mail 48 · large letter",

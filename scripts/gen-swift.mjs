@@ -54,6 +54,7 @@ const FLAT_GROUPS = {
   ChangeCardPicker: strings.changeCardPicker,
   GradedAdd: strings.gradedAdd,
   MoneySettings: strings.moneySettings,
+  PhotoStrip: strings.photoStrip,
   PostageServiceLabels: strings.postageServiceLabels,
   ListingRefusalReasonLabels: strings.listingRefusalReasonLabels,
   ListingRefusalShortLabels: strings.listingRefusalShortLabels,
