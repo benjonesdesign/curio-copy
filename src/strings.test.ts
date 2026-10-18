@@ -1,3 +1,4 @@
+// MUTATION-CHECKED 2026-10-18 (photoStrip, curio-shared#44): red against ofJoiner losing its edge spaces (both composed-name tests), against positionPrefix changed to 'Picture ' (the position test), and against a {placeholder} put into previous (the placeholder test); green against current.
 // MUTATION-CHECKED 2026-10-18 (moneySettings, curio-shared#43): red against confirmedByYouPrefix losing its trailing space (the composed confirmed-date test), against taxError changed to a 0-60 range (the ranges-match-the-route test), and against a {placeholder} put into savedCost (the placeholder test); green against current.
 // MUTATION-CHECKED 2026-10-17 (gradedAdd typed-by-hand, curio-shared#39): red against typedIntroPrefix losing its trailing space, against typedDoneMiddle's sentence changed, and against typedOverline lower-cased; green against current.
 // MUTATION-CHECKED 2026-10-17 (gradedAdd, curio-shared#38): red against certHintUnverifiedSuffix changed (the composed non-PSA hint test), against doneUnverifiedMiddle losing its trailing space (the composed done-line test), and against a {placeholder} put into certHintLabel (the placeholder test); green against current.
@@ -436,5 +437,36 @@ describe("moneySettings: the web Settings money section (design, curio-shared#43
       for (const prefix of ["save", "saving", "saved", "failed"]) expect(M, `${prefix}${panel}`).toHaveProperty(`${prefix}${panel}`);
     }
     expect(M.failedBody).toBe("Nothing was changed. Everything you typed is still here. Try again.");
+  });
+});
+
+describe("photoStrip: the card-detail photo thumbnail strip (design, curio-shared#44)", () => {
+  const P = STRINGS.photoStrip;
+
+  it("has design's five keys, none carrying a placeholder, and none says please", () => {
+    expect(Object.keys(P)).toEqual(["groupName", "previous", "next", "ofJoiner", "positionPrefix"]);
+    for (const [key, value] of Object.entries(P)) {
+      expect(value, `${key} has a placeholder`).not.toMatch(/[{}]|%[@sd@]|\$\{/);
+      expect(value.toLowerCase(), `${key} says please`).not.toContain("please");
+    }
+  });
+
+  it("composes to design's sentences exactly", () => {
+    // thumbnail name = {side} + ofJoiner + {card}
+    expect(`Close-up 1${P.ofJoiner}Charizard ex`).toBe("Close-up 1 of Charizard ex");
+    expect(`Front${P.ofJoiner}Charizard ex`).toBe("Front of Charizard ex");
+    // position announcement = positionPrefix + {n} + ofJoiner + {total}
+    expect(`${P.positionPrefix}3${P.ofJoiner}10`).toBe("Photo 3 of 10");
+    expect(P.groupName).toBe("Photos");
+    expect(P.previous).toBe("Previous photos");
+    expect(P.next).toBe("Next photos");
+  });
+
+  it("edge whitespace only on the two composed halves; the rest are clean", () => {
+    for (const [key, value] of Object.entries(P)) {
+      if (key === "ofJoiner") { expect(value).toMatch(/^ .* $/); continue; }
+      if (key === "positionPrefix") { expect(value).toMatch(/ $/); continue; }
+      expect(value, `${key} has stray edge whitespace`).not.toMatch(/^\s|\s$/);
+    }
   });
 });

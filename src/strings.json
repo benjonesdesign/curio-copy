@@ -371,5 +371,12 @@
     "clear": "Clear",
     "clearNamePrefix": "Clear ",
     "fieldNotSavedReason": "Not saved. "
+  },
+  "photoStrip": {
+    "groupName": "Photos",
+    "previous": "Previous photos",
+    "next": "Next photos",
+    "ofJoiner": " of ",
+    "positionPrefix": "Photo "
   }
 }

@@ -47,6 +47,10 @@ the follow-up of 2026-10-09). Twelve new groups, all keyed by the contract's wir
   the server's words`. The error sentences state the ranges `PATCH /api/profile` enforces (tax 1-60, margin 0-95,
   minutes 1-60, handling 1-3). The "no listing time" guard now exempts the six packing-time-panel keys by path
   ("Your time" is the packing and hourly-rate panel, not listing time).
+- **`photoStrip`** (design, curio-shared#44, `copy-additions-2026-10-18-photos.json`): the card-detail photo
+  thumbnail strip, five keys verbatim: `groupName` ("Photos"), `previous`, `next`, and two halves that compose.
+  Thumbnail name = `{side} + ofJoiner + {card}` ("Close-up 1 of Charizard ex"); position announcement =
+  `positionPrefix + {n} + ofJoiner + {total}` ("Photo 3 of 10"). Tests compose both.
 - **`postageServiceLabels`**: exactly the four contract services, `rm48_ll`, `rm24_ll`,
   `tracked48_sp`, `special_delivery`, with the H6 labels.
 - **`listingRefusalReasonLabels`** (a sentence, for a per-row result or a bulk leave-out line) and
