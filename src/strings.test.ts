@@ -1,3 +1,4 @@
+// MUTATION-CHECKED 2026-10-19 (moneySettingsGaps + photoRemove, curio-shared#46/#47): red against feeBusinessVatValue's 12.8% changed to 13%, against bodyBase losing the 'can't be undone' sentence, against discardOneAfter losing its leading space, and against a {placeholder} put into loadFailedBody; green against current.
 // MUTATION-CHECKED 2026-10-18 (photoStrip, curio-shared#44): red against ofJoiner losing its edge spaces (both composed-name tests), against positionPrefix changed to 'Picture ' (the position test), and against a {placeholder} put into previous (the placeholder test); green against current.
 // MUTATION-CHECKED 2026-10-18 (moneySettings, curio-shared#43): red against confirmedByYouPrefix losing its trailing space (the composed confirmed-date test), against taxError changed to a 0-60 range (the ranges-match-the-route test), and against a {placeholder} put into savedCost (the placeholder test); green against current.
 // MUTATION-CHECKED 2026-10-17 (gradedAdd typed-by-hand, curio-shared#39): red against typedIntroPrefix losing its trailing space, against typedDoneMiddle's sentence changed, and against typedOverline lower-cased; green against current.
@@ -466,6 +467,67 @@ describe("photoStrip: the card-detail photo thumbnail strip (design, curio-share
     for (const [key, value] of Object.entries(P)) {
       if (key === "ofJoiner") { expect(value).toMatch(/^ .* $/); continue; }
       if (key === "positionPrefix") { expect(value).toMatch(/ $/); continue; }
+      expect(value, `${key} has stray edge whitespace`).not.toMatch(/^\s|\s$/);
+    }
+  });
+});
+
+describe("moneySettingsGaps and photoRemove: Settings fee rows, discard dialog, load failure and Remove photo (design, curio-shared#46/#47)", () => {
+  const G = STRINGS.moneySettingsGaps;
+  const R = STRINGS.photoRemove;
+  const HALVES = /(Before|Middle|After|End)$/;
+
+  it("has design's 22 + 8 keys; no placeholder, none says please", () => {
+    expect(Object.keys(G)).toHaveLength(22);
+    expect(Object.keys(R)).toEqual(["button", "confirmTitle", "confirmAction", "confirmCancel", "bodyBase", "bodyListing", "bodyOrder", "toast"]);
+    for (const [group, g] of [["moneySettingsGaps", G], ["photoRemove", R]] as const) {
+      for (const [key, value] of Object.entries(g)) {
+        expect(value, `${group}.${key} has a placeholder`).not.toMatch(/[{}]|%[@sd@]|\$\{/);
+        expect(value.toLowerCase(), `${group}.${key} says please`).not.toContain("please");
+      }
+    }
+  });
+
+  it("the fee rows quote the fee rule exactly (pokemon-tool pins these numbers to lib/economics/fees.ts)", () => {
+    expect(G.feeRowLabel).toBe("eBay final value fee");
+    expect(G.feePrivateValue).toBe("None");
+    expect(G.feeBusinessVatValue).toBe("12.8% + 0.35% + \u00a30.40");
+    expect(G.feeBusinessNoVatValue).toBe("12.8% + 0.35% + \u00a30.40, plus VAT");
+    // The low band and the VAT rate appear in the support lines.
+    expect(G.feeBusinessVatSupport).toContain("\u00a30.30 instead of \u00a30.40 under \u00a310");
+    expect(G.feeBusinessNoVatSupport).toContain("\u00a30.30 instead of \u00a30.40 under \u00a310");
+    expect(G.feeBusinessNoVatSupport).toContain("20% VAT");
+  });
+
+  it("the discard body composes to design's sentences exactly (one, two, three, many)", () => {
+    expect(`${G.discardOneBefore}hourly rate${G.discardOneMiddle}\u00a312.00${G.discardOneAfter}\u00a315.00${G.discardOneEnd}`).toBe(
+      "Your new hourly rate of \u00a312.00 isn\u2019t saved. The panel goes back to \u00a315.00.");
+    expect(`${G.discardTwoBefore}tax${G.discardTwoMiddle}packing${G.discardTwoAfter}`).toBe("Your changes to tax and packing aren\u2019t saved. The panel goes back to what you last saved.");
+    expect(`${G.discardTwoBefore}tax, hourly rate${G.discardTwoMiddle}packing${G.discardTwoAfter}`).toBe("Your changes to tax, hourly rate and packing aren\u2019t saved. The panel goes back to what you last saved.");
+    expect(`${G.discardManyBefore}4${G.discardManyAfter}`).toBe("Your changes to 4 settings aren\u2019t saved. The panel goes back to what you last saved.");
+  });
+
+  it("the Remove photo body composes: base alone, with the listing sentence, with the order sentence, with both", () => {
+    expect(R.bodyBase).toBe("This takes the photo off this copy. It can\u2019t be undone.");
+    expect(R.bodyBase + R.bodyListing).toBe("This takes the photo off this copy. It can\u2019t be undone. Your eBay listing keeps the pictures it was published with until you revise or relist it.");
+    expect(R.bodyBase + R.bodyOrder).toContain("It can\u2019t be undone. Photos stay in order: front, back, then close-ups.");
+    expect((R.bodyBase + R.bodyListing + R.bodyOrder).split(". ").length).toBeGreaterThan(3);
+    expect(R.confirmTitle).toBe("Remove this photo?");
+    expect(R.toast).toBe("Photo removed.");
+  });
+
+  it("states what removal does and does not do: no undo is offered", () => {
+    expect(Object.keys(R).join()).not.toMatch(/undo/i);
+    expect(R.bodyBase).toContain("can\u2019t be undone");
+  });
+
+  it("edge whitespace only on the composed halves (discard *Before/*Middle/*After/*End, photoRemove bodyListing/bodyOrder)", () => {
+    for (const [key, value] of Object.entries(G)) {
+      if (/^discard/.test(key) && HALVES.test(key)) continue;
+      expect(value, `${key} has stray edge whitespace`).not.toMatch(/^\s|\s$/);
+    }
+    for (const [key, value] of Object.entries(R)) {
+      if (key === "bodyListing" || key === "bodyOrder") { expect(value).toMatch(/^ /); continue; }
       expect(value, `${key} has stray edge whitespace`).not.toMatch(/^\s|\s$/);
     }
   });

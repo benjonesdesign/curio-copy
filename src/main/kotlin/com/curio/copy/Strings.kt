@@ -299,6 +299,46 @@ public object CurioCopy {
         )
     }
 
+    public object MoneySettingsGaps {
+        public val all: Map<String, String> = mapOf(
+            "feeRowLabel" to "eBay final value fee",
+            "feePrivateValue" to "None",
+            "feePrivateSupport" to "UK private sellers pay no final value fee.",
+            "feeBusinessVatValue" to "12.8% + 0.35% + £0.40",
+            "feeBusinessVatSupport" to "Per sale, ex-VAT, on the card price plus any postage the buyer pays. £0.30 instead of £0.40 under £10. You’re VAT-registered, so you reclaim the VAT.",
+            "feeBusinessNoVatValue" to "12.8% + 0.35% + £0.40, plus VAT",
+            "feeBusinessNoVatSupport" to "Per sale, on the card price plus any postage the buyer pays; £0.30 instead of £0.40 under £10. Plus 20% VAT you can’t reclaim, so the VAT is a cost too.",
+            "discardTitle" to "Discard your changes?",
+            "discardOneBefore" to "Your new ",
+            "discardOneMiddle" to " of ",
+            "discardOneAfter" to " isn’t saved. The panel goes back to ",
+            "discardOneEnd" to ".",
+            "discardTwoBefore" to "Your changes to ",
+            "discardTwoMiddle" to " and ",
+            "discardTwoAfter" to " aren’t saved. The panel goes back to what you last saved.",
+            "discardManyBefore" to "Your changes to ",
+            "discardManyAfter" to " settings aren’t saved. The panel goes back to what you last saved.",
+            "discardKeep" to "Keep editing",
+            "discardConfirm" to "Discard changes",
+            "loadFailedTitle" to "Couldn’t load your costs and fees",
+            "loadFailedBody" to "Nothing was changed. Try again.",
+            "loadFailedRetry" to "Try again",
+        )
+    }
+
+    public object PhotoRemove {
+        public val all: Map<String, String> = mapOf(
+            "button" to "Remove photo",
+            "confirmTitle" to "Remove this photo?",
+            "confirmAction" to "Remove photo",
+            "confirmCancel" to "Keep photo",
+            "bodyBase" to "This takes the photo off this copy. It can’t be undone.",
+            "bodyListing" to " Your eBay listing keeps the pictures it was published with until you revise or relist it.",
+            "bodyOrder" to " Photos stay in order: front, back, then close-ups. Removing an early one changes which picture comes first the next time you list.",
+            "toast" to "Photo removed.",
+        )
+    }
+
     public object PostageServiceLabels {
         public val all: Map<String, String> = mapOf(
             "rm48_ll" to "Royal Mail 48 · large letter",
