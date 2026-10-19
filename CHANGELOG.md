@@ -2,6 +2,8 @@
 
 ## v0.1.12
 
+**Fee-band wording (curio-shared#49, before the tag):** `feeBusinessVatSupport` and `feeBusinessNoVatSupport` say "£0.30 instead of £0.40 for £10 or less" (was "under £10"). The low band is INCLUSIVE of £10.00 in `lib/economics/fees.ts` (owner ruling 2026-10-08), so "under" was wrong at exactly £10.
+
 **Release rule (19 Oct incident):** `package.json` "version" must equal the tag in the commit that is tagged. v0.1.11 was tagged with 0.1.10 in package.json; web's Next/webpack and Vercel build cache treat a node_modules package with an unchanged version as unchanged, so a restored cache served the pre-v0.1.11 strings and production Settings crashed (`STRINGS.moneySettings` undefined). `src/tag-version.test.ts` fails for any tag that breaks the rule (v0.1.6-v0.1.8 and v0.1.11 are listed, not forgiven).
 
 Adds `moneySettingsGaps` and `photoRemove` (design, curio-shared#46/#47). Additive: no key changed or removed.
