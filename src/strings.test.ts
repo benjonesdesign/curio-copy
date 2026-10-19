@@ -1,3 +1,4 @@
+// MUTATION-CHECKED 2026-10-19 (fee band inclusive, curio-shared#49): red against feeBusinessVatSupport's 'for £10 or less' changed back to 'under £10' (the fee-wording test); green against current.
 // MUTATION-CHECKED 2026-10-19 (moneySettingsGaps + photoRemove, curio-shared#46/#47): red against feeBusinessVatValue's 12.8% changed to 13%, against bodyBase losing the 'can't be undone' sentence, against discardOneAfter losing its leading space, and against a {placeholder} put into loadFailedBody; green against current.
 // MUTATION-CHECKED 2026-10-18 (photoStrip, curio-shared#44): red against ofJoiner losing its edge spaces (both composed-name tests), against positionPrefix changed to 'Picture ' (the position test), and against a {placeholder} put into previous (the placeholder test); green against current.
 // MUTATION-CHECKED 2026-10-18 (moneySettings, curio-shared#43): red against confirmedByYouPrefix losing its trailing space (the composed confirmed-date test), against taxError changed to a 0-60 range (the ranges-match-the-route test), and against a {placeholder} put into savedCost (the placeholder test); green against current.
@@ -494,8 +495,8 @@ describe("moneySettingsGaps and photoRemove: Settings fee rows, discard dialog, 
     expect(G.feeBusinessVatValue).toBe("12.8% + 0.35% + \u00a30.40");
     expect(G.feeBusinessNoVatValue).toBe("12.8% + 0.35% + \u00a30.40, plus VAT");
     // The low band and the VAT rate appear in the support lines.
-    expect(G.feeBusinessVatSupport).toContain("\u00a30.30 instead of \u00a30.40 under \u00a310");
-    expect(G.feeBusinessNoVatSupport).toContain("\u00a30.30 instead of \u00a30.40 under \u00a310");
+    expect(G.feeBusinessVatSupport).toContain("\u00a30.30 instead of \u00a30.40 for \u00a310 or less");
+    expect(G.feeBusinessNoVatSupport).toContain("\u00a30.30 instead of \u00a30.40 for \u00a310 or less");
     expect(G.feeBusinessNoVatSupport).toContain("20% VAT");
   });
 
