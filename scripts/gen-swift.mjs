@@ -55,6 +55,8 @@ const FLAT_GROUPS = {
   GradedAdd: strings.gradedAdd,
   MoneySettings: strings.moneySettings,
   PhotoStrip: strings.photoStrip,
+  MoneySettingsGaps: strings.moneySettingsGaps,
+  PhotoRemove: strings.photoRemove,
   PostageServiceLabels: strings.postageServiceLabels,
   ListingRefusalReasonLabels: strings.listingRefusalReasonLabels,
   ListingRefusalShortLabels: strings.listingRefusalShortLabels,

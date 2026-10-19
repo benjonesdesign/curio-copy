@@ -1,5 +1,39 @@
 # Changelog
 
+## v0.1.12
+
+Adds `moneySettingsGaps` and `photoRemove` (design, curio-shared#46/#47). Additive: no key changed or removed.
+
+- **`moneySettingsGaps`** (design, curio-shared#46, `copy-additions-2026-10-19.json`): 23 keys the web Settings money panels
+  needed beyond `moneySettings`: the Cost panel's fee rows (label, value, support for a private seller, a VAT-registered
+  business and a business that is not VAT-registered), the discard-changes dialog, and a failed settings load. The fee
+  figures (12.8% + 0.35% + £0.40, £0.30 under £10, 20% VAT) must equal `lib/economics/fees.ts` / `costs.ts`; a test here
+  pins the wording and pokemon-tool pins the numbers to the engine. Discard body: one field =
+  `discardOneBefore + {field} + discardOneMiddle + {new} + discardOneAfter + {stored} + discardOneEnd`; two =
+  `discardTwoBefore + {a} + discardTwoMiddle + {b} + discardTwoAfter`; three = `discardTwoBefore + {a} + ", " + {b} +
+  discardTwoMiddle + {c} + discardTwoAfter`; four or more = `discardManyBefore + {n} + discardManyAfter`.
+- **`photoRemove`** (design, curio-shared#47): the card-detail "Remove photo" confirm, nine keys from backend's removal facts
+  (LANE-REPORTS/backend.PHOTO-REMOVAL-FACTS-2026-10-19.md). Body = `bodyBase` + `bodyListing` only when the copy has a live
+  or draft eBay listing + `bodyOrder` only when the removed photo is not the last. There is no undo string: removal cannot
+  be undone.
+
+## v0.1.11 (tagged 19 Oct)
+
+Adds moneySettings (the web Settings money section, 76 keys, curio-copy #15) and photoStrip (the web photo thumbnail strip, curio-copy #16); web, iOS and Android bump together. Transcribed from curio-shared/versions.json.
+
+- **`moneySettings`** (design, curio-shared#43, `copy-additions-2026-10-18.json`): the web Settings money section,
+  76 keys merged verbatim: four panels (Cost, Your time, Dispatch, Buying) with intros, seller-type and VAT
+  labels and not-set help, field labels/placeholders/help/errors, status words, per-panel Save / Saving / saved /
+  failed lines. Three halves compose: a confirmed answer = `confirmedByYouPrefix + {date}`; a Clear button's
+  accessible name = `clearNamePrefix + the field's label`; a server reason beside a field = `fieldNotSavedReason +
+  the server's words`. The error sentences state the ranges `PATCH /api/profile` enforces (tax 1-60, margin 0-95,
+  minutes 1-60, handling 1-3). The "no listing time" guard now exempts the six packing-time-panel keys by path
+  ("Your time" is the packing and hourly-rate panel, not listing time).
+- **`photoStrip`** (design, curio-shared#44, `copy-additions-2026-10-18-photos.json`): the card-detail photo
+  thumbnail strip, five keys verbatim: `groupName` ("Photos"), `previous`, `next`, and two halves that compose.
+  Thumbnail name = `{side} + ofJoiner + {card}` ("Close-up 1 of Charizard ex"); position announcement =
+  `positionPrefix + {n} + ofJoiner + {total}` ("Photo 3 of 10"). Tests compose both.
+
 ## Unreleased (design additions, 2026-10-09)
 
 **Not tagged and not version-bumped.** This is a new-group release, so per README step 5 it waits for
@@ -39,18 +73,6 @@ the follow-up of 2026-10-09). Twelve new groups, all keyed by the contract's wir
   `typedIntroPrefix + grader + typedIntroSuffix`; `typedOverline` (whole); cert support =
   `typedCertSupportPrefix + grader + typedCertSupportSuffix`; done line = `card + typedDoneMiddle + grader +
   typedDoneSuffix`.
-- **`moneySettings`** (design, curio-shared#43, `copy-additions-2026-10-18.json`): the web Settings money section,
-  76 keys merged verbatim: four panels (Cost, Your time, Dispatch, Buying) with intros, seller-type and VAT
-  labels and not-set help, field labels/placeholders/help/errors, status words, per-panel Save / Saving / saved /
-  failed lines. Three halves compose: a confirmed answer = `confirmedByYouPrefix + {date}`; a Clear button's
-  accessible name = `clearNamePrefix + the field's label`; a server reason beside a field = `fieldNotSavedReason +
-  the server's words`. The error sentences state the ranges `PATCH /api/profile` enforces (tax 1-60, margin 0-95,
-  minutes 1-60, handling 1-3). The "no listing time" guard now exempts the six packing-time-panel keys by path
-  ("Your time" is the packing and hourly-rate panel, not listing time).
-- **`photoStrip`** (design, curio-shared#44, `copy-additions-2026-10-18-photos.json`): the card-detail photo
-  thumbnail strip, five keys verbatim: `groupName` ("Photos"), `previous`, `next`, and two halves that compose.
-  Thumbnail name = `{side} + ofJoiner + {card}` ("Close-up 1 of Charizard ex"); position announcement =
-  `positionPrefix + {n} + ofJoiner + {total}` ("Photo 3 of 10"). Tests compose both.
 - **`postageServiceLabels`**: exactly the four contract services, `rm48_ll`, `rm24_ll`,
   `tracked48_sp`, `special_delivery`, with the H6 labels.
 - **`listingRefusalReasonLabels`** (a sentence, for a per-row result or a bulk leave-out line) and

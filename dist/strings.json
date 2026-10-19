@@ -378,5 +378,39 @@
         "next": "Next photos",
         "ofJoiner": " of ",
         "positionPrefix": "Photo "
+    },
+    "moneySettingsGaps": {
+        "feeRowLabel": "eBay final value fee",
+        "feePrivateValue": "None",
+        "feePrivateSupport": "UK private sellers pay no final value fee.",
+        "feeBusinessVatValue": "12.8% + 0.35% + £0.40",
+        "feeBusinessVatSupport": "Per sale, ex-VAT, on the card price plus any postage the buyer pays. £0.30 instead of £0.40 under £10. You’re VAT-registered, so you reclaim the VAT.",
+        "feeBusinessNoVatValue": "12.8% + 0.35% + £0.40, plus VAT",
+        "feeBusinessNoVatSupport": "Per sale, on the card price plus any postage the buyer pays; £0.30 instead of £0.40 under £10. Plus 20% VAT you can’t reclaim, so the VAT is a cost too.",
+        "discardTitle": "Discard your changes?",
+        "discardOneBefore": "Your new ",
+        "discardOneMiddle": " of ",
+        "discardOneAfter": " isn’t saved. The panel goes back to ",
+        "discardOneEnd": ".",
+        "discardTwoBefore": "Your changes to ",
+        "discardTwoMiddle": " and ",
+        "discardTwoAfter": " aren’t saved. The panel goes back to what you last saved.",
+        "discardManyBefore": "Your changes to ",
+        "discardManyAfter": " settings aren’t saved. The panel goes back to what you last saved.",
+        "discardKeep": "Keep editing",
+        "discardConfirm": "Discard changes",
+        "loadFailedTitle": "Couldn’t load your costs and fees",
+        "loadFailedBody": "Nothing was changed. Try again.",
+        "loadFailedRetry": "Try again"
+    },
+    "photoRemove": {
+        "button": "Remove photo",
+        "confirmTitle": "Remove this photo?",
+        "confirmAction": "Remove photo",
+        "confirmCancel": "Keep photo",
+        "bodyBase": "This takes the photo off this copy. It can’t be undone.",
+        "bodyListing": " Your eBay listing keeps the pictures it was published with until you revise or relist it.",
+        "bodyOrder": " Photos stay in order: front, back, then close-ups. Removing an early one changes which picture comes first the next time you list.",
+        "toast": "Photo removed."
     }
 }
