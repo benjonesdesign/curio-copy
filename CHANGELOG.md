@@ -2,6 +2,8 @@
 
 ## v0.1.12
 
+**Release rule (19 Oct incident):** `package.json` "version" must equal the tag in the commit that is tagged. v0.1.11 was tagged with 0.1.10 in package.json; web's Next/webpack and Vercel build cache treat a node_modules package with an unchanged version as unchanged, so a restored cache served the pre-v0.1.11 strings and production Settings crashed (`STRINGS.moneySettings` undefined). `src/tag-version.test.ts` fails for any tag that breaks the rule (v0.1.6-v0.1.8 and v0.1.11 are listed, not forgiven).
+
 Adds `moneySettingsGaps` and `photoRemove` (design, curio-shared#46/#47). Additive: no key changed or removed.
 
 - **`moneySettingsGaps`** (design, curio-shared#46, `copy-additions-2026-10-19.json`): 23 keys the web Settings money panels
