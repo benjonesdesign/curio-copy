@@ -205,6 +205,7 @@ public object CurioCopy {
             "typedCertSupportPrefix" to "Typed by you. ",
             "typedDoneMiddle" to " is in your inventory as a graded slab. The grade and cert are as you typed them, not checked with ",
             "typedDoneSuffix" to ", and the card is the one you chose. Seek never lists an unverified slab as graded.",
+            "doneNotVerifiedNoRecheckMiddle" to " is in your inventory as a graded slab. The grade isn’t verified yet, so Seek won’t list it as graded until it is.",
         )
     }
 
@@ -336,6 +337,72 @@ public object CurioCopy {
             "bodyListing" to " Your eBay listing keeps the pictures it was published with until you revise or relist it.",
             "bodyOrder" to " Photos stay in order: front, back, then close-ups. Removing an early one changes which picture comes first the next time you list.",
             "toast" to "Photo removed.",
+        )
+    }
+
+    public object BuyResults {
+        public val all: Map<String, String> = mapOf(
+            "columnAgainstIt" to "Against it",
+            "underSuffix" to " under",
+            "overSuffix" to " over",
+            "cantSayYet" to "Can’t say yet",
+            "chipUnderPrefix" to "Under the most to pay · ",
+            "pillUnderSuffix" to " under the most to pay",
+            "pillOverSuffix" to " over the most to pay",
+            "overNoticeBody" to "The most to pay is worked from asking prices, so it is a ceiling, not a forecast.",
+        )
+    }
+
+    public object BuyListing {
+        public val all: Map<String, String> = mapOf(
+            "askLabel" to "Item + postage",
+            "askPlaceholder" to "What they’re asking, with postage",
+            "askHelp" to "Add the item price and what they charge for postage, as one figure, to compare it with the most to pay.",
+            "askMissing" to "Enter what they’re asking, with postage, to see how it compares.",
+            "bidCuePrefix" to "Bid up to £",
+            "offerCuePrefix" to "Offer up to £",
+        )
+    }
+
+    public object QuickScanResult {
+        public val all: Map<String, String> = mapOf(
+            "checkAnother" to "Check another card",
+        )
+    }
+
+    public object QuickScanPicker {
+        public val all: Map<String, String> = mapOf(
+            "supportTwo" to "Two cards share this art. Tap the one in your hand.",
+            "supportThree" to "Three cards share this art. Tap the one in your hand.",
+        )
+    }
+
+    public object QuickScanNotReadEnough {
+        public val all: Map<String, String> = mapOf(
+            "coach" to "Hold the card so the bottom line is in the guide",
+        )
+    }
+
+    public object BreakdownLineLabels {
+        public val all: Map<String, String> = mapOf(
+            "sale_price" to "Sale price",
+            "ebay_fee" to "eBay fee",
+            "fee_vat" to "VAT on the fee",
+            "packing" to "Packing",
+            "packingEstimate" to "Packing (estimate)",
+            "postage" to "Postage",
+            "packing_time" to "Packing time",
+            "packingTimeEstimate" to "Packing time (estimate)",
+            "target_margin" to "Your margin",
+            "tax_set_aside" to "Tax set aside",
+            "max_buy" to "Most to pay",
+            "you_receive" to "You receive",
+        )
+    }
+
+    public object MostToPay {
+        public val all: Map<String, String> = mapOf(
+            "headlineLabel" to "Most to pay",
         )
     }
 

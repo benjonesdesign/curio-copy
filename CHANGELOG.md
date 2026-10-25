@@ -1,5 +1,34 @@
 # Changelog
 
+## v0.1.13
+
+Folds in four design string files: the buying screens, Quick Scan on device, the PSA no-re-check line, and the breakdown line
+labels. Additive: no key changed or removed; `gradedAdd` gains one key. Source files: curio-shared `canon/design/`
+`copy-additions-2026-10-19-buying.json`, `-2026-10-19-quick-scan.json`, `-2026-10-24-graded-psa.json` (curio-shared#60),
+`-2026-10-24-breakdown-labels.json` (curio-shared#61). Design's `$comment` / `$compose` annotations are not shipped; the
+compose rules are summarised below.
+
+- **`buyResults`** (8 keys): the Deal Finder / results "Against it" column and its chips. Cell = `"£" + {n} + underSuffix` or
+  `overSuffix`, or `cantSayYet` when there is no price; chip = `chipUnderPrefix + {count}`; panel pill / notice title =
+  `"£" + {n} + pillUnderSuffix` / `pillOverSuffix`; over notice body = `"They ask £" + {asking} + ". " + overNoticeBody`. The
+  amount is the SERVER's figure (the page never subtracts).
+- **`buyListing`** (6 keys): the appraise-a-listing screen. The ask is ONE box, `askLabel` ("Item + postage"). Auction listings
+  show the most to pay as `bidCuePrefix + {n}`, Buy It Now as `offerCuePrefix + {n}`; the figure is the same. A negative
+  difference shows as "£{n} over the most to pay" with the magnitude, never a minus; a missing ask reads `askMissing`.
+- **`quickScanResult`** (1), **`quickScanPicker`** (2), **`quickScanNotReadEnough`** (1): "Check another card"; the picker
+  support line for two or three candidates (never shown for more, or for a read with no set code or printed total); the coach
+  line "Hold the card so the bottom line is in the guide".
+- **`gradedAdd.doneNotVerifiedNoRecheckMiddle`** (1 new key, 14 in the group): a PSA slab saved not verified where no server
+  re-check is scheduled. Done line = `{card} + doneNotVerifiedNoRecheckMiddle`; "We’ll check the cert with PSA again" is
+  used only when the server reports a re-check scheduled.
+- **`breakdownLineLabels`** (12 keys): the labels of the server's breakdown lines, KEYED BY THE LINE'S `key` (`sale_price`,
+  `ebay_fee`, `fee_vat`, `packing`, `postage`, `packing_time`, `target_margin`, `tax_set_aside`, `max_buy`, `you_receive`), plus
+  `packingEstimate` / `packingTimeEstimate` for a line whose `estimate` is true. Ruling (design): the labels ship as this group
+  so any client renders them; if the server also sends `label`, it must equal these strings. Order is price-provenance rule 17;
+  a key with no entry here and no server label is not shown.
+- **`mostToPay`** (1 key): `headlineLabel` ("Most to pay"), the headline on a screen with no listing (`headlineLabel + " £" +
+  {n}`, the whole-pound figure from the server). Equal to `breakdownLineLabels.max_buy`; a test pins that.
+
 ## v0.1.12
 
 **Fee-band wording (curio-shared#49, before the tag):** `feeBusinessVatSupport` and `feeBusinessNoVatSupport` say "£0.30 instead of £0.40 for £10 or less" (was "under £10"). The low band is INCLUSIVE of £10.00 in `lib/economics/fees.ts` (owner ruling 2026-10-08), so "under" was wrong at exactly £10.
