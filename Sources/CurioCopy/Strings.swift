@@ -187,6 +187,7 @@ public enum CurioCopy {
         "typedCertSupportPrefix": "Typed by you. ",
         "typedDoneMiddle": " is in your inventory as a graded slab. The grade and cert are as you typed them, not checked with ",
         "typedDoneSuffix": ", and the card is the one you chose. Seek never lists an unverified slab as graded.",
+        "doneNotVerifiedNoRecheckMiddle": " is in your inventory as a graded slab. The grade isn’t verified yet, so Seek won’t list it as graded until it is.",
     ]
     }
     public enum MoneySettings {
@@ -314,6 +315,65 @@ public enum CurioCopy {
         "bodyListing": " Your eBay listing keeps the pictures it was published with until you revise or relist it.",
         "bodyOrder": " Photos stay in order: front, back, then close-ups. Removing an early one changes which picture comes first the next time you list.",
         "toast": "Photo removed.",
+    ]
+    }
+    public enum BuyResults {
+        public static let all: [String: String] = [
+        "columnAgainstIt": "Against it",
+        "underSuffix": " under",
+        "overSuffix": " over",
+        "cantSayYet": "Can’t say yet",
+        "chipUnderPrefix": "Under the most to pay · ",
+        "pillUnderSuffix": " under the most to pay",
+        "pillOverSuffix": " over the most to pay",
+        "overNoticeBody": "The most to pay is worked from asking prices, so it is a ceiling, not a forecast.",
+    ]
+    }
+    public enum BuyListing {
+        public static let all: [String: String] = [
+        "askLabel": "Item + postage",
+        "askPlaceholder": "What they’re asking, with postage",
+        "askHelp": "Add the item price and what they charge for postage, as one figure, to compare it with the most to pay.",
+        "askMissing": "Enter what they’re asking, with postage, to see how it compares.",
+        "bidCuePrefix": "Bid up to £",
+        "offerCuePrefix": "Offer up to £",
+    ]
+    }
+    public enum QuickScanResult {
+        public static let all: [String: String] = [
+        "checkAnother": "Check another card",
+    ]
+    }
+    public enum QuickScanPicker {
+        public static let all: [String: String] = [
+        "supportTwo": "Two cards share this art. Tap the one in your hand.",
+        "supportThree": "Three cards share this art. Tap the one in your hand.",
+    ]
+    }
+    public enum QuickScanNotReadEnough {
+        public static let all: [String: String] = [
+        "coach": "Hold the card so the bottom line is in the guide",
+    ]
+    }
+    public enum BreakdownLineLabels {
+        public static let all: [String: String] = [
+        "sale_price": "Sale price",
+        "ebay_fee": "eBay fee",
+        "fee_vat": "VAT on the fee",
+        "packing": "Packing",
+        "packingEstimate": "Packing (estimate)",
+        "postage": "Postage",
+        "packing_time": "Packing time",
+        "packingTimeEstimate": "Packing time (estimate)",
+        "target_margin": "Your margin",
+        "tax_set_aside": "Tax set aside",
+        "max_buy": "Most to pay",
+        "you_receive": "You receive",
+    ]
+    }
+    public enum MostToPay {
+        public static let all: [String: String] = [
+        "headlineLabel": "Most to pay",
     ]
     }
     public enum PostageServiceLabels {

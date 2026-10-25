@@ -293,6 +293,7 @@ export declare const STRINGS: {
         typedCertSupportPrefix: string;
         typedDoneMiddle: string;
         typedDoneSuffix: string;
+        doneNotVerifiedNoRecheckMiddle: string;
     };
     moneySettings: {
         sectionTitle: string;
@@ -412,6 +413,51 @@ export declare const STRINGS: {
         bodyListing: string;
         bodyOrder: string;
         toast: string;
+    };
+    buyResults: {
+        columnAgainstIt: string;
+        underSuffix: string;
+        overSuffix: string;
+        cantSayYet: string;
+        chipUnderPrefix: string;
+        pillUnderSuffix: string;
+        pillOverSuffix: string;
+        overNoticeBody: string;
+    };
+    buyListing: {
+        askLabel: string;
+        askPlaceholder: string;
+        askHelp: string;
+        askMissing: string;
+        bidCuePrefix: string;
+        offerCuePrefix: string;
+    };
+    quickScanResult: {
+        checkAnother: string;
+    };
+    quickScanPicker: {
+        supportTwo: string;
+        supportThree: string;
+    };
+    quickScanNotReadEnough: {
+        coach: string;
+    };
+    breakdownLineLabels: {
+        sale_price: string;
+        ebay_fee: string;
+        fee_vat: string;
+        packing: string;
+        packingEstimate: string;
+        postage: string;
+        packing_time: string;
+        packingTimeEstimate: string;
+        target_margin: string;
+        tax_set_aside: string;
+        max_buy: string;
+        you_receive: string;
+    };
+    mostToPay: {
+        headlineLabel: string;
     };
 };
 export type PhysicalCardLifecycleStatus = keyof typeof STRINGS.statusLabels.physicalCardLifecycle;

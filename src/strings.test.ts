@@ -1,3 +1,4 @@
+// MUTATION-CHECKED 2026-10-25 (buying, quick scan, graded PSA, breakdown labels; curio-shared#60/#61 and the 19 Oct buying and quick-scan files): red against `breakdownLineLabels.max_buy` changed from "Most to pay" to "Max buy" (the label-by-line-key test), red against `breakdownLineLabels.packingEstimate` renamed to `packing_estimate` (the estimate-variant test), red against `buyResults.overSuffix` changed to " above" (the compose test), red against `quickScanPicker.supportThree` changed to say 'Two cards' (the picker test), red against `gradedAdd.doneNotVerifiedNoRecheckMiddle` losing 'won\u2019t list it as graded' (the honesty test), green against current.
 // MUTATION-CHECKED 2026-10-19 (fee band inclusive, curio-shared#49): red against feeBusinessVatSupport's 'for £10 or less' changed back to 'under £10' (the fee-wording test); green against current.
 // MUTATION-CHECKED 2026-10-19 (moneySettingsGaps + photoRemove, curio-shared#46/#47): red against feeBusinessVatValue's 12.8% changed to 13%, against bodyBase losing the 'can't be undone' sentence, against discardOneAfter losing its leading space, and against a {placeholder} put into loadFailedBody; green against current.
 // MUTATION-CHECKED 2026-10-18 (photoStrip, curio-shared#44): red against ofJoiner losing its edge spaces (both composed-name tests), against positionPrefix changed to 'Picture ' (the position test), and against a {placeholder} put into previous (the placeholder test); green against current.
@@ -338,9 +339,10 @@ describe("economics, postage and listing-refusal copy (design additions, 2026-10
 describe("gradedAdd: the graded add page's hint, done line and grade error (design, curio-shared#38)", () => {
   const G = STRINGS.gradedAdd;
 
-  it("the keys are exactly design's thirteen, and no value carries a placeholder or says please", () => {
+  it("the keys are exactly design's fourteen (thirteen, plus the PSA no-re-check line of 24 Oct), and no value carries a placeholder or says please", () => {
     expect(Object.keys(G)).toEqual(["certHintLabel", "certHintPsa", "certHintUnverifiedSuffix", "doneUnverifiedMiddle", "doneUnverifiedSuffix", "gradeMissing",
-      "typedIntroSuffix", "typedIntroPrefix", "typedOverline", "typedCertSupportSuffix", "typedCertSupportPrefix", "typedDoneMiddle", "typedDoneSuffix"]);
+      "typedIntroSuffix", "typedIntroPrefix", "typedOverline", "typedCertSupportSuffix", "typedCertSupportPrefix", "typedDoneMiddle", "typedDoneSuffix",
+      "doneNotVerifiedNoRecheckMiddle"]);
     for (const [key, value] of Object.entries(G)) {
       expect(value, `${key} has a placeholder`).not.toMatch(/[{}]|%[@sd@]|\$\{/);
       expect(value.toLowerCase(), `${key} says please`).not.toContain("please");
@@ -531,5 +533,73 @@ describe("moneySettingsGaps and photoRemove: Settings fee rows, discard dialog, 
       if (key === "bodyListing" || key === "bodyOrder") { expect(value).toMatch(/^ /); continue; }
       expect(value, `${key} has stray edge whitespace`).not.toMatch(/^\s|\s$/);
     }
+  });
+});
+
+describe("buyResults, buyListing, quickScan*, breakdownLineLabels, mostToPay and gradedAdd's no-recheck line (design: 19 Oct buying and quick-scan files, curio-shared#60/#61)", () => {
+  const B = STRINGS.buyResults;
+  const L = STRINGS.buyListing;
+  const LINES = STRINGS.breakdownLineLabels;
+
+  it("has design's key counts; no placeholder, none says please", () => {
+    expect(Object.keys(B)).toHaveLength(8);
+    expect(Object.keys(L)).toHaveLength(6);
+    expect(Object.keys(STRINGS.quickScanResult)).toEqual(["checkAnother"]);
+    expect(Object.keys(STRINGS.quickScanPicker)).toEqual(["supportTwo", "supportThree"]);
+    expect(Object.keys(STRINGS.quickScanNotReadEnough)).toEqual(["coach"]);
+    expect(Object.keys(LINES)).toHaveLength(12);
+    expect(Object.keys(STRINGS.mostToPay)).toEqual(["headlineLabel"]);
+    const groups = { buyResults: B, buyListing: L, quickScanResult: STRINGS.quickScanResult, quickScanPicker: STRINGS.quickScanPicker,
+      quickScanNotReadEnough: STRINGS.quickScanNotReadEnough, breakdownLineLabels: LINES, mostToPay: STRINGS.mostToPay };
+    for (const [group, g] of Object.entries(groups)) {
+      for (const [key, value] of Object.entries(g)) {
+        expect(value, `${group}.${key} has a placeholder`).not.toMatch(/[{}]|%[@sd@]|\$\{/);
+        expect(value.toLowerCase(), `${group}.${key} says please`).not.toContain("please");
+        expect(key.startsWith("$"), `${group}.${key} is a design annotation, not copy`).toBe(false);
+      }
+    }
+  });
+
+  it("the Against it column composes: under, over, and 'Can\u2019t say yet' (the server's sign decides, the page never subtracts)", () => {
+    expect(B.columnAgainstIt).toBe("Against it");
+    expect(`\u00a312${B.underSuffix}`).toBe("\u00a312 under");
+    expect(`\u00a35${B.overSuffix}`).toBe("\u00a35 over");
+    expect(B.cantSayYet).toBe("Can\u2019t say yet");
+    expect(`\u00a312${B.pillUnderSuffix}`).toBe("\u00a312 under the most to pay");
+    expect(`\u00a35${B.pillOverSuffix}`).toBe("\u00a35 over the most to pay");
+    expect(`${B.chipUnderPrefix}4`).toBe("Under the most to pay \u00b7 4");
+    expect(B.overNoticeBody).toBe("The most to pay is worked from asking prices, so it is a ceiling, not a forecast.");
+  });
+
+  it("the appraise-a-listing ask is ONE box, 'Item + postage', and an auction bids where Buy It Now offers", () => {
+    expect(L.askLabel).toBe("Item + postage");
+    expect(L.askPlaceholder).toBe("What they\u2019re asking, with postage");
+    expect(L.askMissing).toBe("Enter what they\u2019re asking, with postage, to see how it compares.");
+    expect(`${L.bidCuePrefix}40`).toBe("Bid up to \u00a340");
+    expect(`${L.offerCuePrefix}40`).toBe("Offer up to \u00a340");
+  });
+
+  it("Quick Scan: the picker support says how many cards share the art, and the coach asks for the bottom line", () => {
+    expect(STRINGS.quickScanResult.checkAnother).toBe("Check another card");
+    expect(STRINGS.quickScanPicker.supportTwo).toBe("Two cards share this art. Tap the one in your hand.");
+    expect(STRINGS.quickScanPicker.supportThree).toBe("Three cards share this art. Tap the one in your hand.");
+    expect(STRINGS.quickScanNotReadEnough.coach).toBe("Hold the card so the bottom line is in the guide");
+  });
+
+  it("graded: a PSA slab saved with no re-check scheduled says it is not verified and will not be listed as graded", () => {
+    const mid = STRINGS.gradedAdd.doneNotVerifiedNoRecheckMiddle;
+    expect(mid).toBe(" is in your inventory as a graded slab. The grade isn\u2019t verified yet, so Seek won\u2019t list it as graded until it is.");
+    expect(`PSA 10 Charizard${mid}`.startsWith("PSA 10 Charizard is in your inventory")).toBe(true);
+  });
+
+  it("breakdown line labels are keyed by the SERVER's line key, so any client renders them; estimates have their own keys", () => {
+    expect(LINES).toMatchObject({
+      sale_price: "Sale price", ebay_fee: "eBay fee", fee_vat: "VAT on the fee", packing: "Packing", postage: "Postage",
+      packing_time: "Packing time", target_margin: "Your margin", tax_set_aside: "Tax set aside", max_buy: "Most to pay", you_receive: "You receive",
+    });
+    expect(LINES.packingEstimate).toBe("Packing (estimate)");
+    expect(LINES.packingTimeEstimate).toBe("Packing time (estimate)");
+    // The buying total and the headline on a screen with no listing read the same words.
+    expect(STRINGS.mostToPay.headlineLabel).toBe(LINES.max_buy);
   });
 });
